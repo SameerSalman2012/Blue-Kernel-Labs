@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Simple Website</title>
+
+<style>
+    .dark {
+        background-color: #000000;
+        color: white;
+    }
+
+    body {
+        margin: 0;
+        font-family: 'Times New Roman', Times, sans-serif;
+        background: linear-gradient(to bottom, #8fcfff, #3f7af0);
+        text-align: center;
+    }
+
+    header {
+        background: linear-gradient(90deg, #8fcfff, #ffffff);
+        border: 3px solid black;
+        border-radius: 15px; /* fixed */
+        margin: 15px;
+        color: black;
+        padding: 15px;
+        font-size: xx-large;
+        -webkit-text-stroke: 1px rgb(98, 173, 248);
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    header:hover {
+        box-shadow: 0 0 15px rgba(143, 207, 255, 0.7);
+        
+    }
+
+    main {
+        padding: 0px;
+    }
+
+    button {
+  
+        background: linear-gradient(45deg, #1d33d9, #8fcfff);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 16px;
+        border-radius: 15px; /* upgraded */
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        transform: scale(1.08);
+        background: linear-gradient(45deg, #8fcfff, #1d33d9);
+        box-shadow: 0 0 10px rgba(143, 207, 255, 0.8);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    footer {
+        margin-top: 50px;
+        padding: 20px;
+        background: linear-gradient(to right, #006eff, #8fcfff);
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .header-title {
+        color: #ffffff;
+        font-size: large;
+        padding-top: 20px;
+        margin: auto;
+        font-weight: bold;
+        -webkit-text-stroke: 2px black;
+    }
+
+    #currentDate {
+        position: fixed;
+        top: 10px; /* fixed weird negative value */
+        right: 15px;
+        font-size: 14px;
+        color: aliceblue;
+        font-weight: bold;
+    }
+
+    section {
+        animation: fadeIn 2.5s ease-out;
+        background: linear-gradient(to bottom, #ffffff, #8fcfff);
+        margin: 40px;
+        border: 4px solid #000000;
+        border-radius: 15px;
+        padding: 25px; /* increased so text doesn’t collide */
+        max-width: 900px;
+        transition: 0.3s;
+    }
+
+    section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    * {
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+    }
+    @keyframes fadeIn {
+        from{opacity: 0;}
+        to {opacity: 1;}
+    }
+    @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+    }
+
+button {
+  animation: float 2s ease-in-out infinite;
+}
+</style>
+</head>
+
+<script>
+  function sayHello() {
+    alert("you clicked the button!");
+  }
+
+    function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+}
+    function pageSwitch() {
+        window.location = "About.html";
+    }
+
+    window.onload = function() {
+    let today = new Date();
+    document.getElementById("currentDate").innerText =
+        today.toLocaleDateString();
+    };
+</script>
+
+<body>
+    <h5 class="header-title">The Blue Kernel Labs Studios</h5>
+  <header>
+    Welcome to My Science Blog
+  </header>
+
+  <main>
+    <h1>Hello, World!</h1>
+    <p>This is my first simple website made with HTML and CSS.</p>
+    <p id="currentDate"></p>
+    <button onclick="sayHello()">Click Me</button>
+    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <button onclick="pageSwitch()">About</button>
+    <section>
+        <h1>Post 1: Infinity</h1>
+        <p>Infinity is a very large and never ending number..</p>
+    </section>
+    <section>
+        <h1>Post 2: The Universe</h1>
+        <p>The Universe is an example of infinity, since it also never ends like infinity itself, thats what describes it the best and is considered one of the best examples of infinity.</p>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Blue Kernel Labs | All Rights Reserved
+  </footer>
+
+</body>
+</html>
