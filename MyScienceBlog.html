@@ -216,4 +216,222 @@ button {
   </footer>
 
 </body>
+</html><!DOCTYPE html>
+<html>
+<head>
+  <title>Blue Kernel Labs Blog</title>
+
+<style>
+
+    body {
+    margin: 0;
+    font-family: 'Times New Roman', Times, sans-serif;
+    text-align: center;
+
+    background: linear-gradient(to bottom, #8fcfff, #3f7af0);
+    color: black;
+
+    transition: background 1s ease, color 0.5s ease;
+}
+
+body.dark {
+    background: linear-gradient(to bottom, #000000, #1a1a1a);
+    color: white;
+}
+/* Dark mode header */
+body.dark header {
+    background: linear-gradient(90deg, #111111, #2a2a2a);
+    color: white;
+    border: 3px solid white;
+}
+
+/* Dark mode sections */
+body.dark section {
+    background: linear-gradient(90deg, #1a1a1a, #2b2b2b);
+    border: 3px solid white;
+}
+
+/* Dark mode footer */
+body.dark footer {
+    background: linear-gradient(to right, #000000, #1a1a1a);
+    color: white;
+}
+/* Dark mode buttons */
+body.dark button {
+    background: linear-gradient(45deg, #222222, #444444);
+    color: white;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    transition: background 0.5s ease, box-shadow 0.5s ease, transform 0.3s ease;
+}
+
+/* Dark mode button hover */
+body.dark button:hover {
+    background: linear-gradient(45deg, #444444, #666666);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    transform: translateY(-5px);
+}
+body.dark .header-title {
+    -webkit-text-stroke: 1px white;
+    color: #dddddd;
+}
+body.dark header {
+    -webkit-text-stroke: white;
+}
+
+    header {
+        background: linear-gradient(90deg, #8fcfff, #ffffff);
+        border: 3px solid black;
+        border-radius: 15px; /* fixed */
+        margin: 15px;
+        color: black;
+        padding: 15px;
+        font-size: xx-large;
+        -webkit-text-stroke: 1px rgb(98, 173, 248);
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    header:hover {
+        box-shadow: 0 0 15px rgba(143, 207, 255, 0.7);
+        
+    }
+
+    main {
+        padding: 0px;
+    }
+
+    button {
+  
+        background: linear-gradient(45deg, #1d33d9, #8fcfff);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 16px;
+        border-radius: 15px; /* upgraded */
+        cursor: pointer;
+        transition: 0.3s;
+         transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+        transform: scale(1.08);
+        background: linear-gradient(45deg, #8fcfff, #1d33d9);
+        box-shadow: 0 0 10px rgba(143, 207, 255, 0.8);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    footer {
+        margin-top: 50px;
+        padding: 20px;
+        background: linear-gradient(to right, #006eff, #8fcfff);
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .header-title {
+        color: #ffffff;
+        font-size: large;
+        padding-top: 20px;
+        margin: auto;
+        font-weight: bold;
+        -webkit-text-stroke: 2px black;
+    }
+
+    #currentDate {
+        position: fixed;
+        top: 10px; /* fixed weird negative value */
+        right: 15px;
+        font-size: 14px;
+        color: aliceblue;
+        font-weight: bold;
+    }
+
+    section {
+    padding: 60px 20px;
+    margin: 40px auto;
+    max-width: 900px;
+
+    background: linear-gradient(90deg, #8fcfff, #ffffff);
+    backdrop-filter: blur(10px);
+
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    border: 3px solid black;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+    * {
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+    }
+    @keyframes fadeIn {
+        from{opacity: 0;}
+        to {opacity: 1;}
+    }
+    @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+    }
+
+button {
+  animation: float 2s ease-in-out infinite;
+}
+</style>
+</head>
+
+<script>
+  function sayHello() {
+    alert("you clicked the button!");
+  }
+
+    function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+}
+    function pageSwitch() {
+        window.location = "About.html";
+    }
+
+    window.onload = function() {
+    let today = new Date();
+    document.getElementById("currentDate").innerText =
+        today.toLocaleDateString();
+    };
+</script>
+
+<body>
+    <h5 class="header-title">The Blue Kernel Labs Studios</h5>
+  <header>
+    Welcome to My Science Blog
+  </header>
+
+  <main>
+    <h1>Hello, World!</h1>
+    <p>This is my first simple website made with HTML and CSS.</p>
+    <p id="currentDate"></p>
+    <button onclick="sayHello()">Click Me</button>
+    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <button onclick="pageSwitch()">About</button>
+    <section>
+        <h1>Post 1: Infinity</h1>
+        <p>Infinity is a very large and never ending number..</p>
+    </section>
+    <section>
+        <h1>Post 2: The Universe</h1>
+        <p>The Universe is an example of infinity, since it also never ends like infinity itself, thats what describes it the best and is considered one of the best examples of infinity.</p>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Blue Kernel Labs | All Rights Reserved
+  </footer>
+
+</body>
 </html>
