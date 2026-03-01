@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The Blue Kernel Labs Blog</title>
+  <title>Blue Kernel Labs Blog</title>
 
 <style>
 
@@ -166,6 +166,11 @@ section:hover {
 button {
   animation: float 2s ease-in-out infinite;
 }
+#Toggle {
+    position: fixed;
+    left: 15px;
+    top: 12px;
+}
 </style>
 </head>
 
@@ -174,33 +179,46 @@ button {
     alert("you clicked the button!");
   }
 
-    function toggleDarkMode() {
-  document.body.classList.toggle("dark");
-}
-    function pageSwitch() {
-        window.location = "About.html";
-    }
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark");
 
-    window.onload = function() {
+    // Save preference
+    if (document.body.classList.contains("dark")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function pageSwitch() {
+    window.location = "About.html";
+  }
+
+  window.onload = function() {
     let today = new Date();
     document.getElementById("currentDate").innerText =
         today.toLocaleDateString();
-    };
+
+    // Check saved theme on load
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark");
+    }
+  };
 </script>
 
 <body>
     <h5 class="header-title">The Blue Kernel Labs Studios</h5>
   <header>
-    Welcome to My Science Blog
+    Blue Kernel Labs Blog
   </header>
 
   <main>
-    <h1>Hello, World!</h1>
-    <p>This is my first simple website made with HTML and CSS.</p>
+    <h1>Welcome to Blue Kernel Labs!</h1>
+    <p>Exploring science, tech, and coding adventures—one post at a time!</p>
     <p id="currentDate"></p>
-    <button onclick="sayHello()">Click Me</button>
-    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
-    <button onclick="pageSwitch()">About</button>
+    <button id="Toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <button id="About" onclick="pageSwitch()">About Blue Kernel Labs...</button>
     <section>
         <h1>Post 1: Infinity</h1>
         <p>Infinity is a very large and never ending number..</p>
