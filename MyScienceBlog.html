@@ -20,6 +20,7 @@ body.dark {
     background: linear-gradient(to bottom, #000000, #1a1a1a);
     color: white;
 }
+
 /* Dark mode header */
 body.dark header {
     background: linear-gradient(90deg, #111111, #2a2a2a);
@@ -38,6 +39,7 @@ body.dark footer {
     background: linear-gradient(to right, #000000, #1a1a1a);
     color: white;
 }
+
 /* Dark mode buttons */
 body.dark button {
     background: linear-gradient(45deg, #222222, #444444);
@@ -52,95 +54,90 @@ body.dark button:hover {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
     transform: translateY(-5px);
 }
+
 body.dark .header-title {
     -webkit-text-stroke: 1px white;
     color: #dddddd;
 }
+
 body.dark header {
     -webkit-text-stroke: white;
 }
 
-    header {
-        background: linear-gradient(90deg, #8fcfff, #ffffff);
-        border: 3px solid black;
-        border-radius: 15px; /* fixed */
-        margin: 15px;
-        color: black;
-        padding: 15px;
-        font-size: xx-large;
-        -webkit-text-stroke: 1px rgb(98, 173, 248);
-        font-weight: bold;
-        transition: 0.3s;
-    }
+header {
+    background: linear-gradient(90deg, #8fcfff, #ffffff);
+    border: 3px solid black;
+    border-radius: 15px;
+    margin: 15px;
+    color: black;
+    padding: 15px;
+    font-size: xxx-large;
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
+    font-weight: bold;
+    transition: 0.3s;
+}
 
-    header:hover {
-        box-shadow: 0 0 15px rgba(143, 207, 255, 0.7);
-        
-    }
+header:hover {
+    box-shadow: 0 0 15px rgba(143, 207, 255, 0.7);
+}
 
-    main {
-        padding: 0px;
-    }
+main {
+    padding: 0px;
+}
 
-    button {
-  
-        background: linear-gradient(45deg, #1d33d9, #8fcfff);
-        color: white;
-        border: none;
-        padding: 12px 25px;
-        font-size: 16px;
-        border-radius: 15px; /* upgraded */
-        cursor: pointer;
-        transition: 0.3s;
-         transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+button {
+    background: linear-gradient(45deg, #1d33d9, #8fcfff);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: float 2s ease-in-out infinite;
+}
 
-    button:hover {
-        transform: scale(1.08);
-        background: linear-gradient(45deg, #8fcfff, #1d33d9);
-        box-shadow: 0 0 10px rgba(143, 207, 255, 0.8);
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    }
+button:hover {
+    background: linear-gradient(45deg, #8fcfff, #1d33d9);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
 
-    footer {
-        margin-top: 50px;
-        padding: 20px;
-        background: linear-gradient(to right, #006eff, #8fcfff);
-        font-size: 14px;
-        font-weight: bold;
-    }
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    background: linear-gradient(to right, #006eff, #8fcfff);
+    font-size: 14px;
+    font-weight: bold;
+}
 
-    .header-title {
-        color: #ffffff;
-        font-size: large;
-        padding-top: 20px;
-        margin: auto;
-        font-weight: bold;
-        -webkit-text-stroke: 2px black;
-    }
+.header-title {
+    color: #ffffff;
+    font-size: large;
+    padding-top: 20px;
+    margin: auto;
+    font-weight: bold;
+    -webkit-text-stroke: 2px black;
+}
 
-    #currentDate {
-        position: fixed;
-        top: 10px; /* fixed weird negative value */
-        right: 15px;
-        font-size: 14px;
-        color: aliceblue;
-        font-weight: bold;
-    }
+#currentDate {
+    position: fixed;
+    top: 10px;
+    right: 15px;
+    font-size: 14px;
+    color: aliceblue;
+    font-weight: bold;
+}
 
-    section {
+section {
     padding: 60px 20px;
     margin: 40px auto;
     max-width: 900px;
-
     background: linear-gradient(90deg, #8fcfff, #ffffff);
     backdrop-filter: blur(10px);
-
     border-radius: 16px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
     border: 3px solid black;
-
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -149,89 +146,126 @@ section:hover {
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
 }
 
-    * {
-        font-family: 'Times New Roman', Times, serif;
-        font-weight: bold;
-    }
-    @keyframes fadeIn {
-        from{opacity: 0;}
-        to {opacity: 1;}
-    }
-    @keyframes float {
+* {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+@keyframes float {
     0% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
     100% { transform: translateY(0); }
-    }
-
-button {
-  animation: float 2s ease-in-out infinite;
 }
+
 #Toggle {
     position: fixed;
     left: 15px;
     top: 12px;
 }
+
 </style>
 </head>
 
-<script>
-  function sayHello() {
-    alert("you clicked the button!");
-  }
-
-  function toggleDarkMode() {
-    document.body.classList.toggle("dark");
-
-    // Save preference
-    if (document.body.classList.contains("dark")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  }
-
-  function pageSwitch() {
-    window.location = "About.html";
-  }
-
-  window.onload = function() {
-    let today = new Date();
-    document.getElementById("currentDate").innerText =
-        today.toLocaleDateString();
-
-    // Check saved theme on load
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      document.body.classList.add("dark");
-    }
-  };
-</script>
-
 <body>
-    <h5 class="header-title">The Blue Kernel Labs Studios</h5>
-  <header>
-    Blue Kernel Labs Blog
-  </header>
 
-  <main>
-    <h1>Welcome to Blue Kernel Labs!</h1>
-    <p>Exploring science, tech, and coding adventures—one post at a time!</p>
-    <p id="currentDate"></p>
-    <button id="Toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
-    <button id="About" onclick="pageSwitch()">About Blue Kernel Labs...</button>
-    <section>
-        <h1>Post 1: Infinity</h1>
-        <p>Infinity is a very large and never ending number..</p>
-    </section>
-    <section>
-        <h1>Post 2: The Universe</h1>
-        <p>The Universe is an example of infinity, since it also never ends like infinity itself, thats what describes it the best and is considered one of the best examples of infinity.</p>
-    </section>
-  </main>
+<h5 class="header-title">The Blue Kernel Labs Studios</h5>
 
-  <footer>
-    © 2026 Blue Kernel Labs | All Rights Reserved
-  </footer>
+<header>
+  Blue Kernel Labs Blog
+</header>
+
+<main>
+  <h1>Welcome to Blue Kernel Labs!</h1>
+  <p>Exploring science, tech, and coding adventures—one post at a time!</p>
+  <p id="currentDate"></p>
+
+  <button id="Toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+  <button onclick="pageSwitch()">About Blue Kernel Labs...</button>
+
+  <!-- POSTS AUTO GENERATE HERE -->
+  <div id="postsContainer"></div>
+
+</main>
+
+<footer>
+  © 2026 Blue Kernel Labs | All Rights Reserved
+</footer>
+
+<script>
+
+// ===== POST SYSTEM ONLY (no styling touched) =====
+
+const posts = [
+    {
+  id: 1,
+  heading: "Post 1",
+  title: "What Is Infinity in Mathematics? (And Why There Are Different Sizes of It)",
+  preview: "Infinity comes in different sizes, some larger than others, which may seem counterintuitive.    ....",
+  content: "Many assume infinity is simply a very large number, but it is actually a concept representing something without end or limit. In mathematics, some infinities are larger than others. For instance, counting numbers (1, 2, 3, 4, and so on) form one type of infinity, while the set of decimal numbers between 0 and 1 forms a larger infinity. Mathematician Georg Cantor demonstrated that no matter how you list the decimal numbers, there will always be one missing, showing there are more decimal numbers than counting numbers, even though both sets are infinite. Infinity, therefore, is not just vast; it has structure and hierarchy. This reveals that even endlessness can be organized and measured in different ways. Blue Kernel Labs conclusion: Infinity is not chaos. It is organized mystery."
+  }
+];
+
+function renderPosts() {
+  const container = document.getElementById("postsContainer");
+  container.innerHTML = "";
+
+  posts.forEach(post => {
+    const section = document.createElement("section");
+
+    section.innerHTML = `
+      <header>${post.heading}</header>
+      <h1>${post.title}</h1>
+      <p>${post.preview}</p>
+      <p id="full-${post.id}" style="display:none;">${post.content}</p>
+      <button onclick="togglePost(${post.id}, this)">Read More..</button>
+    `;
+
+    container.appendChild(section);
+  });
+}
+
+function togglePost(id, button) {
+  const full = document.getElementById("full-" + id);
+
+  if (full.style.display === "none") {
+    full.style.display = "block";
+    button.innerText = "Show Less";
+  } else {
+    full.style.display = "none";
+    button.innerText = "Read More..";
+  }
+}
+
+// ===== YOUR ORIGINAL FUNCTIONS =====
+
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+
+  if (document.body.classList.contains("dark")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+}
+
+function pageSwitch() {
+  window.location = "About.html";
+}
+
+window.onload = function() {
+  let today = new Date();
+  document.getElementById("currentDate").innerText =
+      today.toLocaleDateString();
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+  }
+
+  renderPosts();
+};
+
+</script>
 
 </body>
 </html>
