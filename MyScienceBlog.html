@@ -164,6 +164,19 @@ section:hover {
     left: 15px;
     top: 12px;
 }
+.fullContent {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.8s ease, opacity 0.8s ease, padding 0.5s ease;
+  padding: 0 10px;
+}
+
+.fullContent.open {
+  max-height: 500px;  /* adjust as needed */
+  opacity: 1;
+  padding: 10px;
+}
 
 </style>
 </head>
@@ -218,7 +231,7 @@ function renderPosts() {
       <header>${post.heading}</header>
       <h1>${post.title}</h1>
       <p>${post.preview}</p>
-      <p id="full-${post.id}" style="display:none;">${post.content}</p>
+      <div id="full-${post.id}" class="fullContent">${post.content}</div>
       <button onclick="togglePost(${post.id}, this)">Read More..</button>
     `;
 
@@ -228,12 +241,11 @@ function renderPosts() {
 
 function togglePost(id, button) {
   const full = document.getElementById("full-" + id);
+  full.classList.toggle("open"); // triggers CSS animation
 
-  if (full.style.display === "none") {
-    full.style.display = "block";
+  if (full.classList.contains("open")) {
     button.innerText = "Show Less";
   } else {
-    full.style.display = "none";
     button.innerText = "Read More..";
   }
 }
