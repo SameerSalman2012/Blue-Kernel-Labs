@@ -1,7 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Blue Kernel Labs Blog</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===================== SEO: BASIC ===================== -->
+  <title>Blue Kernel Labs Blog | Science, Tech & Coding</title>
+  <meta name="description" content="Blue Kernel Labs Blog — exploring science, mathematics, technology, and coding adventures one post at a time. Written by curious minds, for curious minds." />
+  <meta name="keywords" content="science blog, math facts, coding, technology, Blue Kernel Labs, infinity, space, physics" />
+  <meta name="author" content="Blue Kernel Labs Studios" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://yourdomain.com/" />
+
+  <!-- ===================== SEO: OPEN GRAPH (Facebook, WhatsApp, Discord previews) ===================== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blue Kernel Labs Blog | Science, Tech & Coding" />
+  <meta property="og:description" content="Exploring science, mathematics, technology, and coding adventures — one post at a time." />
+  <meta property="og:url" content="https://yourdomain.com/" />
+  <meta property="og:image" content="https://yourdomain.com/Boron.png" />
+  <meta property="og:site_name" content="Blue Kernel Labs Blog" />
+
+  <!-- ===================== SEO: TWITTER CARD (X / Twitter previews) ===================== -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blue Kernel Labs Blog | Science, Tech & Coding" />
+  <meta name="twitter:description" content="Exploring science, mathematics, technology, and coding adventures — one post at a time." />
+  <meta name="twitter:image" content="https://yourdomain.com/Boron.png" />
+
+  <!-- ===================== SEO: SCHEMA MARKUP (helps Google understand your site) ===================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Blue Kernel Labs Blog",
+    "description": "Exploring science, mathematics, technology, and coding adventures one post at a time.",
+    "url": "https://yourdomain.com/",
+    "author": {
+      "@type": "Organization",
+      "name": "Blue Kernel Labs Studios"
+    },
+    "inLanguage": "en"
+  }
+  </script>
 
 <style>
 
@@ -177,21 +216,21 @@ section:hover {
 }
 
 .fullContent.open {
-  max-height: 500px;  /* adjust as needed */
+  max-height: 500px;
   opacity: 1;
   padding: 10px;
 }
 #logo {
-  width: 60px;       /* adjust size */
-  height: 60px;      /* keeps it square */
+  width: 60px;
+  height: 60px;
   cursor: pointer;
 }
 
 #logo-link {
-  position: fixed;   /* stays at top-left even when scrolling */
+  position: fixed;
   top: 3px;
   left: 8px;
-  z-index: 1000;     /* makes sure it’s above other stuff */
+  z-index: 1000;
 }
 
 </style>
@@ -199,7 +238,7 @@ section:hover {
 
 <body>
 
-<h5 class="header-title">lue Kernel Labs Studios</h5>
+<h5 class="header-title">Blue Kernel Labs Studios</h5>
 <a href="index.html" id="logo-link">
   <img src="Boron.png" alt="Blue Kernel Labs Logo" id="logo">
 </a>
@@ -227,23 +266,21 @@ section:hover {
 
 <script>
 
-// ===== POST SYSTEM ONLY (no styling touched) =====
-
 const posts = [
   {
     id: 1,
     heading: "Post 1",
     title: "What Is Infinity in Mathematics? (And Why There Are Different Sizes of It)",
-    preview: "Infinity isn’t just huge. Some infinities are actually bigger than others… mind blown. ....",
-    content: `Okay, so infinity. Most people think it's just a really, really big number that never ends. Like, bigger than the number of times you’ve hit snooze this week.  
+    preview: "Infinity isn't just huge. Some infinities are actually bigger than others… mind blown. ....",
+    content: `Okay, so infinity. Most people think it's just a really, really big number that never ends. Like, bigger than the number of times you've hit snooze this week.  
 
-But nope. Math is weird. Infinity isn’t just one thing. Some infinities are bigger than others.  
+But nope. Math is weird. Infinity isn't just one thing. Some infinities are bigger than others.  
 
-Counting numbers — 1, 2, 3… — that’s one type of infinity. But the numbers between 0 and 1? That’s a bigger infinity. Yeah, math is trolling us.  
+Counting numbers — 1, 2, 3… — that's one type of infinity. But the numbers between 0 and 1? That's a bigger infinity. Yeah, math is trolling us.  
 
-Georg Cantor figured this out and basically said, “No matter how you try to list these numbers, I’ll always find one you forgot.” Savage.  
+Georg Cantor figured this out and basically said, "No matter how you try to list these numbers, I'll always find one you forgot." Savage.  
 
-So infinity isn’t total chaos. It’s like organized chaos. Like your messy desk… but somehow you still know where your pencil is.  
+So infinity isn't total chaos. It's like organized chaos. Like your messy desk… but somehow you still know where your pencil is.  
 
 Blue Kernel Labs conclusion: Infinity is weird, wild, and secretly hilarious.`
   }
@@ -270,7 +307,7 @@ function renderPosts() {
 
 function togglePost(id, button) {
   const full = document.getElementById("full-" + id);
-  full.classList.toggle("open"); // triggers CSS animation
+  full.classList.toggle("open");
 
   if (full.classList.contains("open")) {
     button.innerText = "Show Less";
@@ -279,19 +316,17 @@ function togglePost(id, button) {
   }
 }
 
-// ===== YOUR ORIGINAL FUNCTIONS =====
-
 function toggleDarkMode() {
   document.body.classList.toggle("dark");
 
-  const toggleBtn = document.getElementById("Toggle"); // your button
+  const toggleBtn = document.getElementById("Toggle");
 
   if (document.body.classList.contains("dark")) {
     localStorage.setItem("theme", "dark");
-    toggleBtn.innerText = "🌘 Toggle Light Mode"; // symbol for dark mode
+    toggleBtn.innerText = "🌘 Toggle Light Mode";
   } else {
     localStorage.setItem("theme", "light");
-    toggleBtn.innerText = "☀️ Toggle Dark Mode"; // symbol for light mode
+    toggleBtn.innerText = "☀️ Toggle Dark Mode";
   }
 }
 
