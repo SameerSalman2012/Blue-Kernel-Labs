@@ -148,6 +148,12 @@
         left: 60px;
     }
 
+    @media (max-width: 600px) {
+        .header-title {
+            display: none;
+        }
+    }
+
     #currentDate {
         position: fixed;
         top: 10px;
@@ -155,6 +161,7 @@
         font-size: 14px;
         color: aliceblue;
         font-weight: bold;
+        opacity: 0;
     }
 
     section {
@@ -190,6 +197,17 @@
         right: 10px;
         top: 12px;
         z-index: 1000;
+        transition: all 0.4s ease;
+    }
+
+    #Toggle.scrolled {
+        padding: 8px 10px;
+        font-size: 20px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     /* ===== POST CONTENT STYLES ===== */
@@ -199,16 +217,15 @@
         overflow: hidden;
         transition: max-height 1s ease, opacity 0.8s ease, padding 0.5s ease;
         padding: 0 10px;
-        text-align: left;        /* post text reads left-to-right, feels more natural */
+        text-align: left;
     }
 
     .fullContent.open {
-        max-height: 2000px;      /* increased so long posts don't get cut off */
+        max-height: 2000px;
         opacity: 1;
         padding: 10px 20px;
     }
 
-    /* Subheadings inside posts */
     .fullContent h3 {
         font-size: 1.2em;
         margin-top: 20px;
@@ -220,14 +237,12 @@
         color: #8fcfff;
     }
 
-    /* Paragraphs inside posts */
     .fullContent p {
         margin: 8px 0;
         line-height: 1.7;
         font-size: 1em;
     }
 
-    /* Conclusion block at end of posts */
     .fullContent .conclusion {
         margin-top: 20px;
         padding: 12px 16px;
@@ -240,6 +255,18 @@
     body.dark .fullContent .conclusion {
         background: rgba(143, 207, 255, 0.1);
         border-left: 4px solid #8fcfff;
+    }
+
+    /* ===== POST DATE STYLE ===== */
+    .post-date {
+        font-size: 0.85em;
+        color: #555;
+        margin: 4px 0 12px 0;
+        font-style: italic;
+    }
+
+    body.dark .post-date {
+        color: #aaaaaa;
     }
 
     #logo {
@@ -288,13 +315,14 @@
 // ============================================================
 //  HOW TO ADD A NEW POST — COPY THE TEMPLATE BELOW
 //  Paste it inside the posts array, above the last ]
-//  Change the id, heading, title, preview, and content
+//  Change ALL fields: id, heading, date, title, preview, content
 // ============================================================
 //
 //  {
-//    id: 2,                          // change number each time
-//    heading: "Post 2",              // e.g. "Post 2", "Post 3"
-//    title: "Your Post Title Here",  // the big heading
+//    id: 2,                            // change number each time
+//    heading: "Post 2",                // e.g. "Post 2", "Post 3"
+//    date: "March 5, 2026",            // ← just type today's date here!
+//    title: "Your Post Title Here",    // the big heading
 //    preview: "A short teaser line that makes people want to click Read More....",
 //    content: `
 //      <h3>Your First Subheading 🔬</h3>
@@ -321,6 +349,7 @@ const posts = [
   {
     id: 1,
     heading: "Post 1",
+    date: "March 3, 2026",
     title: "What Is Infinity in Mathematics? (And Why There Are Different Sizes of It)",
     preview: "Infinity isn't just huge. Some infinities are actually bigger than others… mind blown. ....",
     content: `
@@ -359,6 +388,25 @@ const posts = [
 //  (unless you know what you're doing 😄)
 // ============================================================
 
+window.addEventListener("scroll", function() {
+    const toggleBtn = document.getElementById("Toggle");
+    if (window.scrollY > 80) {
+        toggleBtn.classList.add("scrolled");
+        if (document.body.classList.contains("dark")) {
+            toggleBtn.innerText = "🌘";
+        } else {
+            toggleBtn.innerText = "☀️";
+        }
+    } else {
+        toggleBtn.classList.remove("scrolled");
+        if (document.body.classList.contains("dark")) {
+            toggleBtn.innerText = "🌘 Toggle Light Mode";
+        } else {
+            toggleBtn.innerText = "☀️ Toggle Dark Mode";
+        }
+    }
+});
+
 function renderPosts() {
   const container = document.getElementById("postsContainer");
   container.innerHTML = "";
@@ -369,6 +417,7 @@ function renderPosts() {
     section.innerHTML = `
       <header>${post.heading}</header>
       <h1>${post.title}</h1>
+      <p class="post-date">📅 ${post.date}</p>
       <p>${post.preview}</p>
       <div id="full-${post.id}" class="fullContent">${post.content}</div>
       <button onclick="togglePost(${post.id}, this)">Read More..</button>
