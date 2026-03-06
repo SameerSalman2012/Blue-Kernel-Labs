@@ -43,15 +43,15 @@
   </script>
 
   <!-- ===================== ONESIGNAL PUSH NOTIFICATIONS ===================== -->
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "b52309b7-9674-4ca7-b823-2d2823dd34ac",
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({
+        appId: "b52309b7-9674-4ca7-b823-2d2823dd34ac",
+      });
     });
-  });
-</script>
+  </script>
 
 <style>
     body {
@@ -292,6 +292,17 @@
         left: 8px;
         z-index: 1000;
     }
+
+    /* ===== SUBSCRIBE BUTTON SPECIAL STYLE ===== */
+    #subscribeBtn.subscribed {
+        background: linear-gradient(45deg, #12a150, #00d97e);
+        animation: none;
+        cursor: default;
+    }
+
+    body.dark #subscribeBtn.subscribed {
+        background: linear-gradient(45deg, #0a7a3a, #00b368);
+    }
 </style>
 </head>
 
@@ -313,6 +324,7 @@
 
   <button id="Toggle" onclick="toggleDarkMode()">☀️ Toggle Dark Mode</button>
   <button onclick="pageSwitch()">About Blue Kernel Labs...</button>
+  <button id="subscribeBtn" onclick="subscribeToNotifications()">🔔 Subscribe for Notifications</button>
 
   <div id="postsContainer"></div>
 </main>
@@ -330,9 +342,9 @@
 // ============================================================
 //
 //  {
-//    id: 3,                            // change number each time
-//    heading: "Post 3",                // e.g. "Post 3", "Post 4"
-//    date: "March 5, 2026",            // ← just type today's date here!
+//    id: 4,                            // change number each time
+//    heading: "Post 4",                // e.g. "Post 4", "Post 5"
+//    date: "March 6, 2026",            // ← just type today's date here!
 //    title: "Your Post Title Here",    // the big heading
 //    preview: "A short teaser line that makes people want to click Read More....",
 //    content: `
@@ -456,14 +468,14 @@ const posts = [
       <p>Sometimes, ChatGPT can make up completely fake facts and say them with full confidence!</p>
       <p>It doesn't know its wrong, it just sounds right to itself..like your explanation of "Photosynthesis" where you go complete Einstein mode, while "Velocity" feels like discovering fire for the first time..if you're 5 years old, of course.</p>
       <p>AIs just want to give you an answer, Wether its correct or completely made up. It will never admit that it can't find an answer to your question!</p>
-      <p> And this applies to OUR brains too, if you're in 6th grade and become Einstein by saying <em>"Photosynthesis is the powerhouse of Nitrogen-Dioxide"</em>, Of course it'll feel like you've discovered a new law of Science! (if you weren't paying attention in class..)</p>
+      <p>And this applies to OUR brains too, if you're in 6th grade and become Einstein by saying <em>"Photosynthesis is the powerhouse of Nitrogen-Dioxide"</em>, Of course it'll feel like you've discovered a new law of Science! (if you weren't paying attention in class..)</p>
       
       <h3>So what does this mean?</h3>
       <p>This shows how AIs aren't perfect. They can still make mistakes, even if they're pieces of code.</p>
       <p>It is pricey to train it, i agree, but that doesn't mean its Perfect.</p>
 
       <div class="conclusion">
-        🔬 Blue Kernel Labs Conclusion: AI doesn't have feelings, emotions, thinking, and humour, because its all forced into the program! But it does have to ability to come up with any sort of answer, right or wrong.
+        🔬 Blue Kernel Labs Conclusion: AI doesn't have feelings, emotions, thinking, and humour, because its all forced into the program! But it does have the ability to come up with any sort of answer, right or wrong.
       </div>
     `
   },
@@ -476,6 +488,26 @@ const posts = [
 //  DON'T TOUCH ANYTHING BELOW THIS LINE
 //  (unless you know what you're doing 😄)
 // ============================================================
+
+// ===== SUBSCRIBE BUTTON FUNCTION =====
+function subscribeToNotifications() {
+  const btn = document.getElementById("subscribeBtn");
+
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    const permission = await OneSignal.Notifications.requestPermission();
+    if (permission) {
+      btn.innerText = "✅ Subscribed!";
+      btn.classList.add("subscribed");
+      btn.onclick = null; // disable button after subscribing
+    } else {
+      btn.innerText = "❌ Notifications Blocked";
+      setTimeout(() => {
+        btn.innerText = "🔔 Subscribe for Notifications";
+      }, 3000);
+    }
+  });
+}
 
 window.addEventListener("scroll", function() {
     const toggleBtn = document.getElementById("Toggle");
