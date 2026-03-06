@@ -490,23 +490,30 @@ const posts = [
 // ============================================================
 
 // ===== SUBSCRIBE BUTTON FUNCTION =====
-function subscribeToNotifications() {
+async function subscribeToNotifications() {
   const btn = document.getElementById("subscribeBtn");
 
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    const permission = await OneSignal.Notifications.requestPermission();
-    if (permission) {
+  try {
+    // Directly ask browser for notification permission
+    const permission = await Notification.requestPermission();
+
+    if (permission === "granted") {
+      // Now tell OneSignal the user opted in
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.User.PushSubscription.optIn();
+      });
       btn.innerText = "✅ Subscribed!";
       btn.classList.add("subscribed");
-      btn.onclick = null; // disable button after subscribing
-    } else {
+      btn.onclick = null;
+    } else if (permission === "denied") {
       btn.innerText = "❌ Notifications Blocked";
       setTimeout(() => {
         btn.innerText = "🔔 Subscribe for Notifications";
       }, 3000);
     }
-  });
+  } catch (err) {
+    console.error("Notification error:", err);
+  }
 }
 
 window.addEventListener("scroll", function() {
