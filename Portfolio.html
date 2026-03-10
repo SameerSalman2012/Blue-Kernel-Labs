@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Blue Kernel Labs</title>
+  <meta name="description" content="Sameer's portfolio — student, coder, and technology enthusiast building projects with Python, Arduino, HTML, and more." />
+  <meta name="author" content="Blue Kernel Labs Studios" />
+
+<style>
+    /* ===== BASE ===== */
+    body {
+        margin: 0;
+        font-family: 'Times New Roman', Times, serif;
+        text-align: center;
+        background: linear-gradient(to bottom, #8fcfff, #3f7af0);
+        color: black;
+        transition: background 1.5s ease, color 1s ease;
+    }
+
+    body.dark {
+        background: linear-gradient(to bottom, #000000, #1a1a1a);
+        color: white;
+    }
+
+    * { font-family: 'Times New Roman', Times, serif; font-weight: bold; }
+
+    /* ===== NAVBAR ===== */
+    nav {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        height: 60px;
+        background: linear-gradient(90deg, #8fcfff, #ffffff);
+        border-bottom: 3px solid black;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        transition: background 1.5s ease, border-color 1s ease;
+    }
+
+    body.dark nav {
+        background: linear-gradient(90deg, #111111, #2a2a2a);
+        border-bottom: 3px solid white;
+    }
+
+    .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .nav-logo img { width: 42px; height: 42px; }
+
+    .nav-logo-text {
+        font-size: 1.1em;
+        color: hsl(206, 61%, 45%);
+        font-weight: bold;
+    }
+
+    body.dark .nav-logo-text { color: #8fcfff; }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .nav-link {
+        text-decoration: none;
+        padding: 7px 18px;
+        border-radius: 12px;
+        font-size: 0.95em;
+        font-weight: bold;
+        color: black;
+        background: transparent;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 50%;
+        width: 0; height: 2px;
+        background: #1d33d9;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+
+    .nav-link:hover::after { width: 80%; }
+
+    .nav-link:hover {
+        background: rgba(29, 51, 217, 0.1);
+        border-color: rgba(29, 51, 217, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .nav-link.active {
+        background: linear-gradient(45deg, #1d33d9, #8fcfff);
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 4px 12px rgba(29, 51, 217, 0.35);
+    }
+
+    .nav-link.active::after { display: none; }
+
+    body.dark .nav-link { color: white; }
+
+    body.dark .nav-link:hover {
+        background: rgba(143, 207, 255, 0.15);
+        border-color: rgba(143, 207, 255, 0.3);
+    }
+
+    body.dark .nav-link.active {
+        background: linear-gradient(45deg, #222, #444);
+        box-shadow: 0 4px 12px rgba(255,255,255,0.1);
+    }
+
+    .nav-toggle {
+        background: linear-gradient(45deg, #1d33d9, #8fcfff);
+        color: white;
+        border: none;
+        padding: 7px 14px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 0.9em;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .nav-toggle:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        background: linear-gradient(45deg, #8fcfff, #1d33d9);
+    }
+
+    body.dark .nav-toggle {
+        background: linear-gradient(45deg, #222, #444);
+    }
+
+    /* ===== PAGE TRANSITION ===== */
+    #pageTransition {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        pointer-events: none;
+        background: linear-gradient(135deg, #1d33d9, #8fcfff);
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.4s ease;
+    }
+
+    #pageTransition.active {
+        opacity: 1;
+        transform: scaleY(1);
+        pointer-events: all;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+        background: linear-gradient(90deg, #8fcfff, #ffffff);
+        border: 3px solid black;
+        border-radius: 15px;
+        margin: 80px 15px 15px 15px;
+        color: black;
+        padding: 15px;
+        font-size: xxx-large;
+        -webkit-text-stroke: 1px rgb(0,0,0);
+        font-weight: bold;
+        transition: background 1.5s ease, color 1s ease;
+    }
+
+    header:hover { box-shadow: 0 0 15px rgba(143, 207, 255, 0.7); }
+
+    body.dark header {
+        background: linear-gradient(90deg, #111111, #2a2a2a);
+        color: white;
+        border: 3px solid white;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+        margin-top: 50px;
+        padding: 20px;
+        background: linear-gradient(to right, #006eff, #8fcfff);
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    body.dark footer {
+        background: linear-gradient(to right, #000000, #1a1a1a);
+        color: white;
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+        padding: 40px 30px;
+        margin: 40px auto;
+        max-width: 900px;
+        background: linear-gradient(90deg, #8fcfff, #ffffff);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        border: 3px solid black;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: left;
+    }
+
+    section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+    }
+
+    body.dark section {
+        background: linear-gradient(90deg, #1a1a1a, #2b2b2b);
+        border: 3px solid white;
+    }
+
+    /* ===== SECTION HEADERS ===== */
+    .section-title {
+        text-align: center;
+        font-size: 1.6em;
+        margin-bottom: 25px;
+        color: #1d33d9;
+        border-bottom: 3px solid #1d33d9;
+        padding-bottom: 10px;
+    }
+
+    body.dark .section-title {
+        color: #8fcfff;
+        border-bottom-color: #8fcfff;
+    }
+
+    /* ===== BIO SECTION ===== */
+    .bio-wrapper {
+        display: flex;
+        align-items: flex-start;
+        gap: 25px;
+        flex-wrap: wrap;
+    }
+
+    .bio-avatar {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #1d33d9, #8fcfff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3em;
+        flex-shrink: 0;
+        border: 3px solid black;
+        box-shadow: 0 6px 20px rgba(29, 51, 217, 0.3);
+        animation: float 3s ease-in-out infinite;
+    }
+
+    body.dark .bio-avatar {
+        border-color: white;
+        box-shadow: 0 6px 20px rgba(143, 207, 255, 0.2);
+    }
+
+    .bio-text { flex: 1; min-width: 220px; }
+
+    .bio-text h2 {
+        font-size: 1.8em;
+        margin: 0 0 5px 0;
+        color: #1d33d9;
+    }
+
+    body.dark .bio-text h2 { color: #8fcfff; }
+
+    .bio-text .bio-tagline {
+        font-size: 1em;
+        color: #555;
+        margin-bottom: 15px;
+        font-style: italic;
+    }
+
+    body.dark .bio-text .bio-tagline { color: #aaa; }
+
+    .bio-text p {
+        font-size: 0.95em;
+        line-height: 1.75;
+        margin: 8px 0;
+        font-weight: normal;
+    }
+
+    /* ===== SKILLS ===== */
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 14px;
+        margin-top: 10px;
+    }
+
+    .skill-badge {
+        background: linear-gradient(135deg, #1d33d9, #8fcfff);
+        color: white;
+        border-radius: 12px;
+        padding: 14px 10px;
+        text-align: center;
+        font-size: 0.9em;
+        border: 2px solid transparent;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: default;
+        animation: float 2s ease-in-out infinite;
+    }
+
+    .skill-badge:nth-child(even) { animation-delay: 0.5s; }
+    .skill-badge:nth-child(3n) { animation-delay: 1s; }
+
+    .skill-badge:hover {
+        transform: translateY(-6px) scale(1.05);
+        box-shadow: 0 10px 25px rgba(29, 51, 217, 0.4);
+    }
+
+    body.dark .skill-badge {
+        background: linear-gradient(135deg, #222, #444);
+        box-shadow: 0 4px 12px rgba(255,255,255,0.05);
+    }
+
+    body.dark .skill-badge:hover {
+        box-shadow: 0 10px 25px rgba(255,255,255,0.15);
+    }
+
+    .skill-icon { font-size: 1.8em; display: block; margin-bottom: 6px; }
+
+    /* ===== PROJECTS ===== */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 20px;
+        margin-top: 10px;
+    }
+
+    .project-card {
+        background: linear-gradient(135deg, rgba(29,51,217,0.08), rgba(143,207,255,0.15));
+        border: 2px solid rgba(29,51,217,0.3);
+        border-radius: 14px;
+        padding: 22px 18px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        text-align: left;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .project-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #1d33d9, #8fcfff);
+        border-radius: 14px 14px 0 0;
+    }
+
+    .project-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 14px 35px rgba(29, 51, 217, 0.25);
+        border-color: #1d33d9;
+    }
+
+    body.dark .project-card {
+        background: linear-gradient(135deg, rgba(143,207,255,0.05), rgba(29,51,217,0.1));
+        border-color: rgba(143,207,255,0.2);
+    }
+
+    body.dark .project-card:hover {
+        box-shadow: 0 14px 35px rgba(143,207,255,0.15);
+        border-color: #8fcfff;
+    }
+
+    .project-emoji { font-size: 2.2em; margin-bottom: 10px; display: block; }
+
+    .project-title {
+        font-size: 1.1em;
+        color: #1d33d9;
+        margin: 0 0 8px 0;
+    }
+
+    body.dark .project-title { color: #8fcfff; }
+
+    .project-desc {
+        font-size: 0.88em;
+        line-height: 1.65;
+        color: #333;
+        font-weight: normal;
+        margin: 0 0 12px 0;
+    }
+
+    body.dark .project-desc { color: #ccc; }
+
+    .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 10px;
+    }
+
+    .project-tag {
+        background: rgba(29,51,217,0.12);
+        color: #1d33d9;
+        border-radius: 8px;
+        padding: 3px 10px;
+        font-size: 0.78em;
+        border: 1px solid rgba(29,51,217,0.25);
+    }
+
+    body.dark .project-tag {
+        background: rgba(143,207,255,0.1);
+        color: #8fcfff;
+        border-color: rgba(143,207,255,0.2);
+    }
+
+    /* ===== BLOG POSTS SHOWCASE ===== */
+    .posts-showcase {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-top: 10px;
+    }
+
+    .post-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: linear-gradient(135deg, rgba(29,51,217,0.06), rgba(143,207,255,0.12));
+        border: 2px solid rgba(29,51,217,0.2);
+        border-radius: 12px;
+        padding: 16px 18px;
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        cursor: pointer;
+    }
+
+    .post-row:hover {
+        transform: translateX(6px);
+        box-shadow: 0 6px 20px rgba(29,51,217,0.2);
+        border-color: #1d33d9;
+    }
+
+    body.dark .post-row {
+        background: linear-gradient(135deg, rgba(143,207,255,0.05), rgba(29,51,217,0.08));
+        border-color: rgba(143,207,255,0.15);
+    }
+
+    body.dark .post-row:hover {
+        border-color: #8fcfff;
+        box-shadow: 0 6px 20px rgba(143,207,255,0.12);
+    }
+
+    .post-row-emoji { font-size: 1.8em; flex-shrink: 0; }
+
+    .post-row-info { flex: 1; text-align: left; }
+
+    .post-row-title {
+        font-size: 1em;
+        color: #1d33d9;
+        margin: 0 0 4px 0;
+    }
+
+    body.dark .post-row-title { color: #8fcfff; }
+
+    .post-row-date {
+        font-size: 0.8em;
+        color: #666;
+        font-style: italic;
+        font-weight: normal;
+    }
+
+    body.dark .post-row-date { color: #999; }
+
+    .post-row-arrow {
+        font-size: 1.2em;
+        color: #1d33d9;
+        transition: transform 0.3s ease;
+    }
+
+    .post-row:hover .post-row-arrow { transform: translateX(5px); }
+
+    body.dark .post-row-arrow { color: #8fcfff; }
+
+    /* ===== FLOAT ANIMATION ===== */
+    @keyframes float {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+        100% { transform: translateY(0); }
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 600px) {
+        .nav-logo-text { display: none; }
+        .nav-link { padding: 6px 12px; font-size: 0.85em; }
+        .bio-wrapper { flex-direction: column; align-items: center; text-align: center; }
+        .bio-text { text-align: center; }
+        .projects-grid { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+
+<!-- PAGE TRANSITION OVERLAY -->
+<div id="pageTransition"></div>
+
+<!-- NAVBAR -->
+<nav>
+    <a href="index.html" class="nav-logo" onclick="navigateTo(event, 'index.html')">
+        <img src="Boron.png" alt="Blue Kernel Labs Logo">
+        <span class="nav-logo-text">Blue Kernel Labs</span>
+    </a>
+    <div class="nav-links">
+        <a href="index.html" class="nav-link" onclick="navigateTo(event, 'index.html')">📝 Blog</a>
+        <a href="Portfolio.html" class="nav-link active">🚀 Portfolio</a>
+        <a href="About.html" class="nav-link" onclick="navigateTo(event, 'About.html')">👤 About</a>
+        <button class="nav-toggle" onclick="toggleDarkMode()">☀️ Dark Mode</button>
+    </div>
+</nav>
+
+<header>🚀 Portfolio</header>
+
+<main style="padding: 0 10px;">
+
+  <!-- ===== BIO ===== -->
+  <section>
+    <div class="section-title">👋 About Me</div>
+    <div class="bio-wrapper">
+      <div class="bio-avatar">👨‍💻</div>
+      <div class="bio-text">
+        <h2>Sameer</h2>
+        <div class="bio-tagline">Student · Coder · Tech Enthusiast</div>
+        <p>Hi, I'm Sameer — a student and technology enthusiast who enjoys building things with code and experimenting with different technologies.</p>
+        <p>I work with Python, HTML, CSS, and JavaScript to create websites and small applications, and I also explore hardware projects using Arduino and C++.</p>
+        <p>I'm also interested in game development and like experimenting with engines such as Godot. Outside of programming, I enjoy studying, playing chess as a beginner, and exploring new ideas in technology.</p>
+        <p>I'm naturally curious and enjoy challenging myself to learn new concepts, solve problems, and turn ideas into real projects.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <section>
+    <div class="section-title">🛠️ Skills & Technologies</div>
+    <div class="skills-grid">
+      <div class="skill-badge"><span class="skill-icon">🐍</span>Python</div>
+      <div class="skill-badge"><span class="skill-icon">🌐</span>HTML</div>
+      <div class="skill-badge"><span class="skill-icon">🎨</span>CSS</div>
+      <div class="skill-badge"><span class="skill-icon">⚡</span>JavaScript</div>
+      <div class="skill-badge"><span class="skill-icon">🔌</span>Arduino</div>
+      <div class="skill-badge"><span class="skill-icon">⚙️</span>C++</div>
+      <div class="skill-badge"><span class="skill-icon">🍎</span>AppleScript</div>
+      <div class="skill-badge"><span class="skill-icon">🎮</span>Godot</div>
+      <div class="skill-badge"><span class="skill-icon">🤖</span>Automation</div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section>
+    <div class="section-title">💡 Projects</div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <span class="project-emoji">🏓</span>
+        <div class="project-title">Pong on Arduino</div>
+        <p class="project-desc">Built a fully playable Pong game using Arduino, combining programming with electronics to create a fun interactive hardware project. One of my favourite builds!</p>
+        <div class="project-tags">
+          <span class="project-tag">Arduino</span>
+          <span class="project-tag">C++</span>
+          <span class="project-tag">Hardware</span>
+          <span class="project-tag">Game</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-emoji">🌐</span>
+        <div class="project-title">Blue Kernel Labs Blog</div>
+        <p class="project-desc">This very website! A science and tech blog built from scratch with HTML, CSS, and JavaScript. Features dark mode, push notifications, and animated post reveals.</p>
+        <div class="project-tags">
+          <span class="project-tag">HTML</span>
+          <span class="project-tag">CSS</span>
+          <span class="project-tag">JavaScript</span>
+          <span class="project-tag">Web</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-emoji">🎮</span>
+        <div class="project-title">Game Dev Experiments</div>
+        <p class="project-desc">Exploring game development using the Godot engine — experimenting with mechanics, scenes, and scripting to bring creative game ideas to life.</p>
+        <div class="project-tags">
+          <span class="project-tag">Godot</span>
+          <span class="project-tag">GDScript</span>
+          <span class="project-tag">Game Dev</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-emoji">🤖</span>
+        <div class="project-title">Automation Scripts</div>
+        <p class="project-desc">Using AppleScript and Python to automate repetitive tasks and workflows, turning boring manual steps into one-click solutions.</p>
+        <div class="project-tags">
+          <span class="project-tag">AppleScript</span>
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Automation</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== BLOG SHOWCASE ===== -->
+  <section>
+    <div class="section-title">📝 From the Blog</div>
+    <div class="posts-showcase">
+      <div class="post-row" onclick="navigateTo(event, 'index.html')">
+        <span class="post-row-emoji">♾️</span>
+        <div class="post-row-info">
+          <div class="post-row-title">What Is Infinity in Mathematics?</div>
+          <div class="post-row-date">📅 March 1, 2026</div>
+        </div>
+        <span class="post-row-arrow">→</span>
+      </div>
+      <div class="post-row" onclick="navigateTo(event, 'index.html')">
+        <span class="post-row-emoji">🕰️</span>
+        <div class="post-row-info">
+          <div class="post-row-title">Time and How It Works Differently in Space</div>
+          <div class="post-row-date">📅 March 3, 2026</div>
+        </div>
+        <span class="post-row-arrow">→</span>
+      </div>
+      <div class="post-row" onclick="navigateTo(event, 'index.html')">
+        <span class="post-row-emoji">🦾</span>
+        <div class="post-row-info">
+          <div class="post-row-title">AIs and How They Function</div>
+          <div class="post-row-date">📅 March 5, 2026</div>
+        </div>
+        <span class="post-row-arrow">→</span>
+      </div>
+      <div class="post-row" onclick="navigateTo(event, 'index.html')">
+        <span class="post-row-emoji">⚰️</span>
+        <div class="post-row-info">
+          <div class="post-row-title">What Happens After Death</div>
+          <div class="post-row-date">📅 March 8, 2026</div>
+        </div>
+        <span class="post-row-arrow">→</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2026 Blue Kernel Labs | All Rights Reserved</footer>
+
+<script>
+function navigateTo(e, url) {
+    e.preventDefault();
+    const overlay = document.getElementById("pageTransition");
+    overlay.classList.add("active");
+    setTimeout(() => { window.location.href = url; }, 420);
+}
+
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+    const btn = document.querySelector(".nav-toggle");
+    if (document.body.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+        btn.innerText = "🌘 Light Mode";
+    } else {
+        localStorage.setItem("theme", "light");
+        btn.innerText = "☀️ Dark Mode";
+    }
+}
+
+window.onload = function() {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+        document.querySelector(".nav-toggle").innerText = "🌘 Light Mode";
+    }
+
+    // Fade in from transition
+    const overlay = document.getElementById("pageTransition");
+    overlay.style.transformOrigin = "top";
+    overlay.style.transform = "scaleY(1)";
+    overlay.style.opacity = "1";
+    overlay.style.transition = "none";
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            overlay.style.transition = "transform 0.4s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.4s ease";
+            overlay.style.transform = "scaleY(0)";
+            overlay.style.opacity = "0";
+        });
+    });
+};
+</script>
+</body>
+</html>
