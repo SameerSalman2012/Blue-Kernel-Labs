@@ -1,171 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Blue Kernel Labs Blog</title>
+  <!-- ===================== SEO: BASIC ===================== -->
+  <title>Blue Kernel Labs Blog | Science, Tech & Coding</title>
+  <meta name="description" content="Blue Kernel Labs Blog — exploring science, mathematics, technology, and coding adventures one post at a time. Written by curious minds, for curious minds." />
+  <meta name="keywords" content="science blog, math facts, coding, technology, Blue Kernel Labs, infinity, space, physics" />
+  <meta name="author" content="Blue Kernel Labs Studios" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://Blue-Kernel-Labs.vercel.app/" />
+
+  <!-- ===================== SEO: OPEN GRAPH ===================== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blue Kernel Labs Blog | Science, Tech & Coding" />
+  <meta property="og:description" content="Exploring science, mathematics, technology, and coding adventures — one post at a time." />
+  <meta property="og:url" content="https://Blue-Kernel-Labs.vercel.app/" />
+  <meta property="og:image" content="https://Blue-Kernel-Labs.vercel.app/Boron.png" />
+  <meta property="og:site_name" content="Blue Kernel Labs Blog" />
+
+  <!-- ===================== SEO: TWITTER CARD ===================== -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blue Kernel Labs Blog | Science, Tech & Coding" />
+  <meta name="twitter:description" content="Exploring science, mathematics, technology, and coding adventures — one post at a time." />
+  <meta name="twitter:image" content="https://Blue-Kernel-Labs.vercel.app/Boron.png" />
+
+  <!-- ===================== SEO: SCHEMA MARKUP ===================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Blue Kernel Labs Blog",
+    "description": "Exploring science, mathematics, technology, and coding adventures one post at a time.",
+    "url": "https://Blue-Kernel-Labs.vercel.app/",
+    "author": {
+      "@type": "Organization",
+      "name": "Blue Kernel Labs Studios"
+    },
+    "inLanguage": "en"
+  }
+  </script>
+
+  <!-- ===================== ONESIGNAL PUSH NOTIFICATIONS ===================== -->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({
+        appId: "b52309b7-9674-4ca7-b823-2d2823dd34ac",
+      });
+    });
+  </script>
 
 <style>
+    body {
+        margin: 0;
+        font-family: 'Times New Roman', Times, sans-serif;
+        text-align: center;
+        background: linear-gradient(to bottom, #8fcfff, #3f7af0);
+        color: black;
+        transition: background 1.5s ease, color 1s ease;
+    }
 
-body{
-margin:0;
-font-family:'Times New Roman', Times, serif;
-text-align:center;
-background:linear-gradient(to bottom,#8fcfff,#3f7af0);
-color:black;
-}
+    body.dark {
+        background: linear-gradient(to bottom, #000000, #1a1a1a);
+        color: white;
+    }
 
-*{
-font-family:'Times New Roman', Times, serif;
-font-weight:bold;
-box-sizing:border-box;
-}
+    body.dark header {
+        background: linear-gradient(90deg, #111111, #2a2a2a);
+        color: white;
+        border: 3px solid white;
+    }
 
-nav{
-position:fixed;
-top:0;
-left:0;
-right:0;
-z-index:2000;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 20px;
-height:60px;
-background:linear-gradient(90deg,#8fcfff,#ffffff);
-border-bottom:3px solid black;
-}
+    body.dark section {
+        background: linear-gradient(90deg, #1a1a1a, #2b2b2b);
+        border: 3px solid white;
+    }
 
-.nav-logo{
-display:flex;
-align-items:center;
-gap:10px;
-text-decoration:none;
-color:inherit;
-}
+    body.dark footer {
+        background: linear-gradient(to right, #000000, #1a1a1a);
+        color: white;
+    }
 
-.nav-logo img{
-width:42px;
-height:42px;
-}
+    body.dark button {
+        background: linear-gradient(45deg, #222222, #444444);
+        color: white;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+        transition: background 0.5s ease, box-shadow 0.5s ease, transform 0.3s ease;
+    }
 
-.nav-logo-text{
-font-size:1.1em;
-color:hsl(206,61%,45%);
-}
+    body.dark button:hover {
+        background: linear-gradient(45deg, #444444, #666666);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+        transform: translateY(-5px);
+    }
 
-.nav-links{
-display:flex;
-align-items:center;
-gap:8px;
-}
+    body.dark .header-title {
+        -webkit-text-stroke: 1px white;
+        color: #dddddd;
+    }
 
-.nav-link{
-text-decoration:none;
-padding:7px 18px;
-border-radius:12px;
-font-size:0.95em;
-color:black;
-}
+    header {
+        background: linear-gradient(90deg, #8fcfff, #ffffff);
+        border: 3px solid black;
+        border-radius: 15px;
+        margin: 70px 15px 15px 15px;
+        color: black;
+        padding: 15px;
+        font-size: xxx-large;
+        -webkit-text-stroke: 1px rgb(0, 0, 0);
+        font-weight: bold;
+        transition: background 1.5s ease, color 1s ease;
+    }
 
-.nav-link.active{
-background:linear-gradient(45deg,#1d33d9,#8fcfff);
-color:white;
-}
+    header:hover {
+        box-shadow: 0 0 15px rgba(143, 207, 255, 0.7);
+    }
 
-header{
-background:linear-gradient(90deg,#8fcfff,#ffffff);
-border:3px solid black;
-border-radius:15px;
-margin:80px 15px 15px 15px;
-padding:15px;
-font-size:xxx-large;
-}
+    main { padding: 0px; }
 
-section{
-padding:60px 20px;
-margin:40px auto;
-max-width:900px;
-background:linear-gradient(90deg,#8fcfff,#ffffff);
-border-radius:16px;
-box-shadow:0 8px 25px rgba(0,0,0,0.2);
-border:3px solid black;
-}
+    button {
+        background: linear-gradient(45deg, #1d33d9, #8fcfff);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 16px;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: float 2s ease-in-out infinite;
+    }
 
-button{
-background:linear-gradient(45deg,#1d33d9,#8fcfff);
-color:white;
-border:none;
-padding:12px 25px;
-font-size:16px;
-border-radius:15px;
-cursor:pointer;
-margin-top:10px;
-}
+    button:hover {
+        background: linear-gradient(45deg, #8fcfff, #1d33d9);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
 
-.fullContent{
-max-height:0;
-opacity:0;
-overflow:hidden;
-transition:max-height 1s ease,opacity .8s ease;
-text-align:left;
-}
+    footer {
+        margin-top: 50px;
+        padding: 20px;
+        background: linear-gradient(to right, #006eff, #8fcfff);
+        font-size: 14px;
+        font-weight: bold;
+    }
 
-.fullContent.open{
-max-height:2000px;
-opacity:1;
-padding:10px 20px;
-}
+    .header-title {
+        color: hsl(206, 61%, 60%);
+        font-size: large;
+        padding-top: 20px;
+        margin: auto;
+        font-weight: bold;
+        -webkit-text-stroke: 0px black;
+        position: fixed;
+        top: 1px;
+        left: 60px;
+    }
 
-.post-date{
-font-size:0.85em;
-color:#555;
-margin:4px 0 12px 0;
-font-style:italic;
-}
+    @media (max-width: 600px) {
+        .header-title {
+            display: none;
+        }
+    }
 
-footer{
-margin-top:50px;
-padding:20px;
-background:linear-gradient(to right,#006eff,#8fcfff);
-font-size:14px;
-}
+    #currentDate {
+        position: fixed;
+        top: 10px;
+        right: 15px;
+        font-size: 14px;
+        color: aliceblue;
+        font-weight: bold;
+        opacity: 0;
+    }
 
+    section {
+        padding: 60px 20px;
+        margin: 40px auto;
+        max-width: 900px;
+        background: linear-gradient(90deg, #8fcfff, #ffffff);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        border: 3px solid black;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+        100% { transform: translateY(0); }
+    }
+
+    #Toggle {
+        position: fixed;
+        right: 10px;
+        top: 12px;
+        z-index: 1000;
+        transition: all 0.4s ease;
+    }
+
+    #Toggle.scrolled {
+        padding: 8px 10px;
+        font-size: 20px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    /* ===== POST CONTENT STYLES ===== */
+    .fullContent {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 1s ease, opacity 0.8s ease, padding 0.5s ease;
+        padding: 0 10px;
+        text-align: left;
+    }
+
+    .fullContent.open {
+        max-height: 5000px;
+        opacity: 1;
+        padding: 10px 20px;
+    }
+
+    .fullContent h3 {
+        font-size: 1.2em;
+        margin-top: 20px;
+        margin-bottom: 5px;
+        color: #1d33d9;
+    }
+
+    body.dark .fullContent h3 {
+        color: #8fcfff;
+    }
+
+    .fullContent p {
+        margin: 8px 0;
+        line-height: 1.7;
+        font-size: 1em;
+    }
+
+    .fullContent .conclusion {
+        margin-top: 20px;
+        padding: 12px 16px;
+        background: rgba(29, 51, 217, 0.1);
+        border-left: 4px solid #1d33d9;
+        border-radius: 8px;
+        font-style: italic;
+    }
+
+    body.dark .fullContent .conclusion {
+        background: rgba(143, 207, 255, 0.1);
+        border-left: 4px solid #8fcfff;
+    }
+
+    /* ===== POST DATE STYLE ===== */
+    .post-date {
+        font-size: 0.85em;
+        color: #555;
+        margin: 4px 0 12px 0;
+        font-style: italic;
+    }
+
+    body.dark .post-date {
+        color: #aaaaaa;
+    }
+
+    #logo {
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+    }
+
+    #logo-link {
+        position: fixed;
+        top: 3px;
+        left: 8px;
+        z-index: 1000;
+    }
+
+    /* ===== SUBSCRIBE BUTTON SPECIAL STYLE ===== */
+    #subscribeBtn.subscribed {
+        background: linear-gradient(45deg, #12a150, #00d97e);
+        animation: none;
+        cursor: default;
+    }
+
+    body.dark #subscribeBtn.subscribed {
+        background: linear-gradient(45deg, #0a7a3a, #00b368);
+    }
 </style>
 </head>
 
 <body>
 
-<nav>
-
-<a href="index.html" class="nav-logo">
-<img src="Boron.png">
-<span class="nav-logo-text">Blue Kernel Labs</span>
+<h5 class="header-title">Blue Kernel Labs</h5>
+<a href="index.html" id="logo-link">
+  <img src="Boron.png" alt="Blue Kernel Labs Logo" id="logo">
 </a>
 
-<div class="nav-links">
-<a href="index.html" class="nav-link active">📝 Blog</a>
-<a href="Portfolio.html" class="nav-link">🚀 Portfolio</a>
-<a href="About.html" class="nav-link">👤 About</a>
-</div>
+<header>
+  Blue Kernel Labs Blog
+</header>
 
-</nav>
+<main>
+  <h1>Welcome to Blue Kernel Labs!</h1>
+  <p>Exploring science, tech, and coding adventures—one post at a time!</p>
+  <p id="currentDate"></p>
 
-<header>Blue Kernel Labs Blog</header>
+  <button id="Toggle" onclick="toggleDarkMode()">☀️ Toggle Dark Mode</button>
+  <button onclick="pageSwitch()">About Blue Kernel Labs...</button>
+  <button id="subscribeBtn" onclick="subscribeToNotifications()">🔔 Subscribe for Notifications</button>
+  <div id="notifHelp" style="display:none; margin: 10px auto; max-width: 500px; background: rgba(255,80,80,0.15); border: 2px solid #ff5050; border-radius: 12px; padding: 12px 16px; font-size: 0.9em; color: inherit;">
+    🔕 <strong>Notifications are blocked!</strong><br><br>
+    To fix this:<br>
+    1️⃣ Click the 🔒 <strong>lock icon</strong> in your address bar, next to the "Reload" button.<br>
+    2️⃣ Set <strong>Notifications</strong> to <strong>"Allow"</strong><br>
+    3️⃣ <strong>Refresh</strong> the page and try again!
+    OR: 
+    1️⃣ Click the 3 dots
+    2️⃣ Go to Settings-Notifications-"Enable Notifications"
+  </div>
 
-<div id="postsContainer"></div>
+  <div id="postsContainer"></div>
+</main>
 
 <footer>
-© 2026 Blue Kernel Labs | All Rights Reserved
+  © 2026 Blue Kernel Labs | All Rights Reserved
 </footer>
 
 <script>
 
-/* KEEP YOUR ORIGINAL POSTS ARRAY HERE */
+// ============================================================
+//  HOW TO ADD A NEW POST — COPY THE TEMPLATE BELOW
+//  Paste it inside the posts array, above the last ]
+//  Change ALL fields: id, heading, date, title, preview, content
+// ============================================================
+//
+//  {
+//    id: 4,                            // change number each time
+//    heading: "Post 4",                // e.g. "Post 4", "Post 5"
+//    date: "March 6, 2026",            // ← just type today's date here!
+//    title: "Your Post Title Here",    // the big heading
+//    preview: "A short teaser line that makes people want to click Read More....",
+//    content: `
+//      <h3>Your First Subheading 🔬</h3>
+//      <p>First short paragraph. Keep it 2-3 sentences max.</p>
+//      <p>Second short paragraph. Fun, casual, like texting a friend.</p>
+//
+//      <h3>Your Second Subheading 🤯</h3>
+//      <p>Another short paragraph with a surprising fact.</p>
+//      <p>Keep going! One idea per paragraph.</p>
+//
+//      <h3>Your Third Subheading ⚡</h3>
+//      <p>Wind it down here. Get to the point.</p>
+//
+//      <div class="conclusion">
+//        🔬 Blue Kernel Labs Conclusion: Your witty one-liner summary goes here.
+//      </div>
+//    `
+//  },
+//
+// ============================================================
+
 const posts = [
-/* paste your exact posts here */
+
   {
     id: 1,
     heading: "Post 1: Infinity",
@@ -325,52 +538,123 @@ const posts = [
       </div>
     `
   },
+
+  // ← PASTE YOUR NEXT POST HERE (don't forget the comma after the } above!)
+
 ];
 
-function renderPosts(){
+// ============================================================
+//  DON'T TOUCH ANYTHING BELOW THIS LINE
+//  (unless you know what you're doing 😄)
+// ============================================================
 
-const container=document.getElementById("postsContainer");
-container.innerHTML="";
+// ===== SUBSCRIBE BUTTON FUNCTION =====
+async function subscribeToNotifications() {
+  const btn = document.getElementById("subscribeBtn");
 
-posts.forEach(post=>{
+  // If already blocked — show instructions instead
+  if (Notification.permission === "denied") {
+    document.getElementById("notifHelp").style.display = "block";
+    return;
+  }
 
-const section=document.createElement("section");
+  try {
+    const permission = await Notification.requestPermission();
 
-section.innerHTML=`
+    if (permission === "granted") {
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.User.PushSubscription.optIn();
+      });
+      btn.innerText = "✅ Subscribed!";
+      btn.classList.add("subscribed");
+      btn.onclick = null;
+      document.getElementById("notifHelp").style.display = "none";
+    } else if (permission === "denied") {
+      document.getElementById("notifHelp").style.display = "block";
+    }
+  } catch (err) {
+    console.error("Notification error:", err);
+  }
+}
 
-<header>${post.heading}</header>
-
-<h1>${post.title}</h1>
-
-<p class="post-date">📅 ${post.date}</p>
-
-<p>${post.preview}</p>
-
-<div id="full-${post.id}" class="fullContent">${post.content}</div>
-
-<button onclick="togglePost(${post.id},this)">Read More</button>
-
-`;
-
-container.appendChild(section);
-
+window.addEventListener("scroll", function() {
+    const toggleBtn = document.getElementById("Toggle");
+    if (window.scrollY > 80) {
+        toggleBtn.classList.add("scrolled");
+        if (document.body.classList.contains("dark")) {
+            toggleBtn.innerText = "🌘";
+        } else {
+            toggleBtn.innerText = "☀️";
+        }
+    } else {
+        toggleBtn.classList.remove("scrolled");
+        if (document.body.classList.contains("dark")) {
+            toggleBtn.innerText = "🌘 Toggle Light Mode";
+        } else {
+            toggleBtn.innerText = "☀️ Toggle Dark Mode";
+        }
+    }
 });
 
+function renderPosts() {
+  const container = document.getElementById("postsContainer");
+  container.innerHTML = "";
+
+  posts.forEach(post => {
+    const section = document.createElement("section");
+
+    section.innerHTML = `
+      <header>${post.heading}</header>
+      <h1>${post.title}</h1>
+      <p class="post-date">📅 ${post.date}</p>
+      <p>${post.preview}</p>
+      <div id="full-${post.id}" class="fullContent">${post.content}</div>
+      <button onclick="togglePost(${post.id}, this)">Read More..</button>
+    `;
+
+    container.appendChild(section);
+  });
 }
 
-function togglePost(id,button){
+function togglePost(id, button) {
+  const full = document.getElementById("full-" + id);
+  full.classList.toggle("open");
 
-const full=document.getElementById("full-"+id);
-
-full.classList.toggle("open");
-
-button.innerText=full.classList.contains("open")
-? "Show Less"
-: "Read More";
-
+  if (full.classList.contains("open")) {
+    button.innerText = "Show Less ▲";
+  } else {
+    button.innerText = "Read More..";
+  }
 }
 
-window.onload=renderPosts;
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+  const toggleBtn = document.getElementById("Toggle");
+
+  if (document.body.classList.contains("dark")) {
+    localStorage.setItem("theme", "dark");
+    toggleBtn.innerText = "🌘 Toggle Light Mode";
+  } else {
+    localStorage.setItem("theme", "light");
+    toggleBtn.innerText = "☀️ Toggle Dark Mode";
+  }
+}
+
+function pageSwitch() {
+  window.location = "About.html";
+}
+
+window.onload = function() {
+  let today = new Date();
+  document.getElementById("currentDate").innerText = today.toLocaleDateString();
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+  }
+
+  renderPosts();
+};
 
 </script>
 
