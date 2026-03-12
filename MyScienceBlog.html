@@ -337,12 +337,63 @@
     /* ===== SUBSCRIBE ===== */
     #subscribeBtn.subscribed {
         background: linear-gradient(45deg, #12a150, #00d97e);
-        animation: none;
+        animation: float 2s ease-in-out infinite;
         cursor: default;
     }
 
     body.dark #subscribeBtn.subscribed {
         background: linear-gradient(45deg, #0a7a3a, #00b368);
+    }
+
+    /* ===== SHARE BUTTONS ===== */
+    .share-btns {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin: 12px 0 4px 0;
+        flex-wrap: wrap;
+    }
+
+    .share-btn {
+        animation: float 2s ease-in-out infinite;
+        padding: 8px 16px;
+        font-size: 0.85em;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .share-btn.whatsapp {
+        background: linear-gradient(45deg, #25D366, #128C7E);
+        color: white;
+    }
+
+    .share-btn.whatsapp:hover {
+        background: linear-gradient(45deg, #128C7E, #25D366);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+    }
+
+    .share-btn.copy {
+        background: linear-gradient(45deg, #1d33d9, #8fcfff);
+        color: white;
+    }
+
+    .share-btn.copy:hover {
+        background: linear-gradient(45deg, #8fcfff, #1d33d9);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(29, 51, 217, 0.4);
+    }
+
+    body.dark .share-btn.copy {
+        background: linear-gradient(45deg, #222, #444);
+    }
+
+    body.dark .share-btn.copy:hover {
+        background: linear-gradient(45deg, #444, #666);
+        box-shadow: 0 6px 15px rgba(255,255,255,0.15);
     }
 
     /* ===== DATE ===== */
@@ -412,6 +463,7 @@
 const posts = [
   {
     id: 1,
+    slug: "infinity",
     heading: "Post 1: Infinity",
     date: "March 1, 2026",
     title: "What Is Infinity in Mathematics? (And Why There Are Different Sizes of It)",
@@ -444,6 +496,7 @@ const posts = [
   },
   {
     id: 2,
+    slug: "time",
     heading: "Post 2: Time",
     date: "March 3, 2026",
     title: "Time and how it works differently in Space",
@@ -484,6 +537,7 @@ const posts = [
   },
   {
     id: 3,
+    slug: "ai",
     heading: "Post 3: AI",
     date: "March 5, 2026",
     title: "AIs and how they Function",
@@ -514,9 +568,9 @@ const posts = [
       </div>
     `
   },
-
   {
     id: 4,
+    slug: "death",
     heading: "Post 4: Unknown Science",
     date: "March 8, 2026",
     title: "What happens after Death",
@@ -561,9 +615,9 @@ const posts = [
       </div>
     `
   },
-
-    {
+  {
     id: 5,
+    slug: "black-holes",
     heading: "Post 5: Black Holes",
     date: "March 11, 2026",
     title: "What if you fell into a <em>Black Hole?</em>",
@@ -583,20 +637,20 @@ const posts = [
       <p>You'd just..cross it. And immediately regret every life decision that led to this moment. Now HERE it gets absolutely unhinged..</p>
 
       <h3>Spaghettification 🍝</h3>
-      <p>Now, As you fall deeper into The Black Hole past the Event Horizon, the gravity pulling your feet is WAY stronger than the gravity pulling your head, because your feet are closer to the centre.</p>
+      <p>Now, as you fall deeper into the black hole past the Event Horizon, the gravity pulling your feet is WAY stronger than the gravity pulling your head, because your feet are closer to the centre.</p>
       <p>This difference stretches you vertically like a piece of spaghetti. Your body gets pulled longer and thinner until you are literally a strand of human pasta. We wish we could do this with homework and enjoy our 'homework' pasta..</p>
       <p>NASA, in their infinite wisdom, looked at this process and said <em>"hmm..yea we're calling that Spaghettification"</em></p>
       <p>Bigger black holes = you get further in before this starts</p>
 
       <h3>What's actually inside the Black Hole? ☠️</h3>
-      <p>Both generally and scientifically, we don't know what's truly inside the Black Hole; like, at all! Our physics breaks down at the Singularity. Every equation we have just returns an error, like a calculator you divided by zero on.</p>
-      <p>Space and time are thought to swap roles inside; meaning no matter which direction you move, you're moving toward the Singularity (the Center), There's no way out.</p>
+      <p>Both generally and scientifically, we don't know what's truly inside the black hole; like, at all! Our physics breaks down at the Singularity. Every equation we have just returns an error, like a calculator you divided by zero on.</p>
+      <p>Space and time are thought to swap roles inside; meaning no matter which direction you move, you're moving toward the Singularity (the Center). There's no way out.</p>
       <p>Stephen Hawking spent decades studying black holes and even HE couldn't find out what happens inside. So if you were expecting a neat answer, the universe says no.</p>
 
       <h3>Wait..can ANYTHING escape a Black Hole?</h3>
-      <p>Actually..kind of yes. Stephen Hawking discovered that Black Holes very slowly leak energy over insane timescales - we're talking longer that the current age of the universe by the way!</p>
+      <p>Actually..kind of yes. Stephen Hawking discovered that black holes very slowly leak energy over insane timescales - we're talking longer than the current age of the universe by the way!</p>
       <p>This is called <em>Hawking Radiation</em></p>
-      <p>Eventually, a black hole evaporates completely. It just... vanishes! Takes it all with it, Including you (theoretically) after an unimaginable amount of time! So that's comforting, I guess?</p>
+      <p>Eventually, a black hole evaporates completely. It just... vanishes! Takes it all with it, including you (theoretically) after an unimaginable amount of time! So that's comforting, I guess?</p>
 
       <div class="conclusion">
         🔬 Blue Kernel Labs Conclusion: Black holes are the universe's most dramatic overreaction to a star dying. They break physics, they break time, they will turn you into pasta, and they STILL have scientists losing sleep and their minds! Truly the most unhinged objects in existence. 10/10 would not recommend falling into one!
@@ -604,6 +658,24 @@ const posts = [
     `
   },
 ];
+
+function shareWhatsApp(id) {
+    const post = posts.find(p => p.id === id);
+    const base = window.location.href.split('#')[0].split('?')[0];
+    const url = `${base}#post-${post.slug}`;
+
+    if (navigator.share) {
+        navigator.share({
+            title: `Blue Kernel Labs — ${post.heading}`,
+            text: `Check out this post on Blue Kernel Labs!`,
+            url: url,
+        });
+    } else {
+        // Fallback for desktop: open WhatsApp web
+        const text = `Check out this post on Blue Kernel Labs!\n\n${url}`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    }
+}
 
 // ===== NAVIGATION WITH TRANSITION =====
 function navigateTo(e, url) {
@@ -655,12 +727,16 @@ function renderPosts() {
   container.innerHTML = "";
   posts.forEach(post => {
     const section = document.createElement("section");
+    section.id = `post-${post.slug}`;
     section.innerHTML = `
       <header>${post.heading}</header>
       <h1>${post.title}</h1>
       <p class="post-date">📅 ${post.date}</p>
       <p>${post.preview}</p>
       <div id="full-${post.id}" class="fullContent">${post.content}</div>
+      <div class="share-btns">
+        <button class="share-btn whatsapp" onclick="shareWhatsApp(${post.id})">💬 Share</button>
+      </div>
       <button onclick="togglePost(${post.id}, this)">Read More..</button>
     `;
     container.appendChild(section);
@@ -673,6 +749,19 @@ function togglePost(id, button) {
   button.innerText = full.classList.contains("open") ? "Show Less ▲" : "Read More..";
 }
 
+// ===== SCROLL TO ANCHORED POST =====
+function scrollToAnchor() {
+  const hash = window.location.hash;
+  if (hash) {
+    const target = document.querySelector(hash);
+    if (target) {
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }
+}
+
 function pageSwitch() { navigateTo({ preventDefault: () => {} }, "About.html"); }
 
 window.onload = function() {
@@ -683,6 +772,7 @@ window.onload = function() {
     document.querySelector(".nav-toggle").innerText = "🌘 Light Mode";
   }
   renderPosts();
+  scrollToAnchor();
 
   // Fade in from transition
   const overlay = document.getElementById("pageTransition");
