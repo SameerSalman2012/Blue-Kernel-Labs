@@ -3,9 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Blue Kernel Labs</title>
+  <title>Blue Kernel Labs Blog | Science, Tech & Coding</title>
+  <meta name="description" content="Blue Kernel Labs Blog — exploring science, mathematics, technology, and coding adventures one post at a time. Written by curious minds, for curious minds." />
+  <meta name="keywords" content="science blog, math facts, coding, technology, Blue Kernel Labs, infinity, space, physics" />
+  <meta name="author" content="Blue Kernel Labs Studios" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://Blue-Kernel-Labs.vercel.app/" />
 
-  <style>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blue Kernel Labs Blog | Science, Tech & Coding" />
+  <meta property="og:description" content="Exploring science, mathematics, technology, and coding adventures — one post at a time." />
+  <meta property="og:url" content="https://Blue-Kernel-Labs.vercel.app/" />
+  <meta property="og:image" content="https://Blue-Kernel-Labs.vercel.app/Boron.png" />
+  <meta property="og:site_name" content="Blue Kernel Labs Blog" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blue Kernel Labs Blog | Science, Tech & Coding" />
+  <meta name="twitter:description" content="Exploring science, mathematics, technology, and coding adventures — one post at a time." />
+  <meta name="twitter:image" content="https://Blue-Kernel-Labs.vercel.app/Boron.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Blue Kernel Labs Blog",
+    "description": "Exploring science, mathematics, technology, and coding adventures one post at a time.",
+    "url": "https://Blue-Kernel-Labs.vercel.app/",
+    "author": { "@type": "Organization", "name": "Blue Kernel Labs Studios" },
+    "inLanguage": "en"
+  }
+  </script>
+
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({ appId: "b52309b7-9674-4ca7-b823-2d2823dd34ac" });
+    });
+  </script>
+
+<style>
     /* ===== BASE ===== */
     body {
         margin: 0;
@@ -187,8 +224,9 @@
         background: linear-gradient(90deg, #111111, #2a2a2a);
         color: white;
         border: 3px solid white;
-        -webkit-text-stroke: 1px rgb(0, 0, 0);
     }
+
+    main { padding: 0px; }
 
     /* ===== BUTTONS ===== */
     button {
@@ -235,7 +273,7 @@
         color: white;
     }
 
-    /* ===== SECTION ===== */
+    /* ===== SECTIONS ===== */
     section {
         padding: 60px 20px;
         margin: 40px auto;
@@ -246,7 +284,6 @@
         box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         border: 3px solid black;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        animation: fadein 1.5s ease-out;
     }
 
     section:hover {
@@ -259,17 +296,112 @@
         border: 3px solid white;
     }
 
-    h1 {
-        -webkit-text-stroke: 1px #000000;
+    /* ===== FULL CONTENT ===== */
+    .fullContent {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 1s ease, opacity 0.8s ease, padding 0.5s ease;
+        padding: 0 10px;
+        text-align: left;
     }
 
-    body.dark h1 {
-        -webkit-text-stroke: 1px #ffffff;
+    .fullContent.open {
+        max-height: 100000px;
+        opacity: 1;
+        padding: 10px 20px;
     }
 
-    @keyframes fadein {
-        from { opacity: 0; }
-        to { opacity: 1; }
+    .fullContent h3 { font-size: 1.2em; margin-top: 20px; margin-bottom: 5px; color: #1d33d9; }
+    body.dark .fullContent h3 { color: #8fcfff; }
+
+    .fullContent p { margin: 8px 0; line-height: 1.7; font-size: 1em; }
+
+    .fullContent .conclusion {
+        margin-top: 20px;
+        padding: 12px 16px;
+        background: rgba(29, 51, 217, 0.1);
+        border-left: 4px solid #1d33d9;
+        border-radius: 8px;
+        font-style: italic;
+    }
+
+    body.dark .fullContent .conclusion {
+        background: rgba(143, 207, 255, 0.1);
+        border-left: 4px solid #8fcfff;
+    }
+
+    .post-date { font-size: 0.85em; color: #555; margin: 4px 0 12px 0; font-style: italic; }
+    body.dark .post-date { color: #aaaaaa; }
+
+    /* ===== SUBSCRIBE ===== */
+    #subscribeBtn.subscribed {
+        background: linear-gradient(45deg, #12a150, #00d97e);
+        animation: float 2s ease-in-out infinite;
+        cursor: default;
+    }
+
+    body.dark #subscribeBtn.subscribed {
+        background: linear-gradient(45deg, #0a7a3a, #00b368);
+    }
+
+    /* ===== SHARE BUTTONS ===== */
+    .share-btns {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin: 12px 0 4px 0;
+        flex-wrap: wrap;
+    }
+
+    .share-btn {
+        animation: float 2s ease-in-out infinite;
+        padding: 8px 16px;
+        font-size: 0.85em;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .share-btn.whatsapp {
+        background: linear-gradient(45deg, #25D366, #128C7E);
+        color: white;
+    }
+
+    .share-btn.whatsapp:hover {
+        background: linear-gradient(45deg, #128C7E, #25D366);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+    }
+
+    .share-btn.copy {
+        background: linear-gradient(45deg, #1d33d9, #8fcfff);
+        color: white;
+    }
+
+    .share-btn.copy:hover {
+        background: linear-gradient(45deg, #8fcfff, #1d33d9);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(29, 51, 217, 0.4);
+    }
+
+    body.dark .share-btn.copy {
+        background: linear-gradient(45deg, #222, #444);
+    }
+
+    body.dark .share-btn.copy:hover {
+        background: linear-gradient(45deg, #444, #666);
+        box-shadow: 0 6px 15px rgba(255,255,255,0.15);
+    }
+
+    /* ===== DATE ===== */
+    #currentDate {
+        font-size: 14px;
+        color: inherit;
+        font-weight: bold;
+        opacity: 0.7;
     }
 
     @keyframes float {
@@ -283,83 +415,379 @@
         .nav-logo-text { display: none; }
         .nav-link { padding: 6px 12px; font-size: 0.85em; }
     }
-  </style>
+</style>
 </head>
 
 <body>
 
-  <!-- PAGE TRANSITION OVERLAY -->
-  <div id="pageTransition"></div>
+<!-- PAGE TRANSITION OVERLAY -->
+<div id="pageTransition"></div>
 
-  <!-- NAVBAR -->
-  <nav>
-    <a href="index.html" class="nav-logo" onclick="navigateTo(event, 'index.html')">
-      <img src="Boron.png" alt="Blue Kernel Labs Logo">
-      <span class="nav-logo-text">Blue Kernel Labs</span>
+<!-- NAVBAR -->
+<nav>
+    <a href="index.html" class="nav-logo">
+        <img src="Boron.png" alt="Blue Kernel Labs Logo">
+        <span class="nav-logo-text">Blue Kernel Labs</span>
     </a>
     <div class="nav-links">
-      <a href="index.html" class="nav-link" onclick="navigateTo(event, 'index.html')">📝 Blog</a>
-      <a href="Portfolio.html" class="nav-link" onclick="navigateTo(event, 'Portfolio.html')">🚀 Portfolio</a>
-      <a href="About.html" class="nav-link active">👤 About</a>
-      <button class="nav-toggle" onclick="toggleDarkMode()">☀️ Dark Mode</button>
+        <a href="index.html" class="nav-link active">📝 Blog</a>
+        <a href="Portfolio.html" class="nav-link" onclick="navigateTo(event, 'Portfolio.html')">🚀 Portfolio</a>
+        <a href="About.html" class="nav-link" onclick="navigateTo(event, 'About.html')">👤 About</a>
+        <button class="nav-toggle" onclick="toggleDarkMode()">☀️ Dark Mode</button>
     </div>
-  </nav>
+</nav>
 
-  <header>About Blue Kernel Labs</header>
+<header>Blue Kernel Labs Blog</header>
 
-  <section>
-    <h1>Blue Kernel Labs</h1>
-    <p>Blue Kernel Labs is an independent experimental studio focused on science, software development, and creative innovation. It was founded by a teen with a strong passion for technology and a commitment to building meaningful digital projects.</p>
-    <p>The lab exists as a space for exploration — where ideas are tested, refined, and transformed into real applications. From web development to scientific topics, Blue Kernel Labs combines curiosity with execution.</p>
-    <p>Its core philosophy is simple: think critically, build consistently, and never underestimate the power of starting early.</p>
-  </section>
+<main>
+  <h1>Welcome to Blue Kernel Labs!</h1>
+  <p>Exploring science, tech, and coding adventures—one post at a time!</p>
+  <p id="currentDate"></p>
 
-  <footer>
-    © 2026 Blue Kernel Labs | All Rights Reserved
-  </footer>
+  <button id="subscribeBtn" onclick="subscribeToNotifications()">🔔 Subscribe for Notifications</button>
+  <div id="notifHelp" style="display:none; margin: 10px auto; max-width: 500px; background: rgba(255,80,80,0.15); border: 2px solid #ff5050; border-radius: 12px; padding: 12px 16px; font-size: 0.9em; color: inherit;">
+    🔕 <strong>Notifications are blocked!</strong><br><br>
+    To fix this:<br>
+    1️⃣ Click the 🔒 <strong>lock icon</strong> in your address bar.<br>
+    2️⃣ Set <strong>Notifications</strong> to <strong>"Allow"</strong><br>
+    3️⃣ <strong>Refresh</strong> the page and try again!
+  </div>
 
-  <script>
-    function navigateTo(e, url) {
-      e.preventDefault();
-      const overlay = document.getElementById("pageTransition");
-      overlay.classList.add("active");
-      setTimeout(() => { window.location.href = url; }, 420);
-    }
+  <div id="postsContainer"></div>
+</main>
 
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark");
-      const btn = document.querySelector(".nav-toggle");
-      if (document.body.classList.contains("dark")) {
-        localStorage.setItem("theme", "dark");
-        btn.innerText = "🌘 Light Mode";
-      } else {
-        localStorage.setItem("theme", "light");
-        btn.innerText = "☀️ Dark Mode";
-      }
-    }
+<footer>© 2026 Blue Kernel Labs | All Rights Reserved</footer>
 
-    window.onload = function () {
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme === "dark") {
-        document.body.classList.add("dark");
-        document.querySelector(".nav-toggle").innerText = "🌘 Light Mode";
-      }
+<script>
 
-      // Fade in from page transition
-      const overlay = document.getElementById("pageTransition");
-      overlay.style.transformOrigin = "top";
-      overlay.style.transform = "scaleY(1)";
-      overlay.style.opacity = "1";
-      overlay.style.transition = "none";
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          overlay.style.transition = "transform 0.4s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.4s ease";
-          overlay.style.transform = "scaleY(0)";
-          overlay.style.opacity = "0";
+const posts = [
+  {
+    id: 1,
+    slug: "infinity",
+    heading: "Post 1: Infinity",
+    date: "March 1, 2026",
+    title: "What Is Infinity in Mathematics? (And Why There Are Different Sizes of It)",
+    preview: "Infinity isn't just huge. Some infinities are actually bigger than others… mind blown. ....",
+    content: `
+      <h3>Wait, Infinity Isn't Just One Thing? 🤯</h3>
+      <p>Okay, so infinity. Most people think it's just a really, really big number that never ends.</p>
+      <p>Like, bigger than the number of times you've hit snooze this week.</p>
+      <p>But nope. Math is weird. Infinity isn't just one thing — <strong>some infinities are actually bigger than others.</strong></p>
+
+      <h3>The Two Infinities That Break Your Brain 🔢</h3>
+      <p>Counting numbers — 1, 2, 3… — that's one type of infinity. It goes on forever, sure.</p>
+      <p>But the numbers between 0 and 1? Like 0.1, 0.01, 0.001… that's a <strong>bigger</strong> infinity.</p>
+      <p>Yeah. Math is literally trolling us. 😂</p>
+
+      <h3>The Guy Who Figured This Out 🧠</h3>
+      <p>Georg Cantor basically said: <em>"No matter how you try to list these numbers, I'll always find one you forgot."</em></p>
+      <p>He proved it with something called Cantor's Diagonal Argument. Absolute savage move.</p>
+      <p>Mathematicians at the time were furious. Some called it nonsense. Turns out he was just… right.</p>
+
+      <h3>So What Does This Mean? 🌀</h3>
+      <p>Infinity isn't total chaos. It's like organized chaos.</p>
+      <p>Like your messy desk — somehow you still know where your pencil is.</p>
+      <p>There are actually infinite levels of infinity. Mathematicians call them <strong>cardinalities</strong>. The rabbit hole goes deep.</p>
+
+      <div class="conclusion">
+        🔬 Blue Kernel Labs Conclusion: Infinity is weird, wild, and secretly hilarious. And there's more than one of it. You're welcome.
+      </div>
+    `
+  },
+  {
+    id: 2,
+    slug: "time",
+    heading: "Post 2: Time",
+    date: "March 3, 2026",
+    title: "Time and how it works differently in Space",
+    preview: "Time. The thing which moves very slowly in exams and takes a breather, and just..leaves the chat in weekends; like its running an Olympic Marathon!",
+    content: `
+      <h3>What exactly IS time 🕰️?</h3>
+      <p>Time is simply a measureable number, or a <em>Physical Quantity</em> in Fancy words, that tells us how much the Earth has rotated.</p>
+      <p>Simple enough, right? but NO! Because time just joins some other group chat when its in outer space!</p>
+
+      <h3>Time in Space, and how it abandons Physics to Earth 🌎</h3>
+      <p>Let me give y'all an example to talk on.</p>
+      <p>For example, an astronaut lives in The ISS, and lives there for 2 years. if he returns back on Earth, he would be a fraction of a bit younger than if he just lived on Earth! So, technically astronauts in Space age slower than us at Earth, while i aged 10 years in my recent exam..and grew a white hair in my arm, dont ask me how..</p>
+      <p>I know what you're thinking right now, "Really??"...ok thats kind of an 'AI' thought if you ask me, but dont you worry cause ill tell you how it works.</p>
+
+      <h3>The Person Who Figured This Monstrosity Out ✨</h3>
+      <p>Albert Einstein called this <em>"Time Dilation"</em></p>
+      <p><em>"The Heavier the object near you, The slower time moves." -Einstein, i guess</em></p>
+      <p>This explains how our example actually works in real life. Earth is Insanely heavy, and its the reason time moves slower outside Earth!</p>
+
+      <h3>How our GPS uses Time Dilation 📍</h3>
+      <p>Your phone's GPS satellites actually have to correct for time dilation constantly</p>
+      <p>The satellites are far from Earth's gravity, so their clocks run a little faster than ours on the ground.</p>
+      <p>If it doesn't correct its time dilation, your GPS would give completely wrong directions by minimum 10km every single day!</p>
+
+      <h3>Speed also affects time! 🏎️</h3>
+      <p>Its not only gravity thats affecting how time works, Speed also enters the chat!</p>
+      <p>The faster you move, the slower time passes for you! Just like gravity, speed warps time too.</p>
+      <p>That means if you travelled at 99% the speed of light for what felt like a year to you, Decades would have passed on Earth!</p>
+
+      <h3>So.. What Does This Mean? 🪐</h3>
+      <p>This tells us how far Physics can go to drive our minds crazy and question your existence.</p>
+      <p>"So gravity slows time, speed slows time, and your GPS is out here doing advanced Einstein calculations just so you don't get lost. Very Interesting i must say😬!"</p>
+
+      <div class="conclusion">
+        🔬 Blue Kernel Labs Conclusion: Time is absurd, Space is a complete rage-bait technique for your brain, and Einstein was..a giga chad.
+      </div>
+    `
+  },
+  {
+    id: 3,
+    slug: "ai",
+    heading: "Post 3: AI",
+    date: "March 5, 2026",
+    title: "AIs and how they Function",
+    preview: "AIs. yes, i am talking about those soul-less machines that generate you essays like its a printer with a brain. But have you ever wondered how they work?",
+    content: `
+      <h3>What are AIs? 🦾</h3>
+      <p>AIs, like ChatGPT, are basically programs trained to learn random information by scouring through the entire internet and reading whatever article they find.</p>
+      <p>It can answer your questions and chat with you, just like a real person-but with no soul, no emotions, and no bedtime..</p>
+      <p>But the most interesting part about it is that it is just autocomplete on steroids!</p>
+
+      <h3>It's just Autocomplete! 🧐</h3>
+      <p>The AIs don't actually think or understand anything, it just predicts what word comes next based on patterns it learnt!</p>
+      <p>Its like your phone keyboard autocomplete, but simply trained on the whole Internet.</p>
+
+      <h3>It costs an INSANE amount to train it 🧠</h3>
+      <p>If you wanted to train an AI, it would require a very large amount to do so, since you have to teach it the entire internet's knowledge!</p>
+      <p>Training the latest GPT-5 would approximately cost you <em>$100 Million</em>, just to learn the entire Internet!</p>
+
+      <h3>Why do they sometimes go wrong? 🤪</h3>
+      <p>Sometimes, ChatGPT can make up completely fake facts and say them with full confidence!</p>
+      <p>AIs just want to give you an answer, Whether its correct or completely made up. It will never admit that it can't find an answer!</p>
+
+      <h3>So what does this mean?</h3>
+      <p>This shows how AIs aren't perfect. They can still make mistakes, even if they're pieces of code.</p>
+
+      <div class="conclusion">
+        🔬 Blue Kernel Labs Conclusion: AI doesn't have feelings, emotions, thinking, and humour, because its all forced into the program! But it does have the ability to come up with any sort of answer, right or wrong.
+      </div>
+    `
+  },
+  {
+    id: 4,
+    slug: "death",
+    heading: "Post 4: Unknown Science",
+    date: "March 8, 2026",
+    title: "What happens after Death",
+    preview: "Death, a topic everyone gets uncomfortable about. Because of its unknown effect, we don't actually know what happens after it, not even scientists! (excluding religion).",
+    content: `
+      <h3>What is Death, basically? ⚰️</h3>
+      <p>Death is a stage of life where you just...vanish from Earth. But not exactly, your soul just leaves your body. While your body just stays on Earth and decays over time.</p>
+      <p>What makes this stage more scary is that...we don't know what happens after. Does your soul Actually leave Earth? Or does your soul stay on Earth and haunt everybody?</p>
+      <p>The topic is so puzzling that even scientists can't figure this out, like your answer sheet. But there are still some things that scientists have discovered about Death.</p>
+
+      <h3>Your Brain survives for 10 minutes! 🧠</h3>
+      <p>After your heart stops, your brain continues functioning for up to 10 minutes! Scientists believe this is when people get vivid dreams about their memorable moments during the stage of Death, basically a flashback of their entire life's story.</p>
+      <p>So, even after you die, there is time to relive your best moments and accept your death. I think this feature should be in Shooter games, trust me, it'll feel real!</p>
+
+      <h3>You can still hear after death?!</h3>
+      <p>Hearing is the LAST sense to go when you die. Meaning you can still hear people talking around you AFTER you've technically died!</p>
+      <p>So be careful what you say in a funeral! even if they are dead, you better not risk telling them your exam results..</p>
+
+      <h3>Near Death Experiences are real! ☠️</h3>
+      <p>A huge scientific study, called the AWARE study, tracked 2,060 patients who had cardiac arrests. Some accurately described what doctors were doing in the room while they were DEAD!</p>
+      <p>So, technically they couldn't do anything, but still could process and hear everything when they were LITERALLY dead!</p>
+      <p>Its scary when you think about it..</p>
+
+      <h3>Near Death witnesses reported by people 😵</h3>
+      <p>Thousands of people worldwide have reported the exact same experience during Near Death Experiences — and the creepy part? They came from completely different countries, cultures and religions. Nobody compared notes. Yet they all described the exact same thing:</p>
+      <ul style="text-align: left; margin: 10px 0; padding-left: 20px; line-height: 2;">
+        <li>🌟 A bright warm tunnel of light pulling them forward</li>
+        <li>😌 Feeling of complete peace and zero pain</li>
+        <li>👁️ Floating above their own body watching doctors work on them</li>
+        <li>👴 Meeting deceased relatives who said <em>"it's not your time yet"</em></li>
+        <li>🚫 A strong feeling of not wanting to come back</li>
+      </ul>
+      <p>Its actually creepy that people have witnessed this and survived. Because the patients had cardiac arrests and not sudden death, they managed to survive and describe the experience to scientists.</p>
+      <p>Either the human brain has a very specific way of breaking down — or there's something waiting on the other side. 👀</p>
+
+      <h3>What does science say?</h3>
+      <p>Some scientists think it's the brain releasing a chemical called DMT at the moment of death — a naturally occurring substance that causes intense vivid hallucinations. Others think it's oxygen deprivation causing the brain to malfunction.</p>
+      <p>But nobody has actually proven either theory completely. So the bright light remains… unexplained.</p>
+
+      <div class="conclusion">
+        🔬 Blue Kernel Labs Conclusion: Death is scary, but at that stage..you are basically in peace and quiet! So, enjoy your life like it's the last day! And for the school stress, that pain is temporary and will eventually go away. Just enjoy your life to the fullest while maintaining all the hardships of life!❤️
+      </div>
+    `
+  },
+  {
+    id: 5,
+    slug: "black-holes",
+    heading: "Post 5: Black Holes",
+    date: "March 11, 2026",
+    title: "What if you fell into a <em>Black Hole?</em>",
+    preview: "There is something in space that is very mysterious and confusing: <em>Black Holes.</em> It has a gravity of 153 Trillion G's (gravity varies) and not even light can escape it. But..what if you fell in it?",
+    content: `
+      <h3>So, what IS a Black Hole? ⚫️</h3>
+      <p>In simple terms, A Black Hole is what happens when a super massive star runs out of fuel, collapses in its own gravity, and throws a tantrum so hard that it tears a hole in spacetime itself.</p>
+      <p>Its gravity is so strong that not even light can escape it. And this is the FASTEST thing in the universe we're talking about!</p>
+      <p>And the centre of it — called the <em>Singularity</em> — is a point where density becomes infinite and the laws of physics just... give up. "Elvis has left the building"!</p>
+
+      <h3>The <em>Event Horizon</em></h3>
+      <p>The Event Horizon is basically the point of no return, meaning once you cross it, there is no turning back. You're just trapped in there with no escape. Not even light can escape, let alone yourself..</p>
+      <p>From the outside, someone watching you would see you appear to slow down, freeze, distort, and then fade; All due to Time Dilation.</p>
+
+      <h3>But what ACTUALLY happens if you fall in? 🕳️</h3>
+      <p>First things first, from your perspective, crossing the <em>Event Horizon</em> actually feels completely normal at first. It would just feel like...you're floating, nothing else.</p>
+      <p>You'd just..cross it. And immediately regret every life decision that led to this moment. Now HERE it gets absolutely unhinged..</p>
+
+      <h3>Spaghettification 🍝</h3>
+      <p>Now, as you fall deeper into the black hole past the Event Horizon, the gravity pulling your feet is WAY stronger than the gravity pulling your head, because your feet are closer to the centre.</p>
+      <p>This difference stretches you vertically like a piece of spaghetti. Your body gets pulled longer and thinner until you are literally a strand of human pasta. We wish we could do this with homework and enjoy our 'homework' pasta..</p>
+      <p>NASA, in their infinite wisdom, looked at this process and said <em>"hmm..yea we're calling that Spaghettification"</em></p>
+      <p>Bigger black holes = you get further in before this starts</p>
+
+      <h3>What's actually inside the Black Hole? ☠️</h3>
+      <p>Both generally and scientifically, we don't know what's truly inside the black hole; like, at all! Our physics breaks down at the Singularity. Every equation we have just returns an error, like a calculator you divided by zero on.</p>
+      <p>Space and time are thought to swap roles inside; meaning no matter which direction you move, you're moving toward the Singularity (the Center). There's no way out.</p>
+      <p>Stephen Hawking spent decades studying black holes and even HE couldn't find out what happens inside. So if you were expecting a neat answer, the universe says no.</p>
+
+      <h3>Wait..can ANYTHING escape a Black Hole?</h3>
+      <p>Actually..kind of yes. Stephen Hawking discovered that black holes very slowly leak energy over insane timescales - we're talking longer than the current age of the universe by the way!</p>
+      <p>This is called <em>Hawking Radiation</em></p>
+      <p>Eventually, a black hole evaporates completely. It just... vanishes! Takes it all with it, including you (theoretically) after an unimaginable amount of time! So that's comforting, I guess?</p>
+
+      <div class="conclusion">
+        🔬 Blue Kernel Labs Conclusion: Black holes are the universe's most dramatic overreaction to a star dying. They break physics, they break time, they will turn you into pasta, and they STILL have scientists losing sleep and their minds! Truly the most unhinged objects in existence. 10/10 would not recommend falling into one!
+      </div>
+    `
+  },
+];
+
+function shareWhatsApp(id) {
+    const post = posts.find(p => p.id === id);
+    const base = window.location.href.split('#')[0].split('?')[0];
+    const url = `${base}#post-${post.slug}`;
+
+    if (navigator.share) {
+        navigator.share({
+            title: `Blue Kernel Labs — ${post.heading}`,
+            text: `Check out this post on Blue Kernel Labs!`,
+            url: url,
         });
-      });
-    };
-  </script>
+    } else {
+        // Fallback for desktop: open WhatsApp web
+        const text = `Check out this post on Blue Kernel Labs!\n\n${url}`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    }
+}
 
+// ===== NAVIGATION WITH TRANSITION =====
+function navigateTo(e, url) {
+    e.preventDefault();
+    const overlay = document.getElementById("pageTransition");
+    overlay.classList.add("active");
+    setTimeout(() => { window.location.href = url; }, 420);
+}
+
+// ===== SUBSCRIBE =====
+async function subscribeToNotifications() {
+  const btn = document.getElementById("subscribeBtn");
+  if (Notification.permission === "denied") {
+    document.getElementById("notifHelp").style.display = "block";
+    return;
+  }
+  try {
+    const permission = await Notification.requestPermission();
+    if (permission === "granted") {
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.User.PushSubscription.optIn();
+      });
+      btn.innerText = "✅ Subscribed!";
+      btn.classList.add("subscribed");
+      btn.onclick = null;
+      document.getElementById("notifHelp").style.display = "none";
+    } else if (permission === "denied") {
+      document.getElementById("notifHelp").style.display = "block";
+    }
+  } catch (err) { console.error("Notification error:", err); }
+}
+
+// ===== DARK MODE =====
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+  const btn = document.querySelector(".nav-toggle");
+  if (document.body.classList.contains("dark")) {
+    localStorage.setItem("theme", "dark");
+    btn.innerText = "🌘 Light Mode";
+  } else {
+    localStorage.setItem("theme", "light");
+    btn.innerText = "☀️ Dark Mode";
+  }
+}
+
+// ===== RENDER POSTS =====
+function renderPosts() {
+  const container = document.getElementById("postsContainer");
+  container.innerHTML = "";
+  posts.forEach(post => {
+    const section = document.createElement("section");
+    section.id = `post-${post.slug}`;
+    section.innerHTML = `
+      <header>${post.heading}</header>
+      <h1>${post.title}</h1>
+      <p class="post-date">📅 ${post.date}</p>
+      <p>${post.preview}</p>
+      <div id="full-${post.id}" class="fullContent">${post.content}</div>
+      <div class="share-btns">
+        <button class="share-btn whatsapp" onclick="shareWhatsApp(${post.id})">💬 Share</button>
+      </div>
+      <button onclick="togglePost(${post.id}, this)">Read More..</button>
+    `;
+    container.appendChild(section);
+  });
+}
+
+function togglePost(id, button) {
+  const full = document.getElementById("full-" + id);
+  full.classList.toggle("open");
+  button.innerText = full.classList.contains("open") ? "Show Less ▲" : "Read More..";
+}
+
+// ===== SCROLL TO ANCHORED POST =====
+function scrollToAnchor() {
+  const hash = window.location.hash;
+  if (hash) {
+    const target = document.querySelector(hash);
+    if (target) {
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }
+}
+
+function pageSwitch() { navigateTo({ preventDefault: () => {} }, "About.html"); }
+
+window.onload = function() {
+  document.getElementById("currentDate").innerText = "📅 " + new Date().toLocaleDateString();
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+    document.querySelector(".nav-toggle").innerText = "🌘 Light Mode";
+  }
+  renderPosts();
+  scrollToAnchor();
+
+  // Fade in from transition
+  const overlay = document.getElementById("pageTransition");
+  overlay.style.transformOrigin = "top";
+  overlay.style.transform = "scaleY(1)";
+  overlay.style.opacity = "1";
+  overlay.style.transition = "none";
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      overlay.style.transition = "transform 0.4s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.4s ease";
+      overlay.style.transform = "scaleY(0)";
+      overlay.style.opacity = "0";
+    });
+  });
+};
+</script>
 </body>
 </html>
