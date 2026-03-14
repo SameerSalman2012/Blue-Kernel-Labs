@@ -592,7 +592,7 @@
   </div>
 
   <div class="credit">
-    Powered by <a href="https://www.anthropic.com/claude" target="_blank">Claude — Anthropic</a> ✦
+    Powered by <a href="https://groq.com" target="_blank">Groq</a> &amp; <a href="https://www.llama.com" target="_blank">LLaMA 3</a> ✦
   </div>
 </main>
 
@@ -749,22 +749,27 @@ Always answer in a fun, casual, science-enthusiast tone. Use emojis occasionally
     showTyping();
 
     try {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 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'
+        },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
+          model: 'llama-3.3-70b-versatile',
           max_tokens: 1000,
-          system: blogContext,
-          messages: conversationHistory
+          messages: [
+            { role: 'system', content: blogContext },
+            ...conversationHistory
+          ]
         })
       });
 
       const data = await response.json();
       removeTyping();
 
-      if (data.content && data.content[0]) {
-        const reply = data.content[0].text;
+      if (data.choices && data.choices[0]) {
+        const reply = data.choices[0].message.content;
         appendMessage('ai', reply);
         conversationHistory.push({ role: 'assistant', content: reply });
       } else {
