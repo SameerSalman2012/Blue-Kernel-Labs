@@ -1,10 +1,10 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
 
   const key = process.env.GROQ_API_KEY;
-  
+
   if (!key) {
-    return res.status(500).json({ error: 'No API key found in environment' });
+    return res.status(500).json({ error: 'No API key found' });
   }
 
   const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -18,7 +18,4 @@ export default async function handler(req, res) {
 
   const data = await response.json();
   res.status(200).json(data);
-}
-export default async function handler(req, res) {
-  return res.status(200).json({ allEnvKeys: Object.keys(process.env) });
 }
