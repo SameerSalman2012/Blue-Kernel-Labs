@@ -5,7 +5,7 @@ module.exports = async function handler(req, res) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
+      'Authorization': 'Bearer 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'
     },
     body: JSON.stringify(req.body)
   });
