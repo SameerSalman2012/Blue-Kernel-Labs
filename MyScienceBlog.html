@@ -764,6 +764,112 @@
         color: #e33;
         margin-top: 4px;
     }
+
+    /* ===== SEARCH BAR ===== */
+    .search-wrapper {
+        max-width: 560px;
+        margin: 18px auto 0 auto;
+        position: relative;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 13px 48px 13px 20px;
+        border-radius: 50px;
+        border: 2.5px solid rgba(29, 51, 217, 0.3);
+        background: rgba(255, 255, 255, 0.7);
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.95em;
+        color: black;
+        outline: none;
+        box-sizing: border-box;
+        transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        backdrop-filter: blur(8px);
+    }
+
+    .search-input:focus {
+        border-color: #1d33d9;
+        box-shadow: 0 0 0 4px rgba(29, 51, 217, 0.12);
+        background: rgba(255, 255, 255, 0.92);
+    }
+
+    .search-input::placeholder { opacity: 0.5; }
+
+    body.dark .search-input {
+        background: rgba(255, 255, 255, 0.07);
+        border-color: rgba(143, 207, 255, 0.3);
+        color: white;
+    }
+
+    body.dark .search-input:focus {
+        border-color: #8fcfff;
+        box-shadow: 0 0 0 4px rgba(143, 207, 255, 0.12);
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .search-icon {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.1em;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    .search-clear {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(29, 51, 217, 0.15);
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        font-size: 0.75em;
+        color: #1d33d9;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        animation: none;
+        padding: 0;
+        transition: background 0.2s;
+    }
+
+    .search-clear:hover { background: rgba(29, 51, 217, 0.28); transform: translateY(-50%); box-shadow: none; }
+
+    body.dark .search-clear { color: #8fcfff; background: rgba(143, 207, 255, 0.15); }
+    body.dark .search-clear:hover { background: rgba(143, 207, 255, 0.28); }
+
+    .search-results-count {
+        font-size: 0.82em;
+        opacity: 0.6;
+        margin-top: 8px;
+        min-height: 18px;
+        font-style: italic;
+        transition: opacity 0.2s;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 40px 20px;
+        font-size: 1em;
+        opacity: 0.5;
+        font-style: italic;
+    }
+
+    .search-highlight {
+        background: rgba(29, 51, 217, 0.18);
+        border-radius: 3px;
+        padding: 0 2px;
+        font-weight: bold;
+    }
+
+    body.dark .search-highlight {
+        background: rgba(143, 207, 255, 0.25);
+    }
 </style>
 </head>
 
@@ -812,6 +918,14 @@
     2️⃣ Set <strong>Notifications</strong> to <strong>"Allow"</strong><br>
     3️⃣ <strong>Refresh</strong> the page and try again!
   </div>
+
+  <!-- SEARCH BAR -->
+  <div class="search-wrapper">
+    <input class="search-input" type="text" id="searchInput" placeholder="🔍 Search posts... (press Enter)" onkeydown="if(event.key==='Enter') handleSearch()" oninput="onSearchType()" autocomplete="off" />
+    <span class="search-icon" id="searchIcon">🔍</span>
+    <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+  </div>
+  <div class="search-results-count" id="searchCount"></div>
 
   <div id="postsContainer"></div>
 </main>
@@ -1298,6 +1412,104 @@ function togglePost(id, slug, button) {
     renderComments(slug);
     renderReactionBar(slug);
   }
+}
+
+
+// ===== SEARCH =====
+
+function onSearchType() {
+  const query = document.getElementById('searchInput').value.trim();
+  const clearBtn = document.getElementById('searchClear');
+  const icon = document.getElementById('searchIcon');
+  if (query.length > 0) {
+    clearBtn.style.display = 'flex';
+    icon.style.display = 'none';
+  } else {
+    clearBtn.style.display = 'none';
+    icon.style.display = 'block';
+    document.getElementById('searchCount').textContent = '';
+    document.querySelectorAll('#postsContainer section').forEach(s => removeHighlights(s));
+  }
+}
+
+function handleSearch() {
+  const query = document.getElementById('searchInput').value.trim().toLowerCase();
+  const clearBtn = document.getElementById('searchClear');
+  const icon = document.getElementById('searchIcon');
+  const countEl = document.getElementById('searchCount');
+
+  // Toggle clear button
+  if (query.length > 0) {
+    clearBtn.style.display = 'flex';
+    icon.style.display = 'none';
+  } else {
+    clearBtn.style.display = 'none';
+    icon.style.display = 'block';
+    countEl.textContent = '';
+    // Remove all highlights when cleared
+    document.querySelectorAll('#postsContainer section').forEach(section => {
+      removeHighlights(section);
+    });
+    return;
+  }
+
+  doSearch(query);
+}
+
+function doSearch(query) {
+  const countEl = document.getElementById('searchCount');
+  const sections = document.querySelectorAll('#postsContainer section');
+  let found = null;
+
+  // Remove previous highlights
+  sections.forEach(s => removeHighlights(s));
+
+  sections.forEach(section => {
+    const titleEl = section.querySelector('h1');
+    const previewEl = section.querySelector('p:not(.post-date)');
+    const titleText = titleEl ? titleEl.innerText.toLowerCase() : '';
+    const previewText = previewEl ? previewEl.innerText.toLowerCase() : '';
+
+    if (titleText.includes(query) || previewText.includes(query)) {
+      if (!found) found = section; // scroll to first match
+      // Highlight matching text
+      if (titleEl) titleEl.innerHTML = highlight(titleEl.innerText, query);
+      if (previewEl) previewEl.innerHTML = highlight(previewEl.innerText, query);
+    }
+  });
+
+  if (found) {
+    countEl.textContent = '';
+    // Smooth scroll to the matching post
+    found.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Briefly glow the section
+    found.style.transition = 'box-shadow 0.3s ease';
+    found.style.boxShadow = '0 0 0 4px rgba(29, 51, 217, 0.5)';
+    setTimeout(() => { found.style.boxShadow = ''; }, 1800);
+  } else {
+    countEl.textContent = '😕 No posts found for "' + query + '"';
+  }
+}
+
+function highlight(text, query) {
+  if (!query) return text;
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp('(' + escaped + ')', 'gi');
+  return text.replace(regex, '<span class="search-highlight">$1</span>');
+}
+
+function removeHighlights(section) {
+  const titleEl = section.querySelector('h1');
+  const previewEl = section.querySelector('p:not(.post-date)');
+  if (titleEl) titleEl.innerHTML = titleEl.innerText;
+  if (previewEl) previewEl.innerHTML = previewEl.innerText;
+}
+
+function clearSearch() {
+  const input = document.getElementById('searchInput');
+  input.value = '';
+  handleSearch();
+  input.focus();
 }
 
 // ===== SCROLL TO ANCHOR =====
