@@ -102,7 +102,6 @@
 
     body.dark .nav-logo-text { color: #8fcfff; }
 
-    /* Desktop nav links */
     .nav-links {
         display: flex;
         align-items: center;
@@ -188,7 +187,6 @@
         box-shadow: 0 0 8px rgba(255,255,255,0.1);
     }
 
-    /* ===== HAMBURGER BUTTON (mobile only) ===== */
     .hamburger {
         display: none;
         flex-direction: column;
@@ -219,12 +217,10 @@
         background: linear-gradient(45deg, #222, #444);
     }
 
-    /* Hamburger → X animation */
     .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-    /* ===== MOBILE DROPDOWN MENU ===== */
     .mobile-menu {
         display: none;
         position: fixed;
@@ -261,7 +257,6 @@
         text-align: center;
     }
 
-    /* ===== PAGE TRANSITION OVERLAY ===== */
     #pageTransition {
         position: fixed;
         inset: 0;
@@ -280,7 +275,6 @@
         pointer-events: all;
     }
 
-    /* ===== HEADER ===== */
     header {
         background: linear-gradient(90deg, #8fcfff, #ffffff);
         border: 1px solid rgb(255, 255, 255);
@@ -305,7 +299,6 @@
 
     main { padding: 0px; }
 
-    /* ===== BUTTONS ===== */
     button {
         background: linear-gradient(45deg, #1d33d9, #8fcfff);
         color: white;
@@ -336,7 +329,6 @@
         transform: translateY(-5px);
     }
 
-    /* ===== FOOTER ===== */
     footer {
         margin-top: 50px;
         padding: 20px;
@@ -350,7 +342,6 @@
         color: white;
     }
 
-    /* ===== SECTIONS ===== */
     section {
         padding: 60px 20px;
         margin: 40px auto;
@@ -373,7 +364,6 @@
         border: 3px solid white;
     }
 
-    /* ===== FULL CONTENT ===== */
     .fullContent {
         max-height: 0;
         opacity: 0;
@@ -411,7 +401,6 @@
     .post-date { font-size: 0.85em; color: #555; margin: 4px 0 12px 0; font-style: italic; }
     body.dark .post-date { color: #aaaaaa; }
 
-    /* ===== SUBSCRIBE ===== */
     #subscribeBtn.subscribed {
         background: linear-gradient(45deg, #12a150, #00d97e);
         animation: float 2s ease-in-out infinite;
@@ -422,7 +411,6 @@
         background: linear-gradient(45deg, #0a7a3a, #00b368);
     }
 
-    /* ===== SHARE BUTTONS ===== */
     .share-btns {
         display: flex;
         gap: 10px;
@@ -473,7 +461,6 @@
         box-shadow: 0 6px 15px rgba(255,255,255,0.15);
     }
 
-    /* ===== DATE ===== */
     #currentDate {
         font-size: 14px;
         color: inherit;
@@ -487,32 +474,307 @@
         100% { transform: translateY(0); }
     }
 
-    /* ===== MOBILE ===== */
     @media (max-width: 580px) {
-        /* Hide desktop nav links and toggle on mobile */
         .nav-links { display: none; }
-
-        /* Show hamburger */
         .hamburger { display: flex; }
-
         .nav-logo-text { display: none; }
+    }
+
+    /* ===== COMMENT SYSTEM ===== */
+    .comments-section {
+        margin-top: 30px;
+        text-align: left;
+        border-top: 2px dashed rgba(29, 51, 217, 0.3);
+        padding-top: 20px;
+    }
+
+    body.dark .comments-section {
+        border-top: 2px dashed rgba(143, 207, 255, 0.3);
+    }
+
+    .comments-title {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #1d33d9;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    body.dark .comments-title { color: #8fcfff; }
+
+    .comment-count-badge {
+        background: linear-gradient(45deg, #1d33d9, #8fcfff);
+        color: white;
+        font-size: 0.75em;
+        padding: 2px 9px;
+        border-radius: 20px;
+        font-weight: bold;
+    }
+
+    body.dark .comment-count-badge {
+        background: linear-gradient(45deg, #333, #555);
+    }
+
+    /* Reaction bar */
+    .reaction-bar {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+    }
+
+    .reaction-btn {
+        background: rgba(29, 51, 217, 0.08);
+        border: 2px solid rgba(29, 51, 217, 0.2);
+        border-radius: 20px;
+        padding: 5px 12px;
+        cursor: pointer;
+        font-size: 0.95em;
+        transition: all 0.2s ease;
+        animation: none;
+        color: inherit;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .reaction-btn:hover {
+        background: rgba(29, 51, 217, 0.15);
+        border-color: #1d33d9;
+        transform: scale(1.08);
+        box-shadow: none;
+    }
+
+    .reaction-btn.reacted {
+        background: linear-gradient(45deg, #1d33d9, #8fcfff);
+        color: white;
+        border-color: transparent;
+        transform: scale(1.05);
+    }
+
+    body.dark .reaction-btn {
+        background: rgba(143, 207, 255, 0.08);
+        border-color: rgba(143, 207, 255, 0.2);
+    }
+
+    body.dark .reaction-btn:hover {
+        background: rgba(143, 207, 255, 0.15);
+        border-color: #8fcfff;
+    }
+
+    body.dark .reaction-btn.reacted {
+        background: linear-gradient(45deg, #333, #555);
+        border-color: transparent;
+    }
+
+    .reaction-count {
+        font-size: 0.8em;
+        font-weight: bold;
+        opacity: 0.85;
+    }
+
+    /* Comment form */
+    .comment-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .comment-form input,
+    .comment-form textarea {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 2px solid rgba(29, 51, 217, 0.25);
+        background: rgba(255,255,255,0.6);
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.9em;
+        color: black;
+        outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        box-sizing: border-box;
+        resize: vertical;
+    }
+
+    .comment-form input:focus,
+    .comment-form textarea:focus {
+        border-color: #1d33d9;
+        box-shadow: 0 0 0 3px rgba(29, 51, 217, 0.12);
+    }
+
+    body.dark .comment-form input,
+    body.dark .comment-form textarea {
+        background: rgba(255,255,255,0.07);
+        border-color: rgba(143, 207, 255, 0.25);
+        color: white;
+    }
+
+    body.dark .comment-form input:focus,
+    body.dark .comment-form textarea:focus {
+        border-color: #8fcfff;
+        box-shadow: 0 0 0 3px rgba(143, 207, 255, 0.12);
+    }
+
+    .comment-form input::placeholder,
+    .comment-form textarea::placeholder {
+        opacity: 0.5;
+    }
+
+    .emoji-picker-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .emoji-picker-label {
+        font-size: 0.8em;
+        opacity: 0.6;
+        margin-right: 2px;
+    }
+
+    .emoji-opt {
+        font-size: 1.3em;
+        cursor: pointer;
+        padding: 4px 6px;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        background: transparent;
+        animation: none;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .emoji-opt:hover { transform: scale(1.25); box-shadow: none; }
+
+    .emoji-opt.selected {
+        border-color: #1d33d9;
+        background: rgba(29, 51, 217, 0.1);
+    }
+
+    body.dark .emoji-opt.selected {
+        border-color: #8fcfff;
+        background: rgba(143, 207, 255, 0.1);
+    }
+
+    .submit-comment-btn {
+        align-self: flex-start;
+        padding: 9px 22px;
+        font-size: 0.9em;
+        border-radius: 12px;
+        animation: none;
+        background: linear-gradient(45deg, #1d33d9, #8fcfff);
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .submit-comment-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(29, 51, 217, 0.35);
+        background: linear-gradient(45deg, #8fcfff, #1d33d9);
+    }
+
+    .submit-comment-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    body.dark .submit-comment-btn {
+        background: linear-gradient(45deg, #333, #555);
+    }
+
+    /* Comment list */
+    .comments-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .comment-card {
+        background: rgba(255,255,255,0.55);
+        border: 2px solid rgba(29, 51, 217, 0.15);
+        border-radius: 12px;
+        padding: 12px 16px;
+        animation: commentSlideIn 0.4s ease;
+    }
+
+    @keyframes commentSlideIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    body.dark .comment-card {
+        background: rgba(255,255,255,0.05);
+        border-color: rgba(143, 207, 255, 0.15);
+    }
+
+    .comment-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 6px;
+    }
+
+    .comment-emoji { font-size: 1.3em; }
+
+    .comment-name {
+        font-weight: bold;
+        font-size: 0.95em;
+        color: #1d33d9;
+    }
+
+    body.dark .comment-name { color: #8fcfff; }
+
+    .comment-time {
+        font-size: 0.75em;
+        opacity: 0.5;
+        margin-left: auto;
+    }
+
+    .comment-text {
+        font-size: 0.9em;
+        line-height: 1.6;
+        margin: 0;
+        word-break: break-word;
+    }
+
+    .comments-loading {
+        font-size: 0.85em;
+        opacity: 0.5;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .no-comments {
+        font-size: 0.85em;
+        opacity: 0.5;
+        text-align: center;
+        padding: 10px 0;
+        font-style: italic;
+    }
+
+    .comment-error {
+        font-size: 0.82em;
+        color: #e33;
+        margin-top: 4px;
     }
 </style>
 </head>
 
 <body>
 
-<!-- PAGE TRANSITION OVERLAY -->
 <div id="pageTransition"></div>
 
-<!-- NAVBAR -->
 <nav>
     <a href="index.html" class="nav-logo">
         <img src="Boron.png" alt="Blue Kernel Labs Logo">
-
     </a>
-
-    <!-- Desktop links (hidden on mobile) -->
     <div class="nav-links">
         <a href="index.html" class="nav-link active">📝 Blog</a>
         <a href="blue-ai.html" class="nav-link" onclick="navigateTo(event, 'blue-ai.html')">🤖 Blue AI</a>
@@ -520,8 +782,6 @@
         <a href="About.html" class="nav-link" onclick="navigateTo(event, 'About.html')">👤 About</a>
         <button class="nav-toggle" onclick="toggleDarkMode()">☀️ Dark Mode</button>
     </div>
-
-    <!-- Hamburger (visible on mobile only) -->
     <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Toggle menu">
         <span></span>
         <span></span>
@@ -529,7 +789,6 @@
     </button>
 </nav>
 
-<!-- Mobile Dropdown Menu -->
 <div class="mobile-menu" id="mobileMenu">
     <a href="index.html" class="nav-link active">📝 Blog</a>
     <a href="blue-ai.html" class="nav-link" onclick="closeMobileMenu(); navigateTo(event, 'blue-ai.html')">🤖 Blue AI</a>
@@ -560,7 +819,30 @@
 <footer>© 2026 Blue Kernel Labs | All Rights Reserved</footer>
 
 <script>
+// ===== SUPABASE CONFIG =====
+const SUPABASE_URL = "https://ebqfsjlhnfaqeiyglilp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_uo-gb5e4U2i9n3uJ14PmXg_2xF2suM3";
 
+async function sbFetch(path, options = {}) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+        ...options,
+        headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": `Bearer ${SUPABASE_KEY}`,
+            "Content-Type": "application/json",
+            "Prefer": options.prefer || "",
+            ...(options.headers || {})
+        }
+    });
+    if (!res.ok) {
+        const err = await res.text();
+        throw new Error(err);
+    }
+    const text = await res.text();
+    return text ? JSON.parse(text) : null;
+}
+
+// ===== POSTS DATA =====
 const posts = [
   {
     id: 1,
@@ -574,25 +856,19 @@ const posts = [
       <p>Okay, so infinity. Most people think it's just a really, really big number that never ends.</p>
       <p>Like, bigger than the number of times you've hit snooze this week.</p>
       <p>But nope. Math is weird. Infinity isn't just one thing — <strong>some infinities are actually bigger than others.</strong></p>
-
       <h3>The Two Infinities That Break Your Brain 🔢</h3>
       <p>Counting numbers — 1, 2, 3… — that's one type of infinity. It goes on forever, sure.</p>
       <p>But the numbers between 0 and 1? Like 0.1, 0.01, 0.001… that's a <strong>bigger</strong> infinity.</p>
       <p>Yeah. Math is literally trolling us. 😂</p>
-
       <h3>The Guy Who Figured This Out 🧠</h3>
       <p>Georg Cantor basically said: <em>"No matter how you try to list these numbers, I'll always find one you forgot."</em></p>
       <p>He proved it with something called Cantor's Diagonal Argument. Absolute savage move.</p>
       <p>Mathematicians at the time were furious. Some called it nonsense. Turns out he was just… right.</p>
-
       <h3>So What Does This Mean? 🌀</h3>
       <p>Infinity isn't total chaos. It's like organized chaos.</p>
       <p>Like your messy desk — somehow you still know where your pencil is.</p>
       <p>There are actually infinite levels of infinity. Mathematicians call them <strong>cardinalities</strong>. The rabbit hole goes deep.</p>
-
-      <div class="conclusion">
-        🔬 Blue Kernel Labs Conclusion: Infinity is weird, wild, and secretly hilarious. And there's more than one of it. You're welcome.
-      </div>
+      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: Infinity is weird, wild, and secretly hilarious. And there's more than one of it. You're welcome.</div>
     `
   },
   {
@@ -606,34 +882,22 @@ const posts = [
       <h3>What exactly IS time 🕰️?</h3>
       <p>Time is simply a measureable number, or a <em>Physical Quantity</em> in Fancy words, that tells us how much the Earth has rotated.</p>
       <p>Simple enough, right? but NO! Because time just joins some other group chat when its in outer space!</p>
-
       <h3>Time in Space, and how it abandons Physics to Earth 🌎</h3>
       <p>Let me give y'all an example to talk on.</p>
-      <p>For example, an astronaut lives in The ISS, and lives there for 2 years. if he returns back on Earth, he would be a fraction of a bit younger than if he just lived on Earth! So, technically astronauts in Space age slower than us at Earth, while i aged 10 years in my recent exam..and grew a white hair in my arm, dont ask me how..</p>
-      <p>I know what you're thinking right now, "Really??"...ok thats kind of an 'AI' thought if you ask me, but dont you worry cause ill tell you how it works.</p>
-
+      <p>For example, an astronaut lives in The ISS, and lives there for 2 years. if he returns back on Earth, he would be a fraction of a bit younger than if he just lived on Earth!</p>
       <h3>The Person Who Figured This Monstrosity Out ✨</h3>
       <p>Albert Einstein called this <em>"Time Dilation"</em></p>
       <p><em>"The Heavier the object near you, The slower time moves." -Einstein, i guess</em></p>
       <p>This explains how our example actually works in real life. Earth is Insanely heavy, and its the reason time moves slower outside Earth!</p>
-
       <h3>How our GPS uses Time Dilation 📍</h3>
       <p>Your phone's GPS satellites actually have to correct for time dilation constantly</p>
       <p>The satellites are far from Earth's gravity, so their clocks run a little faster than ours on the ground.</p>
       <p>If it doesn't correct its time dilation, your GPS would give completely wrong directions by minimum 10km every single day!</p>
-
       <h3>Speed also affects time! 🏎️</h3>
       <p>Its not only gravity thats affecting how time works, Speed also enters the chat!</p>
       <p>The faster you move, the slower time passes for you! Just like gravity, speed warps time too.</p>
       <p>That means if you travelled at 99% the speed of light for what felt like a year to you, Decades would have passed on Earth!</p>
-
-      <h3>So.. What Does This Mean? 🪐</h3>
-      <p>This tells us how far Physics can go to drive our minds crazy and question your existence.</p>
-      <p>"So gravity slows time, speed slows time, and your GPS is out here doing advanced Einstein calculations just so you don't get lost. Very Interesting i must say😬!"</p>
-
-      <div class="conclusion">
-        🔬 Blue Kernel Labs Conclusion: Time is absurd, Space is a complete rage-bait technique for your brain, and Einstein was..a giga chad.
-      </div>
+      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: Time is absurd, Space is a complete rage-bait technique for your brain, and Einstein was..a giga chad.</div>
     `
   },
   {
@@ -648,25 +912,16 @@ const posts = [
       <p>AIs, like ChatGPT, are basically programs trained to learn random information by scouring through the entire internet and reading whatever article they find.</p>
       <p>It can answer your questions and chat with you, just like a real person-but with no soul, no emotions, and no bedtime..</p>
       <p>But the most interesting part about it is that it is just autocomplete on steroids!</p>
-
       <h3>It's just Autocomplete! 🧐</h3>
       <p>The AIs don't actually think or understand anything, it just predicts what word comes next based on patterns it learnt!</p>
       <p>Its like your phone keyboard autocomplete, but simply trained on the whole Internet.</p>
-
       <h3>It costs an INSANE amount to train it 🧠</h3>
       <p>If you wanted to train an AI, it would require a very large amount to do so, since you have to teach it the entire internet's knowledge!</p>
       <p>Training the latest GPT-5 would approximately cost you <em>$100 Million</em>, just to learn the entire Internet!</p>
-
       <h3>Why do they sometimes go wrong? 🤪</h3>
       <p>Sometimes, ChatGPT can make up completely fake facts and say them with full confidence!</p>
       <p>AIs just want to give you an answer, Whether its correct or completely made up. It will never admit that it can't find an answer!</p>
-
-      <h3>So what does this mean?</h3>
-      <p>This shows how AIs aren't perfect. They can still make mistakes, even if they're pieces of code.</p>
-
-      <div class="conclusion">
-        🔬 Blue Kernel Labs Conclusion: AI doesn't have feelings, emotions, thinking, and humour, because its all forced into the program! But it does have the ability to come up with any sort of answer, right or wrong.
-      </div>
+      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: AI doesn't have feelings, emotions, thinking, and humour, because its all forced into the program! But it does have the ability to come up with any sort of answer, right or wrong.</div>
     `
   },
   {
@@ -679,24 +934,15 @@ const posts = [
     content: `
       <h3>What is Death, basically? ⚰️</h3>
       <p>Death is a stage of life where you just...vanish from Earth. But not exactly, your soul just leaves your body. While your body just stays on Earth and decays over time.</p>
-      <p>What makes this stage more scary is that...we don't know what happens after. Does your soul Actually leave Earth? Or does your soul stay on Earth and haunt everybody?</p>
-      <p>The topic is so puzzling that even scientists can't figure this out, like your answer sheet. But there are still some things that scientists have discovered about Death.</p>
-
+      <p>What makes this stage more scary is that...we don't know what happens after.</p>
       <h3>Your Brain survives for 10 minutes! 🧠</h3>
-      <p>After your heart stops, your brain continues functioning for up to 10 minutes! Scientists believe this is when people get vivid dreams about their memorable moments during the stage of Death, basically a flashback of their entire life's story.</p>
-      <p>So, even after you die, there is time to relive your best moments and accept your death. I think this feature should be in Shooter games, trust me, it'll feel real!</p>
-
+      <p>After your heart stops, your brain continues functioning for up to 10 minutes! Scientists believe this is when people get vivid dreams about their memorable moments during the stage of Death.</p>
       <h3>You can still hear after death?!</h3>
       <p>Hearing is the LAST sense to go when you die. Meaning you can still hear people talking around you AFTER you've technically died!</p>
-      <p>So be careful what you say in a funeral! even if they are dead, you better not risk telling them your exam results..</p>
-
       <h3>Near Death Experiences are real! ☠️</h3>
       <p>A huge scientific study, called the AWARE study, tracked 2,060 patients who had cardiac arrests. Some accurately described what doctors were doing in the room while they were DEAD!</p>
-      <p>So, technically they couldn't do anything, but still could process and hear everything when they were LITERALLY dead!</p>
-      <p>Its scary when you think about it..</p>
-
       <h3>Near Death witnesses reported by people 😵</h3>
-      <p>Thousands of people worldwide have reported the exact same experience during Near Death Experiences — and the creepy part? They came from completely different countries, cultures and religions. Nobody compared notes. Yet they all described the exact same thing:</p>
+      <p>Thousands of people worldwide have reported the exact same experience during Near Death Experiences:</p>
       <ul style="text-align: left; margin: 10px 0; padding-left: 20px; line-height: 2;">
         <li>🌟 A bright warm tunnel of light pulling them forward</li>
         <li>😌 Feeling of complete peace and zero pain</li>
@@ -704,16 +950,7 @@ const posts = [
         <li>👴 Meeting deceased relatives who said <em>"it's not your time yet"</em></li>
         <li>🚫 A strong feeling of not wanting to come back</li>
       </ul>
-      <p>Its actually creepy that people have witnessed this and survived. Because the patients had cardiac arrests and not sudden death, they managed to survive and describe the experience to scientists.</p>
-      <p>Either the human brain has a very specific way of breaking down — or there's something waiting on the other side. 👀</p>
-
-      <h3>What does science say?</h3>
-      <p>Some scientists think it's the brain releasing a chemical called DMT at the moment of death — a naturally occurring substance that causes intense vivid hallucinations. Others think it's oxygen deprivation causing the brain to malfunction.</p>
-      <p>But nobody has actually proven either theory completely. So the bright light remains… unexplained.</p>
-
-      <div class="conclusion">
-        🔬 Blue Kernel Labs Conclusion: Death is scary, but at that stage..you are basically in peace and quiet! So, enjoy your life like it's the last day! And for the school stress, that pain is temporary and will eventually go away. Just enjoy your life to the fullest while maintaining all the hardships of life!❤️
-      </div>
+      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: Death is scary, but at that stage..you are basically in peace and quiet! So, enjoy your life like it's the last day!❤️</div>
     `
   },
   {
@@ -727,53 +964,240 @@ const posts = [
       <h3>So, what IS a Black Hole? ⚫️</h3>
       <p>In simple terms, A Black Hole is what happens when a super massive star runs out of fuel, collapses in its own gravity, and throws a tantrum so hard that it tears a hole in spacetime itself.</p>
       <p>Its gravity is so strong that not even light can escape it. And this is the FASTEST thing in the universe we're talking about!</p>
-      <p>And the centre of it — called the <em>Singularity</em> — is a point where density becomes infinite and the laws of physics just... give up. "Elvis has left the building"!</p>
-
       <h3>The <em>Event Horizon</em></h3>
-      <p>The Event Horizon is basically the point of no return, meaning once you cross it, there is no turning back. You're just trapped in there with no escape. Not even light can escape, let alone yourself..</p>
-      <p>From the outside, someone watching you would see you appear to slow down, freeze, distort, and then fade; All due to Time Dilation.</p>
-
+      <p>The Event Horizon is basically the point of no return, meaning once you cross it, there is no turning back.</p>
       <h3>But what ACTUALLY happens if you fall in? 🕳️</h3>
       <p>First things first, from your perspective, crossing the <em>Event Horizon</em> actually feels completely normal at first. It would just feel like...you're floating, nothing else.</p>
-      <p>You'd just..cross it. And immediately regret every life decision that led to this moment. Now HERE it gets absolutely unhinged..</p>
-
       <h3>Spaghettification 🍝</h3>
-      <p>Now, as you fall deeper into the black hole past the Event Horizon, the gravity pulling your feet is WAY stronger than the gravity pulling your head, because your feet are closer to the centre.</p>
-      <p>This difference stretches you vertically like a piece of spaghetti. Your body gets pulled longer and thinner until you are literally a strand of human pasta. We wish we could do this with homework and enjoy our 'homework' pasta..</p>
-      <p>NASA, in their infinite wisdom, looked at this process and said <em>"hmm..yea we're calling that Spaghettification"</em></p>
-      <p>Bigger black holes = you get further in before this starts</p>
-
+      <p>Now, as you fall deeper into the black hole past the Event Horizon, the gravity pulling your feet is WAY stronger than the gravity pulling your head.</p>
+      <p>This difference stretches you vertically like a piece of spaghetti. NASA, in their infinite wisdom, looked at this process and said <em>"hmm..yea we're calling that Spaghettification"</em></p>
       <h3>What's actually inside the Black Hole? ☠️</h3>
-      <p>Both generally and scientifically, we don't know what's truly inside the black hole; like, at all! Our physics breaks down at the Singularity. Every equation we have just returns an error, like a calculator you divided by zero on.</p>
-      <p>Space and time are thought to swap roles inside; meaning no matter which direction you move, you're moving toward the Singularity (the Center). There's no way out.</p>
-      <p>Stephen Hawking spent decades studying black holes and even HE couldn't find out what happens inside. So if you were expecting a neat answer, the universe says no.</p>
-
+      <p>Both generally and scientifically, we don't know what's truly inside the black hole. Our physics breaks down at the Singularity.</p>
       <h3>Wait..can ANYTHING escape a Black Hole?</h3>
-      <p>Actually..kind of yes. Stephen Hawking discovered that black holes very slowly leak energy over insane timescales - we're talking longer than the current age of the universe by the way!</p>
-      <p>This is called <em>Hawking Radiation</em></p>
-      <p>Eventually, a black hole evaporates completely. It just... vanishes! Takes it all with it, including you (theoretically) after an unimaginable amount of time! So that's comforting, I guess?</p>
-
-      <div class="conclusion">
-        🔬 Blue Kernel Labs Conclusion: Black holes are the universe's most dramatic overreaction to a star dying. They break physics, they break time, they will turn you into pasta, and they STILL have scientists losing sleep and their minds! Truly the most unhinged objects in existence. 10/10 would not recommend falling into one!
-      </div>
+      <p>Actually..kind of yes. Stephen Hawking discovered that black holes very slowly leak energy — this is called <em>Hawking Radiation</em>. Eventually, a black hole evaporates completely.</p>
+      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: Black holes are the universe's most dramatic overreaction to a star dying. 10/10 would not recommend falling into one!</div>
     `
   },
 ];
 
+// ===== REACTIONS CONFIG =====
+const REACTION_EMOJIS = ["🔥", "🤯", "💡", "😂", "👏"];
+const COMMENT_EMOJIS  = ["💬", "🤔", "😮", "🧠", "❤️", "😂"];
+
+// Track user's reactions per post (localStorage so they don't react twice per session)
+function getUserReactions() {
+    try { return JSON.parse(localStorage.getItem("bkl_reactions") || "{}"); }
+    catch { return {}; }
+}
+function saveUserReactions(obj) {
+    localStorage.setItem("bkl_reactions", JSON.stringify(obj));
+}
+
+// ===== FETCH REACTIONS =====
+async function fetchReactions(slug) {
+    try {
+        const data = await sbFetch(`reactions?post_slug=eq.${encodeURIComponent(slug)}&select=emoji,count`);
+        return data || [];
+    } catch { return []; }
+}
+
+// ===== SUBMIT REACTION =====
+async function submitReaction(slug, emoji, btnEl) {
+    const userReactions = getUserReactions();
+    const key = `${slug}__${emoji}`;
+
+    // Toggle off if already reacted with same emoji
+    if (userReactions[slug] === emoji) {
+        delete userReactions[slug];
+        saveUserReactions(userReactions);
+        await sbFetch(`reactions?post_slug=eq.${encodeURIComponent(slug)}&emoji=eq.${encodeURIComponent(emoji)}`, {
+            method: "DELETE"
+        });
+        renderReactionBar(slug);
+        return;
+    }
+
+    // Remove old reaction if different emoji
+    if (userReactions[slug]) {
+        await sbFetch(`reactions?post_slug=eq.${encodeURIComponent(slug)}&emoji=eq.${encodeURIComponent(userReactions[slug])}`, {
+            method: "DELETE"
+        });
+    }
+
+    userReactions[slug] = emoji;
+    saveUserReactions(userReactions);
+
+    // Upsert: try insert, if conflict increment
+    try {
+        await sbFetch(`reactions`, {
+            method: "POST",
+            prefer: "resolution=merge-duplicates",
+            headers: { "Prefer": "resolution=merge-duplicates" },
+            body: JSON.stringify({ post_slug: slug, emoji: emoji, count: 1 })
+        });
+    } catch(e) {
+        // fallback: just re-render
+    }
+    renderReactionBar(slug);
+}
+
+async function renderReactionBar(slug) {
+    const bar = document.getElementById(`reaction-bar-${slug}`);
+    if (!bar) return;
+    const userReactions = getUserReactions();
+    const myReaction = userReactions[slug];
+
+    // Fetch current counts
+    let counts = {};
+    try {
+        const data = await sbFetch(`reactions?post_slug=eq.${encodeURIComponent(slug)}`);
+        (data || []).forEach(r => { counts[r.emoji] = r.count || 0; });
+    } catch {}
+
+    bar.innerHTML = REACTION_EMOJIS.map(emoji => {
+        const count = counts[emoji] || 0;
+        const isReacted = myReaction === emoji;
+        return `<button class="reaction-btn ${isReacted ? 'reacted' : ''}" 
+                    onclick="submitReaction('${slug}', '${emoji}', this)" 
+                    title="React with ${emoji}">
+                    ${emoji} <span class="reaction-count">${count > 0 ? count : ''}</span>
+                </button>`;
+    }).join('');
+}
+
+// ===== FETCH COMMENTS =====
+async function fetchComments(slug) {
+    try {
+        const data = await sbFetch(`comments?post_slug=eq.${encodeURIComponent(slug)}&order=created_at.asc&select=*`);
+        return data || [];
+    } catch { return []; }
+}
+
+// ===== SUBMIT COMMENT =====
+async function submitComment(slug) {
+    const nameEl    = document.getElementById(`comment-name-${slug}`);
+    const msgEl     = document.getElementById(`comment-msg-${slug}`);
+    const errEl     = document.getElementById(`comment-err-${slug}`);
+    const submitBtn = document.getElementById(`comment-submit-${slug}`);
+
+    const name    = nameEl.value.trim();
+    const message = msgEl.value.trim();
+    const emoji   = document.querySelector(`#emoji-picker-${slug} .emoji-opt.selected`)?.dataset.emoji || "💬";
+
+    if (!name) { errEl.textContent = "⚠️ Please enter your name!"; return; }
+    if (!message) { errEl.textContent = "⚠️ Please write a comment!"; return; }
+    if (message.length > 500) { errEl.textContent = "⚠️ Comment too long (max 500 chars)!"; return; }
+
+    errEl.textContent = "";
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Posting...";
+
+    try {
+        await sbFetch(`comments`, {
+            method: "POST",
+            prefer: "return=representation",
+            body: JSON.stringify({ post_slug: slug, name, message, emoji })
+        });
+        nameEl.value = "";
+        msgEl.value = "";
+        // reset emoji selection
+        document.querySelectorAll(`#emoji-picker-${slug} .emoji-opt`).forEach(b => b.classList.remove("selected"));
+        document.querySelector(`#emoji-picker-${slug} .emoji-opt[data-emoji="💬"]`)?.classList.add("selected");
+
+        await renderComments(slug);
+    } catch(e) {
+        errEl.textContent = "❌ Failed to post. Try again!";
+        console.error(e);
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = "💬 Post Comment";
+}
+
+// ===== RENDER COMMENTS =====
+async function renderComments(slug) {
+    const list = document.getElementById(`comments-list-${slug}`);
+    const countBadge = document.getElementById(`comment-count-${slug}`);
+    if (!list) return;
+
+    list.innerHTML = `<div class="comments-loading">Loading comments...</div>`;
+
+    const comments = await fetchComments(slug);
+
+    if (countBadge) countBadge.textContent = comments.length;
+
+    if (comments.length === 0) {
+        list.innerHTML = `<div class="no-comments">No comments yet — be the first! 👇</div>`;
+        return;
+    }
+
+    list.innerHTML = comments.map(c => {
+        const date = new Date(c.created_at);
+        const timeStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        return `
+        <div class="comment-card">
+            <div class="comment-header">
+                <span class="comment-emoji">${c.emoji || "💬"}</span>
+                <span class="comment-name">${escapeHtml(c.name)}</span>
+                <span class="comment-time">${timeStr}</span>
+            </div>
+            <p class="comment-text">${escapeHtml(c.message)}</p>
+        </div>`;
+    }).join('');
+}
+
+function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ===== BUILD COMMENT SECTION HTML =====
+function buildCommentSection(slug) {
+    const emojiOptsHtml = COMMENT_EMOJIS.map((e, i) =>
+        `<button class="emoji-opt ${i === 0 ? 'selected' : ''}" data-emoji="${e}" onclick="selectEmoji(this, '${slug}')" title="${e}">${e}</button>`
+    ).join('');
+
+    return `
+    <div class="comments-section">
+        <div class="comments-title">
+            💬 Comments
+            <span class="comment-count-badge" id="comment-count-${slug}">0</span>
+        </div>
+
+        <div class="reaction-bar" id="reaction-bar-${slug}">
+            ${REACTION_EMOJIS.map(e => `<button class="reaction-btn" onclick="submitReaction('${slug}', '${e}', this)">${e} <span class="reaction-count"></span></button>`).join('')}
+        </div>
+
+        <div class="comment-form">
+            <input type="text" id="comment-name-${slug}" placeholder="Your name..." maxlength="40" />
+            <div class="emoji-picker-row">
+                <span class="emoji-picker-label">Mood:</span>
+                <div id="emoji-picker-${slug}">${emojiOptsHtml}</div>
+            </div>
+            <textarea id="comment-msg-${slug}" placeholder="Write your comment..." rows="3" maxlength="500"></textarea>
+            <span class="comment-error" id="comment-err-${slug}"></span>
+            <button class="submit-comment-btn" id="comment-submit-${slug}" onclick="submitComment('${slug}')">💬 Post Comment</button>
+        </div>
+
+        <div class="comments-list" id="comments-list-${slug}">
+            <div class="comments-loading">Loading comments...</div>
+        </div>
+    </div>`;
+}
+
+function selectEmoji(btn, slug) {
+    document.querySelectorAll(`#emoji-picker-${slug} .emoji-opt`).forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+}
+
+// ===== SHARE =====
 function shareWhatsApp(id) {
     const post = posts.find(p => p.id === id);
     const base = window.location.href.split('#')[0].split('?')[0];
     const url = `${base}#post-${post.slug}`;
-
     if (navigator.share) {
-        navigator.share({
-            title: `Blue Kernel Labs — ${post.heading}`,
-            text: `Check out this post on Blue Kernel Labs!`,
-            url: url,
-        });
+        navigator.share({ title: `Blue Kernel Labs — ${post.heading}`, text: `Check out this post on Blue Kernel Labs!`, url });
     } else {
-        const text = `Check out this post on Blue Kernel Labs!\n\n${url}`;
-        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        window.open(`https://wa.me/?text=${encodeURIComponent(`Check out this post on Blue Kernel Labs!\n\n${url}`)}`, '_blank');
     }
 }
 
@@ -790,7 +1214,6 @@ function closeMobileMenu() {
     document.getElementById("hamburgerBtn").classList.remove("open");
 }
 
-// Close mobile menu when tapping outside
 document.addEventListener("click", function(e) {
     const menu = document.getElementById("mobileMenu");
     const btn = document.getElementById("hamburgerBtn");
@@ -799,7 +1222,7 @@ document.addEventListener("click", function(e) {
     }
 });
 
-// ===== NAVIGATION WITH TRANSITION =====
+// ===== PAGE TRANSITION =====
 function navigateTo(e, url) {
     e.preventDefault();
     const overlay = document.getElementById("pageTransition");
@@ -835,10 +1258,7 @@ function toggleDarkMode() {
   document.body.classList.toggle("dark");
   const isDark = document.body.classList.contains("dark");
   const label = isDark ? "🌘 Light Mode" : "☀️ Dark Mode";
-
-  // Update both desktop and mobile toggles
   document.querySelectorAll(".nav-toggle").forEach(btn => btn.innerText = label);
-
   localStorage.setItem("theme", isDark ? "dark" : "light");
 }
 
@@ -854,37 +1274,44 @@ function renderPosts() {
       <h1>${post.title}</h1>
       <p class="post-date">📅 ${post.date}</p>
       <p>${post.preview}</p>
-      <div id="full-${post.id}" class="fullContent">${post.content}</div>
+      <div id="full-${post.id}" class="fullContent">
+        ${post.content}
+        ${buildCommentSection(post.slug)}
+      </div>
       <div class="share-btns">
         <button class="share-btn whatsapp" onclick="shareWhatsApp(${post.id})">💬 Share</button>
       </div>
-      <button onclick="togglePost(${post.id}, this)">Read More..</button>
+      <button onclick="togglePost(${post.id}, '${post.slug}', this)">Read More..</button>
     `;
     container.appendChild(section);
   });
 }
 
-function togglePost(id, button) {
+function togglePost(id, slug, button) {
   const full = document.getElementById("full-" + id);
+  const wasOpen = full.classList.contains("open");
   full.classList.toggle("open");
   button.innerText = full.classList.contains("open") ? "Show Less ▲" : "Read More..";
+
+  // Load comments & reactions when post opens for first time
+  if (!wasOpen) {
+    renderComments(slug);
+    renderReactionBar(slug);
+  }
 }
 
-// ===== SCROLL TO ANCHORED POST =====
+// ===== SCROLL TO ANCHOR =====
 function scrollToAnchor() {
   const hash = window.location.hash;
   if (hash) {
     const target = document.querySelector(hash);
     if (target) {
-      setTimeout(() => {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100);
+      setTimeout(() => { target.scrollIntoView({ behavior: "smooth", block: "start" }); }, 100);
     }
   }
 }
 
-function pageSwitch() { navigateTo({ preventDefault: () => {} }, "About.html"); }
-
+// ===== INIT =====
 window.onload = function() {
   document.getElementById("currentDate").innerText = "📅 " + new Date().toLocaleDateString();
   const savedTheme = localStorage.getItem("theme");
@@ -895,7 +1322,7 @@ window.onload = function() {
   renderPosts();
   scrollToAnchor();
 
-  // Fade in from transition
+  // Fade in from page transition
   const overlay = document.getElementById("pageTransition");
   overlay.style.transformOrigin = "top";
   overlay.style.transform = "scaleY(1)";
