@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BKL Admin — Post Editor</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --blue:    #1d33d9;
+    --sky:     #8fcfff;
+    --dark:    #0a0e1a;
+    --darker:  #060810;
+    --card:    rgba(255,255,255,0.04);
+    --border:  rgba(143,207,255,0.15);
+    --text:    #e8f4ff;
+    --muted:   rgba(143,207,255,0.45);
+    --green:   #00e87a;
+    --red:     #ff4d6a;
+    --radius:  14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Exo 2', sans-serif;
+    background: var(--darker);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* grid bg */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(29,51,217,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(29,51,217,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* glow blobs */
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .blob-1 { width: 500px; height: 500px; background: rgba(29,51,217,0.18); top: -150px; left: -100px; }
+  .blob-2 { width: 400px; height: 400px; background: rgba(143,207,255,0.1); bottom: -100px; right: -100px; }
+
+  /* ===== LOCK SCREEN ===== */
+  #lockScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--darker);
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .lock-card {
+    position: relative;
+    z-index: 1;
+    background: rgba(10,14,26,0.9);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 48px 44px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 0 80px rgba(29,51,217,0.2), 0 0 0 1px rgba(143,207,255,0.08);
+    text-align: center;
+  }
+
+  .lock-icon {
+    font-size: 3em;
+    margin-bottom: 16px;
+    display: block;
+    animation: lockPulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes lockPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+
+  .lock-title {
+    font-size: 1.5em;
+    font-weight: 800;
+    color: var(--sky);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .lock-sub {
+    font-size: 0.85em;
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .lock-input {
+    width: 100%;
+    padding: 13px 18px;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1em;
+    outline: none;
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .lock-input:focus {
+    border-color: var(--sky);
+    box-shadow: 0 0 0 3px rgba(143,207,255,0.12);
+  }
+
+  .lock-btn {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, var(--blue), var(--sky));
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1em;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    animation: none;
+  }
+
+  .lock-btn:hover { opacity: 0.88; transform: translateY(-2px); }
+
+  .lock-error {
+    margin-top: 12px;
+    font-size: 0.82em;
+    color: var(--red);
+    min-height: 18px;
+    font-family: 'Share Tech Mono', monospace;
+    animation: shake 0.3s ease;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+
+  /* ===== MAIN APP ===== */
+  #app {
+    display: none;
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+  }
+
+  /* ===== TOPBAR ===== */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .topbar-left { display: flex; align-items: center; gap: 12px; }
+
+  .logo-pill {
+    background: linear-gradient(135deg, var(--blue), var(--sky));
+    border-radius: 10px;
+    padding: 6px 14px;
+    font-weight: 800;
+    font-size: 0.95em;
+    letter-spacing: 0.5px;
+  }
+
+  .topbar-title {
+    font-size: 1.2em;
+    font-weight: 800;
+    color: var(--sky);
+  }
+
+  .topbar-sub {
+    font-size: 0.78em;
+    color: var(--muted);
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .logout-btn {
+    background: rgba(255,77,106,0.12);
+    border: 1px solid rgba(255,77,106,0.3);
+    border-radius: 10px;
+    color: var(--red);
+    padding: 7px 16px;
+    font-size: 0.82em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    animation: none;
+    font-family: 'Exo 2', sans-serif;
+  }
+
+  .logout-btn:hover { background: rgba(255,77,106,0.22); transform: none; box-shadow: none; }
+
+  /* ===== TABS ===== */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 24px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 5px;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 9px;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    font-size: 0.88em;
+    cursor: pointer;
+    transition: all 0.2s;
+    animation: none;
+  }
+
+  .tab:hover { color: var(--text); background: rgba(255,255,255,0.05); transform: none; box-shadow: none; }
+
+  .tab.active {
+    background: linear-gradient(135deg, var(--blue), rgba(143,207,255,0.6));
+    color: white;
+    box-shadow: 0 4px 14px rgba(29,51,217,0.35);
+  }
+
+  /* ===== PANELS ===== */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ===== CARD ===== */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+
+  .card-title {
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--sky);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ===== FORM FIELDS ===== */
+  .field { margin-bottom: 16px; }
+
+  label {
+    display: block;
+    font-size: 0.78em;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 6px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 11px 14px;
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.88em;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: vertical;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--sky);
+    box-shadow: 0 0 0 3px rgba(143,207,255,0.1);
+  }
+
+  select option { background: #0a0e1a; }
+
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  @media (max-width: 540px) { .row-2 { grid-template-columns: 1fr; } }
+
+  /* ===== CONTENT EDITOR ===== */
+  .section-builder { display: flex; flex-direction: column; gap: 12px; }
+
+  .section-block {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    position: relative;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-block-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .section-num {
+    background: linear-gradient(135deg, var(--blue), var(--sky));
+    border-radius: 6px;
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7em;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .section-block input[type="text"] { margin-bottom: 8px; }
+
+  .remove-section-btn {
+    margin-left: auto;
+    background: rgba(255,77,106,0.12);
+    border: 1px solid rgba(255,77,106,0.25);
+    border-radius: 8px;
+    color: var(--red);
+    padding: 4px 10px;
+    font-size: 0.75em;
+    cursor: pointer;
+    animation: none;
+    transition: background 0.2s;
+    font-family: 'Exo 2', sans-serif;
+  }
+
+  .remove-section-btn:hover { background: rgba(255,77,106,0.25); transform: none; box-shadow: none; }
+
+  .add-section-btn {
+    background: rgba(143,207,255,0.07);
+    border: 1.5px dashed rgba(143,207,255,0.3);
+    border-radius: 12px;
+    color: var(--sky);
+    padding: 10px;
+    font-size: 0.85em;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s;
+    animation: none;
+    font-family: 'Exo 2', sans-serif;
+  }
+
+  .add-section-btn:hover { background: rgba(143,207,255,0.13); transform: none; box-shadow: none; }
+
+  /* ===== PREVIEW ===== */
+  .preview-box {
+    background: linear-gradient(90deg, #8fcfff, #ffffff);
+    border-radius: 14px;
+    padding: 24px;
+    color: black;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+    border: 2px solid rgba(0,0,0,0.1);
+  }
+
+  .preview-box h2 { font-size: 1.3em; margin-bottom: 6px; }
+  .preview-box .preview-date { font-size: 0.8em; opacity: 0.55; margin-bottom: 10px; font-style: italic; }
+  .preview-box p { font-size: 0.9em; line-height: 1.6; margin-bottom: 8px; }
+  .preview-box h3 { color: #1d33d9; font-size: 1em; margin: 14px 0 4px; }
+  .preview-box .preview-conclusion {
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: rgba(29,51,217,0.1);
+    border-left: 4px solid #1d33d9;
+    border-radius: 8px;
+    font-style: italic;
+    font-size: 0.88em;
+  }
+
+  /* ===== ACTION BTNS ===== */
+  .action-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue), var(--sky));
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding: 12px 28px;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    animation: none;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(29,51,217,0.35); }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  .btn-secondary {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    padding: 12px 20px;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background 0.2s;
+    animation: none;
+  }
+
+  .btn-secondary:hover { background: rgba(255,255,255,0.1); transform: none; box-shadow: none; }
+
+  /* ===== STATUS TOAST ===== */
+  #toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: rgba(10,14,26,0.95);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 13px 24px;
+    font-size: 0.9em;
+    font-weight: 600;
+    z-index: 9999;
+    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    white-space: nowrap;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+
+  #toast.show { transform: translateX(-50%) translateY(0); }
+  #toast.success { border-color: rgba(0,232,122,0.4); color: var(--green); }
+  #toast.error   { border-color: rgba(255,77,106,0.4); color: var(--red); }
+
+  /* ===== POSTS LIST ===== */
+  .posts-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .post-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    animation: slideIn 0.3s ease;
+  }
+
+  .post-item-num {
+    background: linear-gradient(135deg, var(--blue), var(--sky));
+    border-radius: 8px;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-size: 0.85em;
+    flex-shrink: 0;
+  }
+
+  .post-item-info { flex: 1; min-width: 0; }
+
+  .post-item-title {
+    font-weight: 700;
+    font-size: 0.92em;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .post-item-meta {
+    font-size: 0.75em;
+    color: var(--muted);
+    font-family: 'Share Tech Mono', monospace;
+    margin-top: 3px;
+  }
+
+  .post-item-badge {
+    font-size: 0.72em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .badge-live { background: rgba(0,232,122,0.12); color: var(--green); border: 1px solid rgba(0,232,122,0.25); }
+  .badge-local { background: rgba(143,207,255,0.1); color: var(--sky); border: 1px solid rgba(143,207,255,0.2); }
+
+  .delete-post-btn {
+    background: rgba(255,77,106,0.1);
+    border: 1px solid rgba(255,77,106,0.2);
+    border-radius: 8px;
+    color: var(--red);
+    padding: 5px 12px;
+    font-size: 0.78em;
+    cursor: pointer;
+    animation: none;
+    transition: background 0.2s;
+    font-family: 'Exo 2', sans-serif;
+    flex-shrink: 0;
+  }
+
+  .delete-post-btn:hover { background: rgba(255,77,106,0.22); transform: none; box-shadow: none; }
+
+  /* ===== CODE OUTPUT ===== */
+  .code-block {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.78em;
+    line-height: 1.7;
+    color: #a8d8ff;
+    overflow-x: auto;
+    white-space: pre;
+    max-height: 260px;
+    overflow-y: auto;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 6px 0 18px;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .stat-card {
+    flex: 1;
+    min-width: 100px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    text-align: center;
+  }
+
+  .stat-num { font-size: 1.8em; font-weight: 800; color: var(--sky); }
+  .stat-label { font-size: 0.72em; color: var(--muted); font-family: 'Share Tech Mono', monospace; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<!-- ===== LOCK SCREEN ===== -->
+<div id="lockScreen">
+  <div class="lock-card">
+    <span class="lock-icon">🔐</span>
+    <div class="lock-title">BKL Admin Panel</div>
+    <div class="lock-sub">Blue Kernel Labs — restricted access</div>
+    <input class="lock-input" type="password" id="pwInput" placeholder="Enter password..." onkeydown="if(event.key==='Enter') checkPassword()" />
+    <button class="lock-btn" onclick="checkPassword()">🚀 Unlock</button>
+    <div class="lock-error" id="lockError"></div>
+  </div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div id="app">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="logo-pill">🧪 BKL</div>
+      <div>
+        <div class="topbar-title">Admin Panel</div>
+        <div class="topbar-sub">Blue Kernel Labs Studio</div>
+      </div>
+    </div>
+    <button class="logout-btn" onclick="logout()">🔒 Lock</button>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('write')">✏️ Write Post</button>
+    <button class="tab" onclick="switchTab('posts')">📋 All Posts</button>
+    <button class="tab" onclick="switchTab('code')">📦 Get Code</button>
+  </div>
+
+  <!-- ===== WRITE PANEL ===== -->
+  <div class="panel active" id="panel-write">
+
+    <div class="card">
+      <div class="card-title">📝 Post Details</div>
+
+      <div class="row-2">
+        <div class="field">
+          <label>Post Number (ID)</label>
+          <input type="number" id="postId" placeholder="e.g. 6" min="1" />
+        </div>
+        <div class="field">
+          <label>Slug (URL name)</label>
+          <input type="text" id="postSlug" placeholder="e.g. quantum-physics" oninput="autoSlug()" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Heading (shown on card)</label>
+        <input type="text" id="postHeading" placeholder="e.g. Post 6: Quantum Physics" />
+      </div>
+
+      <div class="field">
+        <label>Full Title</label>
+        <input type="text" id="postTitle" placeholder="e.g. What Is Quantum Physics and Why Is It Insane?" />
+      </div>
+
+      <div class="row-2">
+        <div class="field">
+          <label>Date</label>
+          <input type="text" id="postDate" placeholder="e.g. March 20, 2026" />
+        </div>
+        <div class="field">
+          <label>Preview Text (teaser)</label>
+          <input type="text" id="postPreview" placeholder="Short teaser shown before Read More..." />
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📖 Content Sections</div>
+      <div class="section-builder" id="sectionBuilder"></div>
+      <button class="add-section-btn" onclick="addSection()">+ Add Section</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔬 Conclusion</div>
+      <div class="field">
+        <textarea id="postConclusion" rows="3" placeholder="🔬 Blue Kernel Labs Conclusion: ..."></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">👁️ Live Preview</div>
+      <div class="preview-box" id="previewBox">
+        <p style="opacity:0.4; font-style:italic;">Fill in the form above to see a preview...</p>
+      </div>
+    </div>
+
+    <div class="action-row">
+      <button class="btn-primary" id="saveBtn" onclick="savePost()">💾 Save Post to Database</button>
+      <button class="btn-secondary" onclick="clearForm()">🗑️ Clear</button>
+    </div>
+    <div id="saveError" style="margin-top:10px; font-size:0.82em; color:var(--red); font-family:'Share Tech Mono',monospace;"></div>
+
+  </div>
+
+  <!-- ===== POSTS PANEL ===== -->
+  <div class="panel" id="panel-posts">
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num" id="statTotal">—</div>
+        <div class="stat-label">TOTAL POSTS</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statLive">—</div>
+        <div class="stat-label">IN DATABASE</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">📋 All Posts</div>
+      <div class="posts-list" id="postsList">
+        <div style="color:var(--muted); font-size:0.85em; font-family:'Share Tech Mono',monospace;">Loading...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CODE PANEL ===== -->
+  <div class="panel" id="panel-code">
+    <div class="card">
+      <div class="card-title">📦 Generated Post Code</div>
+      <p style="font-size:0.82em; color:var(--muted); margin-bottom:16px; font-family:'Share Tech Mono',monospace;">
+        Copy this code and paste it into the <code style="color:var(--sky);">posts</code> array in your <code style="color:var(--sky);">index.html</code> to publish the post.
+      </p>
+      <button class="btn-secondary" style="margin-bottom:14px; width:100%;" onclick="generateCode()">⚙️ Generate Code from Current Form</button>
+      <div class="code-block" id="codeOutput">// Fill in the Write Post form and click Generate Code</div>
+      <div class="action-row" style="margin-top:12px;">
+        <button class="btn-primary" onclick="copyCode()">📋 Copy Code</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">💡 How to publish a new post</div>
+      <ol style="padding-left:18px; font-size:0.85em; color:var(--muted); line-height:2.2; font-family:'Share Tech Mono',monospace;">
+        <li>Fill in the <strong style="color:var(--text);">Write Post</strong> tab completely</li>
+        <li>Click <strong style="color:var(--sky);">Save Post to Database</strong> — this stores it in Supabase</li>
+        <li>Come to this tab and click <strong style="color:var(--sky);">Generate Code</strong></li>
+        <li>Copy the code and paste it into your <code style="color:var(--sky);">index.html</code> posts array</li>
+        <li>Re-deploy to Vercel — done! 🎉</li>
+      </ol>
+    </div>
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+// ===== CONFIG =====
+const PASS = "blue.kernel.labs2025";
+const SUPABASE_URL = "https://ebqfsjlhnfaqeiyglilp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_uo-gb5e4U2i9n3uJ14PmXg_2xF2suM3";
+
+// ===== SUPABASE HELPER =====
+async function sbFetch(path, options = {}) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+        ...options,
+        headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": `Bearer ${SUPABASE_KEY}`,
+            "Content-Type": "application/json",
+            ...(options.headers || {})
+        }
+    });
+    const text = await res.text();
+    if (!res.ok) throw new Error(text);
+    return text ? JSON.parse(text) : null;
+}
+
+// ===== AUTH =====
+function checkPassword() {
+    const val = document.getElementById("pwInput").value;
+    const errEl = document.getElementById("lockError");
+    if (val === PASS) {
+        document.getElementById("lockScreen").style.display = "none";
+        document.getElementById("app").style.display = "block";
+        sessionStorage.setItem("bkl_auth", "1");
+        initApp();
+    } else {
+        errEl.textContent = "❌ Wrong password. Try again.";
+        document.getElementById("pwInput").value = "";
+        // re-trigger shake
+        errEl.style.animation = "none";
+        void errEl.offsetWidth;
+        errEl.style.animation = "shake 0.3s ease";
+    }
+}
+
+function logout() {
+    sessionStorage.removeItem("bkl_auth");
+    document.getElementById("lockScreen").style.display = "flex";
+    document.getElementById("app").style.display = "none";
+    document.getElementById("pwInput").value = "";
+    document.getElementById("lockError").textContent = "";
+}
+
+// ===== INIT =====
+function initApp() {
+    setTodayDate();
+    addSection();
+    updatePreview();
+    loadPostsPanel();
+}
+
+// Auto-restore session
+if (sessionStorage.getItem("bkl_auth") === "1") {
+    document.getElementById("lockScreen").style.display = "none";
+    document.getElementById("app").style.display = "block";
+    setTimeout(initApp, 0);
+}
+
+// ===== TABS =====
+function switchTab(name) {
+    document.querySelectorAll(".tab").forEach((t, i) => {
+        const names = ["write","posts","code"];
+        t.classList.toggle("active", names[i] === name);
+    });
+    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+    document.getElementById(`panel-${name}`).classList.add("active");
+    if (name === "posts") loadPostsPanel();
+}
+
+// ===== DATE =====
+function setTodayDate() {
+    const d = new Date();
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    document.getElementById("postDate").value = `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+}
+
+// ===== SLUG AUTO-GENERATE =====
+function autoSlug() {
+    const title = document.getElementById("postTitle").value;
+    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    document.getElementById("postSlug").value = slug;
+    updatePreview();
+}
+
+// ===== SECTIONS =====
+let sectionCount = 0;
+
+function addSection() {
+    sectionCount++;
+    const n = sectionCount;
+    const div = document.createElement("div");
+    div.className = "section-block";
+    div.id = `section-${n}`;
+    div.innerHTML = `
+        <div class="section-block-header">
+            <div class="section-num">${n}</div>
+            <span style="font-size:0.82em; color:var(--muted); font-family:'Share Tech Mono',monospace;">Section ${n}</span>
+            <button class="remove-section-btn" onclick="removeSection(${n})">✕ Remove</button>
+        </div>
+        <input type="text" placeholder="Section heading (e.g. What is it? 🤯)" id="sec-head-${n}" oninput="updatePreview()" />
+        <textarea rows="4" placeholder="Section content..." id="sec-body-${n}" oninput="updatePreview()"></textarea>
+    `;
+    document.getElementById("sectionBuilder").appendChild(div);
+}
+
+function removeSection(n) {
+    const el = document.getElementById(`section-${n}`);
+    if (el) el.remove();
+    updatePreview();
+}
+
+function getSections() {
+    const sections = [];
+    document.querySelectorAll(".section-block").forEach(block => {
+        const id = block.id.replace("section-", "");
+        const heading = document.getElementById(`sec-head-${id}`)?.value.trim();
+        const body    = document.getElementById(`sec-body-${id}`)?.value.trim();
+        if (heading || body) sections.push({ heading, body });
+    });
+    return sections;
+}
+
+// ===== PREVIEW =====
+function updatePreview() {
+    const title      = document.getElementById("postTitle").value.trim();
+    const date       = document.getElementById("postDate").value.trim();
+    const preview    = document.getElementById("postPreview").value.trim();
+    const conclusion = document.getElementById("postConclusion").value.trim();
+    const sections   = getSections();
+
+    const box = document.getElementById("previewBox");
+    if (!title && sections.length === 0) {
+        box.innerHTML = `<p style="opacity:0.4; font-style:italic;">Fill in the form above to see a preview...</p>`;
+        return;
+    }
+
+    let html = "";
+    if (title) html += `<h2>${title}</h2>`;
+    if (date)  html += `<div class="preview-date">📅 ${date}</div>`;
+    if (preview) html += `<p><em>${preview}</em></p><hr style="border:none;border-top:1px solid rgba(0,0,0,0.1);margin:10px 0;">`;
+
+    sections.forEach(s => {
+        if (s.heading) html += `<h3>${s.heading}</h3>`;
+        if (s.body)    html += `<p>${s.body.replace(/\n/g, "<br>")}</p>`;
+    });
+
+    if (conclusion) html += `<div class="preview-conclusion">${conclusion}</div>`;
+
+    box.innerHTML = html || `<p style="opacity:0.4; font-style:italic;">Keep typing...</p>`;
+}
+
+// Listen to all inputs for live preview
+document.addEventListener("input", function(e) {
+    if (["postTitle","postDate","postPreview","postConclusion"].includes(e.target.id) || 
+        e.target.id?.startsWith("sec-")) {
+        updatePreview();
+    }
+});
+
+// ===== SAVE POST =====
+async function savePost() {
+    const btn = document.getElementById("saveBtn");
+    const errEl = document.getElementById("saveError");
+    errEl.textContent = "";
+
+    const id         = parseInt(document.getElementById("postId").value);
+    const slug       = document.getElementById("postSlug").value.trim();
+    const heading    = document.getElementById("postHeading").value.trim();
+    const title      = document.getElementById("postTitle").value.trim();
+    const date       = document.getElementById("postDate").value.trim();
+    const preview    = document.getElementById("postPreview").value.trim();
+    const conclusion = document.getElementById("postConclusion").value.trim();
+    const sections   = getSections();
+
+    if (!id)       { errEl.textContent = "⚠️ Post ID is required!"; return; }
+    if (!slug)     { errEl.textContent = "⚠️ Slug is required!"; return; }
+    if (!heading)  { errEl.textContent = "⚠️ Heading is required!"; return; }
+    if (!title)    { errEl.textContent = "⚠️ Title is required!"; return; }
+    if (!date)     { errEl.textContent = "⚠️ Date is required!"; return; }
+    if (!preview)  { errEl.textContent = "⚠️ Preview text is required!"; return; }
+    if (sections.length === 0) { errEl.textContent = "⚠️ Add at least one content section!"; return; }
+
+    btn.disabled = true;
+    btn.textContent = "💾 Saving...";
+
+    const contentHtml = buildContentHtml(sections, conclusion);
+
+    try {
+        await sbFetch("posts", {
+            method: "POST",
+            headers: { "Prefer": "resolution=merge-duplicates" },
+            body: JSON.stringify({ id, slug, heading, title, date, preview, content: contentHtml })
+        });
+        showToast("✅ Post saved to database!", "success");
+        generateCode();
+    } catch(e) {
+        errEl.textContent = "❌ Failed to save: " + e.message;
+        showToast("❌ Save failed!", "error");
+    }
+
+    btn.disabled = false;
+    btn.textContent = "💾 Save Post to Database";
+}
+
+function buildContentHtml(sections, conclusion) {
+    let html = "";
+    sections.forEach(s => {
+        if (s.heading) html += `\n      <h3>${s.heading}</h3>`;
+        if (s.body)    html += `\n      <p>${s.body.replace(/\n/g, "</p>\n      <p>")}</p>`;
+    });
+    if (conclusion) html += `\n      <div class="conclusion">${conclusion}</div>`;
+    return html;
+}
+
+// ===== GENERATE CODE =====
+function generateCode() {
+    const id         = document.getElementById("postId").value.trim();
+    const slug       = document.getElementById("postSlug").value.trim();
+    const heading    = document.getElementById("postHeading").value.trim();
+    const title      = document.getElementById("postTitle").value.trim();
+    const date       = document.getElementById("postDate").value.trim();
+    const preview    = document.getElementById("postPreview").value.trim();
+    const conclusion = document.getElementById("postConclusion").value.trim();
+    const sections   = getSections();
+
+    if (!slug || !title) {
+        document.getElementById("codeOutput").textContent = "// Fill in the Write Post form first!";
+        return;
+    }
+
+    const contentHtml = buildContentHtml(sections, conclusion);
+
+    const code = `  {
+    id: ${id || "??"},
+    slug: "${slug}",
+    heading: "${heading}",
+    date: "${date}",
+    title: "${title}",
+    preview: "${preview.replace(/"/g, '\\"')}",
+    content: \`${contentHtml}
+    \`
+  },`;
+
+    document.getElementById("codeOutput").textContent = code;
+}
+
+function copyCode() {
+    const text = document.getElementById("codeOutput").textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        showToast("📋 Code copied!", "success");
+    }).catch(() => {
+        showToast("❌ Copy failed — select manually", "error");
+    });
+}
+
+// ===== POSTS LIST =====
+async function loadPostsPanel() {
+    const list = document.getElementById("postsList");
+    list.innerHTML = `<div style="color:var(--muted); font-size:0.85em; font-family:'Share Tech Mono',monospace;">Loading from database...</div>`;
+
+    let dbPosts = [];
+    try {
+        dbPosts = await sbFetch("posts?select=id,slug,heading,title,date&order=id.asc") || [];
+    } catch(e) {
+        dbPosts = [];
+    }
+
+    document.getElementById("statLive").textContent = dbPosts.length;
+    document.getElementById("statTotal").textContent = dbPosts.length;
+
+    if (dbPosts.length === 0) {
+        list.innerHTML = `<div style="color:var(--muted); font-size:0.85em; font-family:'Share Tech Mono',monospace; text-align:center; padding:16px;">No posts saved to database yet.</div>`;
+        return;
+    }
+
+    list.innerHTML = dbPosts.map(p => `
+        <div class="post-item">
+            <div class="post-item-num">${p.id}</div>
+            <div class="post-item-info">
+                <div class="post-item-title">${p.title || p.heading}</div>
+                <div class="post-item-meta">/${p.slug} · ${p.date || "—"}</div>
+            </div>
+            <span class="post-item-badge badge-live">● LIVE</span>
+            <button class="delete-post-btn" onclick="deletePost(${p.id}, '${p.slug}')">🗑️</button>
+        </div>
+    `).join('');
+}
+
+async function deletePost(id, slug) {
+    if (!confirm(`Delete post "${slug}"? This cannot be undone.`)) return;
+    try {
+        await sbFetch(`posts?id=eq.${id}`, { method: "DELETE" });
+        showToast("🗑️ Post deleted", "success");
+        loadPostsPanel();
+    } catch(e) {
+        showToast("❌ Delete failed", "error");
+    }
+}
+
+// ===== CLEAR FORM =====
+function clearForm() {
+    if (!confirm("Clear all form fields?")) return;
+    ["postId","postSlug","postHeading","postTitle","postPreview","postConclusion"].forEach(id => {
+        document.getElementById(id).value = "";
+    });
+    document.getElementById("sectionBuilder").innerHTML = "";
+    sectionCount = 0;
+    addSection();
+    setTodayDate();
+    updatePreview();
+    document.getElementById("saveError").textContent = "";
+}
+
+// ===== TOAST =====
+let toastTimer;
+function showToast(msg, type = "success") {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.className = `show ${type}`;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.className = ""; }, 3200);
+}
+
+// ===== SQL HINT =====
+// Make sure you have a 'posts' table in Supabase:
+// CREATE TABLE posts (
+//   id integer PRIMARY KEY,
+//   slug text UNIQUE NOT NULL,
+//   heading text,
+//   title text,
+//   date text,
+//   preview text,
+//   content text,
+//   created_at timestamp DEFAULT now()
+// );
+</script>
+</body>
+</html>
