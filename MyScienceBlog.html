@@ -870,6 +870,26 @@
     body.dark .search-highlight {
         background: rgba(143, 207, 255, 0.25);
     }
+    /* ===== PREVIEW COMMENT COUNT ===== */
+.preview-comment-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 15px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: bold;
+    background: rgba(29, 51, 217, 0.08);
+    border: 2px solid rgba(29, 51, 217, 0.2);
+    color: #1d33d9;
+    cursor: default;
+    animation: float 2s ease-in-out infinite;
+}
+body.dark .preview-comment-count {
+    background: rgba(143, 207, 255, 0.08);
+    border-color: rgba(143, 207, 255, 0.2);
+    color: #8fcfff;
+}
 </style>
 </head>
 
@@ -1493,6 +1513,7 @@ function renderPosts() {
       </div>
       <div class="share-btns">
         <button class="share-btn whatsapp" onclick="shareWhatsApp(${post.id})">💬 Share</button>
+        <span class="preview-comment-count" id="preview-count-${post.slug}" title="Comments">💬 <span class="pcc-num">...</span></span>
       </div>
       <button onclick="togglePost(${post.id}, '${post.slug}', this)">Read More..</button>
     `;
@@ -1622,6 +1643,29 @@ function scrollToAnchor() {
   }
 }
 
+// ===== PREVIEW COMMENT COUNTS =====
+async function loadAllPreviewCounts() {
+    try {
+        const data = await sbFetch(`comments?select=post_slug`);
+        const counts = {};
+        (data || []).forEach(row => {
+            counts[row.post_slug] = (counts[row.post_slug] || 0) + 1;
+        });
+        posts.forEach(post => {
+            const badge = document.getElementById(`preview-count-${post.slug}`);
+            if (!badge) return;
+            const num = counts[post.slug] || 0;
+            badge.querySelector('.pcc-num').textContent =
+                num === 1 ? '1 comment' : `${num} comments`;
+        });
+    } catch(e) {
+        posts.forEach(post => {
+            const badge = document.getElementById(`preview-count-${post.slug}`);
+            if (badge) badge.style.display = 'none';
+        });
+    }
+}
+
 // ===== INIT =====
 window.onload = function() {
   document.getElementById("currentDate").innerText = "📅 " + new Date().toLocaleDateString();
@@ -1631,6 +1675,7 @@ window.onload = function() {
     document.querySelectorAll(".nav-toggle").forEach(btn => btn.innerText = "🌘 Light Mode");
   }
   renderPosts();
+  loadAllPreviewCounts();
   scrollToAnchor();
 
   // Fade in from page transition
