@@ -1,0 +1,21 @@
+{
+  "name": "Blue Kernel Labs Blog",
+  "short_name": "BKL Blog",
+  "description": "Exploring science, tech, and coding adventures — one post at a time.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#8fcfff",
+  "theme_color": "#8fcfff",
+  "icons": [
+    {
+      "src": "/Boron.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/Boron.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
