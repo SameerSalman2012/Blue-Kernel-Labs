@@ -10,6 +10,15 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://Blue-Kernel-Labs.vercel.app/" />
 
+  <!-- PWA / Home Screen Icon -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/Boron.png">
+  <meta name="theme-color" content="#8fcfff">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="BKL Blog">
+
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Blue Kernel Labs Blog | Science, Tech & Coding" />
   <meta property="og:description" content="Exploring science, mathematics, technology, and coding adventures — one post at a time." />
@@ -1110,8 +1119,7 @@ const posts = [
       <div class="conclusion">🔬 Blue Kernel Labs Conclusion: Black holes are the universe's most dramatic overreaction to a star dying. 10/10 would not recommend falling into one!</div>
     `
   },
-
-    {
+  {
     id: 6,
     slug: "the-universe-shouldn-t-exist-but-here-we-are",
     heading: "Post 6: The Universe",
@@ -1121,39 +1129,28 @@ const posts = [
     content: `
       <h3>What is Matter and Antimatter? ⚛️</h3>
       <p>Every particle in the universe has a twin called an antiparticle — identical in almost every way, except opposite in charge. The antimatter version of an electron is called a positron, While the antimatter version of a proton is called an antiproton.</p>
-      <p></p>
       <p>And when a particle meets its antiparticle, they both explode into pure energy and vanish, with nothing left but nothingness.</p>
-      <p></p>
       <p>Now here's the problem: the Big Bang should have created equal amounts of matter and antimatter. Equal amounts meeting each other means total annihilation. Which means no universe, no stars, no you..</p>
       <h3>The Insane Number That Explains Everything 🔢</h3>
       <p>For every 1,630,000,000 antimatter particles created at the Big Bang, there was apparently ONE extra matter particle.</p>
-      <p></p>
       <p>And thats totally it! The one-in-a-billion imbalance which create every Galaxy, every living thing, every everything! All of this are just scraps of matter that survived the 'cancellation' of matter and antimatter.</p>
-      <p></p>
       <p>Physicists call this the Baryon Asymmetry, and they still don't fully know why it happened!</p>
       <h3>Sakharov's Three Rules 🧑‍🔬</h3>
       <p>Back in 1967, a Soviet Physicist named Andrei Sakharov asked: What had to be true about the early universe for matter to win?</p>
-      <p></p>
-      <p>He came up with 3 conditions: </p>
-      <p></p>
+      <p>He came up with 3 conditions:</p>
       <p>1. There must be a way to convert antimatter into matter</p>
       <p>2. The universe must have been out of equilibrium (basically, cooling too fast to "correct" itself)</p>
       <p>3. The laws of physics must treat matter and antimatter slightly differently — a tiny built-in bias toward matter</p>
-      <p></p>
       <p>That third one is wild. It means the universe wasn't perfectly fair. Physics itself had a preference. And we've actually confirmed this experimentally — it's called CP violation, and it was first observed in the 1960s in the decay of tiny particles called neutral kaons.</p>
       <h3>So Do We Have an Answer? 🤔</h3>
       <p>Sort of. Not really.</p>
-      <p></p>
       <p>We know the three conditions that had to be met. We have proof that CP violation exists. But the amount of CP violation we've measured isn't nearly big enough to explain the full imbalance, Something is missing...</p>
-      <p></p>
       <p>Neither the Standard Model of particle physics nor general relativity can fully explain it. Scientists have theories — some involve phase transitions in the early universe, others involve weird particles called neutrinos — but none have been confirmed yet.</p>
-      <p></p>
       <p>The honest answer is: we don't know. And this is considered one of the biggest unsolved problems in all of physics.</p>
       <div class="conclusion">🔬 Blue Kernel Labs Conclusion: The universe exists because of a one-in-a-billion rounding error that nobody can fully explain yet. Matter won against antimatter by the tiniest margin imaginable — and everything you've ever seen, touched, or known is just the leftover from that almost-perfectly-balanced destruction. Physics is wild!</div>
     `
   },
-
-    {
+  {
     id: 7,
     slug: "how-does-the-internet-actually-work",
     heading: "Post 7: The Internet",
@@ -1170,7 +1167,7 @@ const posts = [
       <p>Then your computer sends a request all the way to Google's servers, which could be thousands of miles away, Google sends the website back to you. All this happens in under a second, every single time!</p>
       <h3>What's an IP Address?</h3>
       <p>Every device on the internet has an IP Address. In simple terms, it's just your device's home address on the internet. Without this Address, nobody would know where to send the data back to.</p>
-      <p>It's like ordering pizza. If you literally don't give your address to them, By no surprise, the pizza just...won't arrive. You are just a hungry person staring at a phone at this point. </p>
+      <p>It's like ordering pizza. If you literally don't give your address to them, By no surprise, the pizza just...won't arrive. You are just a hungry person staring at a phone at this point.</p>
       <p>That's why IP address also acts in a same way! If there would be no Address for the device, no data would be received back!</p>
       <h3>How does data actually travel? 🚀</h3>
       <p>Here's the wild part: When you load a webpage, it doesn't load as one BIG chunk of data, Instead, The data gets chopped into thousands of tiny pieces called packets. Each packet finds its own route across the Internet, bouncing through routers around the world, and then reassembles perfectly on your screen!</p>
@@ -1181,8 +1178,7 @@ const posts = [
       <div class="conclusion">🔬 Blue Kernel Labs Conclusion: The Internet is just Billions of computers communicating with one another through physical cables, chopping data into tiny packets, bouncing them around the entire world, and reassembling them perfectly - All in less than a second! Pretty insane for something we use to read the Blue Kernel Labs Blog!</div>
     `
   },
-
-    {
+  {
     id: 8,
     slug: "what-actually-happens-when-you-press-a-key-on-your-keyboard",
     heading: "Post 8: Programs",
@@ -1215,7 +1211,6 @@ const posts = [
 const REACTION_EMOJIS = ["🔥", "🤯", "💡", "😂", "👏"];
 const COMMENT_EMOJIS  = ["💬", "🤔", "😮", "🧠", "❤️", "😂"];
 
-// Track user's reactions per post (localStorage so they don't react twice per session)
 function getUserReactions() {
     try { return JSON.parse(localStorage.getItem("bkl_reactions") || "{}"); }
     catch { return {}; }
@@ -1224,7 +1219,6 @@ function saveUserReactions(obj) {
     localStorage.setItem("bkl_reactions", JSON.stringify(obj));
 }
 
-// ===== FETCH REACTIONS =====
 async function fetchReactions(slug) {
     try {
         const data = await sbFetch(`reactions?post_slug=eq.${encodeURIComponent(slug)}&select=emoji,count`);
@@ -1232,12 +1226,9 @@ async function fetchReactions(slug) {
     } catch { return []; }
 }
 
-// ===== SUBMIT REACTION =====
 async function submitReaction(slug, emoji, btnEl) {
     const userReactions = getUserReactions();
-    const key = `${slug}__${emoji}`;
 
-    // Toggle off if already reacted with same emoji
     if (userReactions[slug] === emoji) {
         delete userReactions[slug];
         saveUserReactions(userReactions);
@@ -1248,7 +1239,6 @@ async function submitReaction(slug, emoji, btnEl) {
         return;
     }
 
-    // Remove old reaction if different emoji
     if (userReactions[slug]) {
         await sbFetch(`reactions?post_slug=eq.${encodeURIComponent(slug)}&emoji=eq.${encodeURIComponent(userReactions[slug])}`, {
             method: "DELETE"
@@ -1258,7 +1248,6 @@ async function submitReaction(slug, emoji, btnEl) {
     userReactions[slug] = emoji;
     saveUserReactions(userReactions);
 
-    // Upsert: try insert, if conflict increment
     try {
         await sbFetch(`reactions`, {
             method: "POST",
@@ -1266,9 +1255,7 @@ async function submitReaction(slug, emoji, btnEl) {
             headers: { "Prefer": "resolution=merge-duplicates" },
             body: JSON.stringify({ post_slug: slug, emoji: emoji, count: 1 })
         });
-    } catch(e) {
-        // fallback: just re-render
-    }
+    } catch(e) {}
     renderReactionBar(slug);
 }
 
@@ -1278,7 +1265,6 @@ async function renderReactionBar(slug) {
     const userReactions = getUserReactions();
     const myReaction = userReactions[slug];
 
-    // Fetch current counts
     let counts = {};
     try {
         const data = await sbFetch(`reactions?post_slug=eq.${encodeURIComponent(slug)}`);
@@ -1296,7 +1282,6 @@ async function renderReactionBar(slug) {
     }).join('');
 }
 
-// ===== FETCH COMMENTS =====
 async function fetchComments(slug) {
     try {
         const data = await sbFetch(`comments?post_slug=eq.${encodeURIComponent(slug)}&order=created_at.asc&select=*`);
@@ -1304,7 +1289,6 @@ async function fetchComments(slug) {
     } catch { return []; }
 }
 
-// ===== SUBMIT COMMENT =====
 async function submitComment(slug) {
     const nameEl    = document.getElementById(`comment-name-${slug}`);
     const msgEl     = document.getElementById(`comment-msg-${slug}`);
@@ -1331,10 +1315,8 @@ async function submitComment(slug) {
         });
         nameEl.value = "";
         msgEl.value = "";
-        // reset emoji selection
         document.querySelectorAll(`#emoji-picker-${slug} .emoji-opt`).forEach(b => b.classList.remove("selected"));
         document.querySelector(`#emoji-picker-${slug} .emoji-opt[data-emoji="💬"]`)?.classList.add("selected");
-
         await renderComments(slug);
     } catch(e) {
         errEl.textContent = "❌ Failed to post. Try again!";
@@ -1345,7 +1327,6 @@ async function submitComment(slug) {
     submitBtn.textContent = "💬 Post Comment";
 }
 
-// ===== RENDER COMMENTS =====
 async function renderComments(slug) {
     const list = document.getElementById(`comments-list-${slug}`);
     const countBadge = document.getElementById(`comment-count-${slug}`);
@@ -1381,7 +1362,6 @@ function escapeHtml(str) {
     return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ===== BUILD COMMENT SECTION HTML =====
 function buildCommentSection(slug) {
     const emojiOptsHtml = COMMENT_EMOJIS.map((e, i) =>
         `<button class="emoji-opt ${i === 0 ? 'selected' : ''}" data-emoji="${e}" onclick="selectEmoji(this, '${slug}')" title="${e}">${e}</button>`
@@ -1420,7 +1400,6 @@ function selectEmoji(btn, slug) {
     btn.classList.add("selected");
 }
 
-// ===== SHARE =====
 function shareWhatsApp(id) {
     const post = posts.find(p => p.id === id);
     const base = window.location.href.split('#')[0].split('?')[0];
@@ -1432,7 +1411,6 @@ function shareWhatsApp(id) {
     }
 }
 
-// ===== MOBILE MENU =====
 function toggleMobileMenu() {
     const menu = document.getElementById("mobileMenu");
     const btn = document.getElementById("hamburgerBtn");
@@ -1453,7 +1431,6 @@ document.addEventListener("click", function(e) {
     }
 });
 
-// ===== PAGE TRANSITION =====
 function navigateTo(e, url) {
     e.preventDefault();
     const overlay = document.getElementById("pageTransition");
@@ -1461,7 +1438,6 @@ function navigateTo(e, url) {
     setTimeout(() => { window.location.href = url; }, 420);
 }
 
-// ===== SUBSCRIBE =====
 async function subscribeToNotifications() {
   const btn = document.getElementById("subscribeBtn");
   if (Notification.permission === "denied") {
@@ -1484,7 +1460,6 @@ async function subscribeToNotifications() {
   } catch (err) { console.error("Notification error:", err); }
 }
 
-// ===== DARK MODE =====
 function toggleDarkMode() {
   document.body.classList.toggle("dark");
   const isDark = document.body.classList.contains("dark");
@@ -1493,7 +1468,6 @@ function toggleDarkMode() {
   localStorage.setItem("theme", isDark ? "dark" : "light");
 }
 
-// ===== RENDER POSTS =====
 function renderPosts() {
   const container = document.getElementById("postsContainer");
   container.innerHTML = "";
@@ -1525,15 +1499,11 @@ function togglePost(id, slug, button) {
   full.classList.toggle("open");
   button.innerText = full.classList.contains("open") ? "Show Less ▲" : "Read More..";
 
-  // Load comments & reactions when post opens for first time
   if (!wasOpen) {
     renderComments(slug);
     renderReactionBar(slug);
   }
 }
-
-
-// ===== SEARCH =====
 
 function onSearchType() {
   const query = document.getElementById('searchInput').value.trim();
@@ -1556,7 +1526,6 @@ function handleSearch() {
   const icon = document.getElementById('searchIcon');
   const countEl = document.getElementById('searchCount');
 
-  // Toggle clear button
   if (query.length > 0) {
     clearBtn.style.display = 'flex';
     icon.style.display = 'none';
@@ -1564,7 +1533,6 @@ function handleSearch() {
     clearBtn.style.display = 'none';
     icon.style.display = 'block';
     countEl.textContent = '';
-    // Remove all highlights when cleared
     document.querySelectorAll('#postsContainer section').forEach(section => {
       removeHighlights(section);
     });
@@ -1579,7 +1547,6 @@ function doSearch(query) {
   const sections = document.querySelectorAll('#postsContainer section');
   let found = null;
 
-  // Remove previous highlights
   sections.forEach(s => removeHighlights(s));
 
   sections.forEach(section => {
@@ -1589,8 +1556,7 @@ function doSearch(query) {
     const previewText = previewEl ? previewEl.innerText.toLowerCase() : '';
 
     if (titleText.includes(query) || previewText.includes(query)) {
-      if (!found) found = section; // scroll to first match
-      // Highlight matching text
+      if (!found) found = section;
       if (titleEl) titleEl.innerHTML = highlight(titleEl.innerText, query);
       if (previewEl) previewEl.innerHTML = highlight(previewEl.innerText, query);
     }
@@ -1598,9 +1564,7 @@ function doSearch(query) {
 
   if (found) {
     countEl.textContent = '';
-    // Smooth scroll to the matching post
     found.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    // Briefly glow the section
     found.style.transition = 'box-shadow 0.3s ease';
     found.style.boxShadow = '0 0 0 4px rgba(29, 51, 217, 0.5)';
     setTimeout(() => { found.style.boxShadow = ''; }, 1800);
@@ -1630,7 +1594,6 @@ function clearSearch() {
   input.focus();
 }
 
-// ===== SCROLL TO ANCHOR =====
 function scrollToAnchor() {
   const hash = window.location.hash;
   if (hash) {
@@ -1641,7 +1604,6 @@ function scrollToAnchor() {
   }
 }
 
-// ===== PREVIEW COMMENT COUNTS =====
 async function loadAllPreviewCounts() {
     try {
         const data = await sbFetch(`comments?select=post_slug`);
@@ -1664,7 +1626,6 @@ async function loadAllPreviewCounts() {
     }
 }
 
-// ===== INIT =====
 window.onload = function() {
   document.getElementById("currentDate").innerText = "📅 " + new Date().toLocaleDateString();
   const savedTheme = localStorage.getItem("theme");
@@ -1676,7 +1637,6 @@ window.onload = function() {
   loadAllPreviewCounts();
   scrollToAnchor();
 
-  // Fade in from page transition
   const overlay = document.getElementById("pageTransition");
   overlay.style.transformOrigin = "top";
   overlay.style.transform = "scaleY(1)";
