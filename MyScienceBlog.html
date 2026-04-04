@@ -936,6 +936,15 @@ body.dark .preview-comment-count {
 
 <main>
   <h1>Welcome to Blue Kernel Labs!</h1>
+  <!-- WEEKLY FACT WIDGET -->
+<section id="weekly-fact-section" style="padding: 28px 32px;">
+  <div style="display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:bold;letter-spacing:1px;color:#1d33d9;background:rgba(29,51,217,0.1);border:2px solid rgba(29,51,217,0.25);border-radius:20px;padding:4px 14px;margin-bottom:14px;">🔬 Science Fact of the Week</div>
+  <p id="weekly-fact-text" style="font-size:1.05em;line-height:1.75;border-left:4px solid #1d33d9;padding-left:16px;text-align:left;margin:0 0 18px 0;">Loading this week's fact...</p>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:0.78em;color:#555;font-style:italic;">
+    <span>📅 Updated weekly by Blue Kernel Labs</span>
+    <span id="weekly-fact-week" style="background:linear-gradient(45deg,#1d33d9,#8fcfff);color:white;font-size:0.78em;font-weight:bold;padding:3px 12px;border-radius:20px;font-style:normal;"></span>
+  </div>
+</section>
   <p>Exploring science, tech, and coding adventures—one post at a time!</p>
   <p id="currentDate"></p>
 
@@ -1436,6 +1445,15 @@ function buildCommentSection(slug) {
     </div>`;
 }
 
+async function loadWeeklyFact() {
+  const weekNum = Math.ceil((new Date() - new Date(new Date().getFullYear(), 0, 1)) / 604800000);
+  document.getElementById("weekly-fact-week").textContent = `Week ${weekNum}, ${new Date().getFullYear()}`;
+  try {
+    const data = await sbFetch("weekly_fact?order=id.desc&limit=1&select=fact");
+    if (data && data[0]) document.getElementById("weekly-fact-text").textContent = data[0].fact;
+  } catch { document.getElementById("weekly-fact-text").textContent = "Couldn't load this week's fact — check back soon!"; }
+}
+
 function selectEmoji(btn, slug) {
     document.querySelectorAll(`#emoji-picker-${slug} .emoji-opt`).forEach(b => b.classList.remove("selected"));
     btn.classList.add("selected");
@@ -1677,6 +1695,7 @@ window.onload = function() {
   renderPosts();
   loadAllPreviewCounts();
   scrollToAnchor();
+  loadWeeklyFact(); 
 
   const overlay = document.getElementById("pageTransition");
   overlay.style.transformOrigin = "top";
