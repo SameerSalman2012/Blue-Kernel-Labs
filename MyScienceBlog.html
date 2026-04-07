@@ -901,6 +901,171 @@ body.dark .preview-comment-count {
     border-color: rgba(143, 207, 255, 0.2);
     color: #8fcfff;
 }
+#bkl-hero {
+    position: relative;
+    width: 100%;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+#hero-stars {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+}
+.hero-badge {
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #1d33d9;
+    background: rgba(255,255,255,0.55);
+    border: 1.5px solid rgba(29,51,217,0.25);
+    border-radius: 20px;
+    padding: 5px 16px;
+    text-transform: uppercase;
+}
+body.dark .hero-badge {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(143,207,255,0.3);
+    color: #8fcfff;
+}
+.hero-title {
+    font-size: 3em;
+    font-weight: bold;
+    color: white;
+    -webkit-text-stroke: 1px rgba(0,0,80,0.3);
+    margin: 0;
+    line-height: 1.15;
+    text-shadow: 0 2px 18px rgba(29,51,217,0.35);
+}
+.hero-tagline {
+    font-size: 1.05em;
+    color: rgba(255,255,255,0.88);
+    margin: 0;
+    max-width: 480px;
+    line-height: 1.7;
+}
+.hero-btn {
+    margin-top: 8px;
+    padding: 13px 34px;
+    font-size: 0.95em;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    background: linear-gradient(45deg, #1d33d9, #8fcfff);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(29,51,217,0.35);
+    animation: float 2.5s ease-in-out infinite;
+    transition: box-shadow 0.25s ease;
+}
+.hero-btn:hover {
+    background: linear-gradient(45deg, #8fcfff, #1d33d9);
+    box-shadow: 0 12px 28px rgba(29,51,217,0.45);
+}
+body.dark .hero-btn {
+    background: linear-gradient(45deg, #222, #444);
+    box-shadow: 0 6px 20px rgba(255,255,255,0.08);
+}
+body.dark .hero-btn:hover {
+    background: linear-gradient(45deg, #444, #666);
+}
+.hero-scroll-hint {
+    font-size: 0.78em;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+}
+#bkl-hero {
+  position: relative;
+}
+
+.hero-boron {
+  position: absolute;
+  top: 80px;              /* pushes it below the header */
+  left:auto;              /* center horizontally */
+  transform: translateX(-50%);
+  width: 140px;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 12px cyan);
+  animation: float 3s ease-in-out infinite;
+  z-index: 1;             /* behind text but above stars */
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+/* 🌌 HERO BACKGROUND (dark mode depth) */
+body.dark #bkl-hero {
+  background: radial-gradient(circle at 50% 30%, #0a0f2a, #050814 70%);
+}
+
+/* 🧪 BADGE */
+body.dark .hero-badge {
+  background: rgba(143,207,255,0.08);
+  border: 1.5px solid rgba(143,207,255,0.35);
+  color: #8fcfff;
+  box-shadow: 0 0 10px rgba(143,207,255,0.15);
+}
+
+/* 🧠 TITLE (more glow + sci-fi feel) */
+body.dark .hero-title {
+  color: #e8f1ff;
+  -webkit-text-stroke: 1px rgba(100,150,255,0.2);
+  text-shadow:
+    0 0 8px rgba(143,207,255,0.4),
+    0 0 20px rgba(29,51,217,0.5);
+}
+
+/* 📜 TAGLINE */
+body.dark .hero-tagline {
+  color: rgba(200,220,255,0.85);
+}
+
+/* 🚀 BUTTON (neon glow style) */
+body.dark .hero-btn {
+  background: linear-gradient(45deg, #0f1c5c, #1d33d9);
+  box-shadow:
+    0 0 12px rgba(29,51,217,0.6),
+    0 6px 20px rgba(0,0,0,0.5);
+}
+
+body.dark .hero-btn:hover {
+  background: linear-gradient(45deg, #1d33d9, #4da3ff);
+  box-shadow:
+    0 0 20px rgba(77,163,255,0.8),
+    0 10px 30px rgba(0,0,0,0.7);
+}
+
+/* 👇 SCROLL HINT */
+body.dark .hero-scroll-hint {
+  color: rgba(180,200,255,0.6);
+}
+
+/* 🧬 BORON IMAGE (make it POP in dark mode) */
+body.dark .hero-boron {
+  filter:
+    drop-shadow(0 0 12px #4da3ff)
+    drop-shadow(0 0 25px rgba(77,163,255,0.6));
+  opacity: 1;
+}
 </style>
 </head>
 
@@ -933,6 +1098,18 @@ body.dark .preview-comment-count {
 </div>
 
 <header>🧪 Blue Kernel Labs Blog 🧬</header>
+
+<div id="bkl-hero">
+  <canvas id="hero-stars"></canvas>
+  <img src="boron.png" alt="Boron Atom" class="hero-boron">
+  <div class="hero-content">
+    <div class="hero-badge">🧪 Science · Tech · Curiosity</div>
+    <h1 class="hero-title">Blue Kernel Labs</h1>
+    <p class="hero-tagline">Exploring the universe one post at a time — black holes, AI, the internet, and everything weird in between.</p>
+    <a href="#postsContainer" class="hero-btn">Explore Posts ↓</a>
+    <span class="hero-scroll-hint">↓ scroll to discover</span>
+  </div>
+</div>
 
 <main>
   <h1>Welcome to Blue Kernel Labs!</h1>
@@ -1710,6 +1887,52 @@ window.onload = function() {
     });
   });
 };
+
+// ===== HERO STARFIELD =====
+(function() {
+    const canvas = document.getElementById('hero-stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resize() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+    }
+
+    function makeStars() {
+        stars = [];
+        for (let i = 0; i < 150; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1.5 + 0.3,
+                speed: Math.random() * 0.4 + 0.1,
+                alpha: Math.random() * 0.6 + 0.3
+            });
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const isDark = document.body.classList.contains('dark');
+        stars.forEach(s => {
+            s.y += s.speed;
+            if (s.y > canvas.height) { s.y = 0; s.x = Math.random() * canvas.width; }
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = isDark
+                ? `rgba(143,207,255,${s.alpha})`
+                : `rgba(255,255,255,${s.alpha})`;
+            ctx.fill();
+        });
+        requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', () => { resize(); makeStars(); });
+    resize();
+    makeStars();
+    draw();
+})();
 </script>
 </body>
 </html>
