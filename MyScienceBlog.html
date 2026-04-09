@@ -1108,6 +1108,40 @@ body.dark .hero-boron {
     drop-shadow(0 0 25px rgba(77,163,255,0.6));
   opacity: 1;
 }
+.new-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, #7b2ff7, #f107a3);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 4px 4px 4px 0;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 50%, calc(100% - 6px) 100%, 0 100%);
+  text-transform: uppercase;
+}
+
+.new-badge::before {
+  content: "🔖";
+  font-size: 0.65rem;
+}
+.new-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(135deg, #7b2ff7, #f107a3);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 3px 10px 3px 8px;
+  border-radius: 4px 4px 4px 0;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 50%, calc(100% - 6px) 100%, 0 100%);
+  text-transform: uppercase;
+  vertical-align: middle;
+}
 </style>
 </head>
 
@@ -1216,227 +1250,6 @@ async function sbFetch(path, options = {}) {
 // ===== POSTS DATA =====
 const posts = [
   {
-    id: 1,
-    slug: "infinity",
-    heading: "Post 1: Infinity",
-    date: "March 1, 2026",
-    title: "What Is Infinity in Mathematics? (And Why There Are Different Sizes of It)",
-    preview: "Infinity isn't just huge. Some infinities are actually bigger than others… mind blown. ....",
-    content: `
-      <h3>Wait, Infinity Isn't Just One Thing? 🤯</h3>
-      <p>Okay, so infinity. Most people think it's just a really, really big number that never ends.</p>
-      <p>Like, bigger than the number of times you've hit snooze this week.</p>
-      <p>But nope. Math is weird. Infinity isn't just one thing — <strong>some infinities are actually bigger than others.</strong></p>
-      <h3>The Two Infinities That Break Your Brain 🔢</h3>
-      <p>Counting numbers — 1, 2, 3… — that's one type of infinity. It goes on forever, sure.</p>
-      <p>But the numbers between 0 and 1? Like 0.1, 0.01, 0.001… that's a <strong>bigger</strong> infinity.</p>
-      <p>Yeah. Math is literally trolling us. 😂</p>
-      <h3>The Guy Who Figured This Out 🧠</h3>
-      <p>Georg Cantor basically said: <em>"No matter how you try to list these numbers, I'll always find one you forgot."</em></p>
-      <p>He proved it with something called Cantor's Diagonal Argument. Absolute savage move.</p>
-      <p>Mathematicians at the time were furious. Some called it nonsense. Turns out he was just… right.</p>
-      <h3>So What Does This Mean? 🌀</h3>
-      <p>Infinity isn't total chaos. It's like organized chaos.</p>
-      <p>Like your messy desk — somehow you still know where your pencil is.</p>
-      <p>There are actually infinite levels of infinity. Mathematicians call them <strong>cardinalities</strong>. The rabbit hole goes deep.</p>
-      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: Infinity is weird, wild, and secretly hilarious. And there's more than one of it. You're welcome.</div>
-    `
-  },
-  {
-    id: 2,
-    slug: "time",
-    heading: "Post 2: Time",
-    date: "March 3, 2026",
-    title: "Time and how it works differently in Space",
-    preview: "Time. The thing which moves very slowly in exams and takes a breather, and just..leaves the chat in weekends; like its running an Olympic Marathon!",
-    content: `
-      <h3>What exactly IS time 🕰️?</h3>
-      <p>Time is simply a measureable number, or a <em>Physical Quantity</em> in Fancy words, that tells us how much the Earth has rotated.</p>
-      <p>Simple enough, right? but NO! Because time just joins some other group chat when its in outer space!</p>
-      <h3>Time in Space, and how it abandons Physics to Earth 🌎</h3>
-      <p>Let me give y'all an example to talk on.</p>
-      <p>For example, an astronaut lives in The ISS, and lives there for 2 years. if he returns back on Earth, he would be a fraction of a bit younger than if he just lived on Earth!</p>
-      <h3>The Person Who Figured This Monstrosity Out ✨</h3>
-      <p>Albert Einstein called this <em>"Time Dilation"</em></p>
-      <p><em>"The Heavier the object near you, The slower time moves." -Einstein, i guess</em></p>
-      <p>This explains how our example actually works in real life. Earth is Insanely heavy, and its the reason time moves slower outside Earth!</p>
-      <h3>How our GPS uses Time Dilation 📍</h3>
-      <p>Your phone's GPS satellites actually have to correct for time dilation constantly</p>
-      <p>The satellites are far from Earth's gravity, so their clocks run a little faster than ours on the ground.</p>
-      <p>If it doesn't correct its time dilation, your GPS would give completely wrong directions by minimum 10km every single day!</p>
-      <h3>Speed also affects time! 🏎️</h3>
-      <p>Its not only gravity thats affecting how time works, Speed also enters the chat!</p>
-      <p>The faster you move, the slower time passes for you! Just like gravity, speed warps time too.</p>
-      <p>That means if you travelled at 99% the speed of light for what felt like a year to you, Decades would have passed on Earth!</p>
-      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: Time is absurd, Space is a complete rage-bait technique for your brain, and Einstein was..a giga chad.</div>
-    `
-  },
-  {
-    id: 3,
-    slug: "ai",
-    heading: "Post 3: AI",
-    date: "March 5, 2026",
-    title: "AIs and how they Function",
-    preview: "AIs. yes, i am talking about those soul-less machines that generate you essays like its a printer with a brain. But have you ever wondered how they work?",
-    content: `
-      <h3>What are AIs? 🦾</h3>
-      <p>AIs, like ChatGPT, are basically programs trained to learn random information by scouring through the entire internet and reading whatever article they find.</p>
-      <p>It can answer your questions and chat with you, just like a real person-but with no soul, no emotions, and no bedtime..</p>
-      <p>But the most interesting part about it is that it is just autocomplete on steroids!</p>
-      <h3>It's just Autocomplete! 🧐</h3>
-      <p>The AIs don't actually think or understand anything, it just predicts what word comes next based on patterns it learnt!</p>
-      <p>Its like your phone keyboard autocomplete, but simply trained on the whole Internet.</p>
-      <h3>It costs an INSANE amount to train it 🧠</h3>
-      <p>If you wanted to train an AI, it would require a very large amount to do so, since you have to teach it the entire internet's knowledge!</p>
-      <p>Training the latest GPT-5 would approximately cost you <em>$100 Million</em>, just to learn the entire Internet!</p>
-      <h3>Why do they sometimes go wrong? 🤪</h3>
-      <p>Sometimes, ChatGPT can make up completely fake facts and say them with full confidence!</p>
-      <p>AIs just want to give you an answer, Whether its correct or completely made up. It will never admit that it can't find an answer!</p>
-      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: AI doesn't have feelings, emotions, thinking, and humour, because its all forced into the program! But it does have the ability to come up with any sort of answer, right or wrong.</div>
-    `
-  },
-  {
-    id: 4,
-    slug: "death",
-    heading: "Post 4: Unknown Science",
-    date: "March 8, 2026",
-    title: "What happens after Death",
-    preview: "Death, a topic everyone gets uncomfortable about. Because of its unknown effect, we don't actually know what happens after it, not even scientists! (excluding religion).",
-    content: `
-      <h3>What is Death, basically? ⚰️</h3>
-      <p>Death is a stage of life where you just...vanish from Earth. But not exactly, your soul just leaves your body. While your body just stays on Earth and decays over time.</p>
-      <p>What makes this stage more scary is that...we don't know what happens after.</p>
-      <h3>Your Brain survives for 10 minutes! 🧠</h3>
-      <p>After your heart stops, your brain continues functioning for up to 10 minutes! Scientists believe this is when people get vivid dreams about their memorable moments during the stage of Death.</p>
-      <h3>You can still hear after death?!</h3>
-      <p>Hearing is the LAST sense to go when you die. Meaning you can still hear people talking around you AFTER you've technically died!</p>
-      <h3>Near Death Experiences are real! ☠️</h3>
-      <p>A huge scientific study, called the AWARE study, tracked 2,060 patients who had cardiac arrests. Some accurately described what doctors were doing in the room while they were DEAD!</p>
-      <h3>Near Death witnesses reported by people 😵</h3>
-      <p>Thousands of people worldwide have reported the exact same experience during Near Death Experiences:</p>
-      <ul style="text-align: left; margin: 10px 0; padding-left: 20px; line-height: 2;">
-        <li>🌟 A bright warm tunnel of light pulling them forward</li>
-        <li>😌 Feeling of complete peace and zero pain</li>
-        <li>👁️ Floating above their own body watching doctors work on them</li>
-        <li>👴 Meeting deceased relatives who said <em>"it's not your time yet"</em></li>
-        <li>🚫 A strong feeling of not wanting to come back</li>
-      </ul>
-      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: Death is scary, but at that stage..you are basically in peace and quiet! So, enjoy your life like it's the last day!❤️</div>
-    `
-  },
-  {
-    id: 5,
-    slug: "black-holes",
-    heading: "Post 5: Black Holes",
-    date: "March 11, 2026",
-    title: "What if you fell into a <em>Black Hole?</em>",
-    preview: "There is something in space that is very mysterious and confusing: <em>Black Holes.</em> It has a gravity of 153 Trillion G's (gravity varies) and not even light can escape it. But..what if you fell in it?",
-    content: `
-      <h3>So, what IS a Black Hole? ⚫️</h3>
-      <p>In simple terms, A Black Hole is what happens when a super massive star runs out of fuel, collapses in its own gravity, and throws a tantrum so hard that it tears a hole in spacetime itself.</p>
-      <p>Its gravity is so strong that not even light can escape it. And this is the FASTEST thing in the universe we're talking about!</p>
-      <h3>The <em>Event Horizon</em></h3>
-      <p>The Event Horizon is basically the point of no return, meaning once you cross it, there is no turning back.</p>
-      <h3>But what ACTUALLY happens if you fall in? 🕳️</h3>
-      <p>First things first, from your perspective, crossing the <em>Event Horizon</em> actually feels completely normal at first. It would just feel like...you're floating, nothing else.</p>
-      <h3>Spaghettification 🍝</h3>
-      <p>Now, as you fall deeper into the black hole past the Event Horizon, the gravity pulling your feet is WAY stronger than the gravity pulling your head.</p>
-      <p>This difference stretches you vertically like a piece of spaghetti. NASA, in their infinite wisdom, looked at this process and said <em>"hmm..yea we're calling that Spaghettification"</em></p>
-      <h3>What's actually inside the Black Hole? ☠️</h3>
-      <p>Both generally and scientifically, we don't know what's truly inside the black hole. Our physics breaks down at the Singularity.</p>
-      <h3>Wait..can ANYTHING escape a Black Hole?</h3>
-      <p>Actually..kind of yes. Stephen Hawking discovered that black holes very slowly leak energy — this is called <em>Hawking Radiation</em>. Eventually, a black hole evaporates completely.</p>
-      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: Black holes are the universe's most dramatic overreaction to a star dying. 10/10 would not recommend falling into one!</div>
-    `
-  },
-  {
-    id: 6,
-    slug: "the-universe-shouldn-t-exist-but-here-we-are",
-    heading: "Post 6: The Universe",
-    date: "March 18, 2026",
-    title: "The Universe Shouldn't Exist — But Here We Are",
-    preview: "The universe shouldn't exist. Not in some deep philosophical way — but literally. Every single atom in your body should have been wiped out moments after the Big Bang, leaving behind absolutely nothing. So why are you still here?",
-    content: `
-      <h3>What is Matter and Antimatter? ⚛️</h3>
-      <p>Every particle in the universe has a twin called an antiparticle — identical in almost every way, except opposite in charge. The antimatter version of an electron is called a positron, While the antimatter version of a proton is called an antiproton.</p>
-      <p>And when a particle meets its antiparticle, they both explode into pure energy and vanish, with nothing left but nothingness.</p>
-      <p>Now here's the problem: the Big Bang should have created equal amounts of matter and antimatter. Equal amounts meeting each other means total annihilation. Which means no universe, no stars, no you..</p>
-      <h3>The Insane Number That Explains Everything 🔢</h3>
-      <p>For every 1,630,000,000 antimatter particles created at the Big Bang, there was apparently ONE extra matter particle.</p>
-      <p>And thats totally it! The one-in-a-billion imbalance which create every Galaxy, every living thing, every everything! All of this are just scraps of matter that survived the 'cancellation' of matter and antimatter.</p>
-      <p>Physicists call this the Baryon Asymmetry, and they still don't fully know why it happened!</p>
-      <h3>Sakharov's Three Rules 🧑‍🔬</h3>
-      <p>Back in 1967, a Soviet Physicist named Andrei Sakharov asked: What had to be true about the early universe for matter to win?</p>
-      <p>He came up with 3 conditions:</p>
-      <p>1. There must be a way to convert antimatter into matter</p>
-      <p>2. The universe must have been out of equilibrium (basically, cooling too fast to "correct" itself)</p>
-      <p>3. The laws of physics must treat matter and antimatter slightly differently — a tiny built-in bias toward matter</p>
-      <p>That third one is wild. It means the universe wasn't perfectly fair. Physics itself had a preference. And we've actually confirmed this experimentally — it's called CP violation, and it was first observed in the 1960s in the decay of tiny particles called neutral kaons.</p>
-      <h3>So Do We Have an Answer? 🤔</h3>
-      <p>Sort of. Not really.</p>
-      <p>We know the three conditions that had to be met. We have proof that CP violation exists. But the amount of CP violation we've measured isn't nearly big enough to explain the full imbalance, Something is missing...</p>
-      <p>Neither the Standard Model of particle physics nor general relativity can fully explain it. Scientists have theories — some involve phase transitions in the early universe, others involve weird particles called neutrinos — but none have been confirmed yet.</p>
-      <p>The honest answer is: we don't know. And this is considered one of the biggest unsolved problems in all of physics.</p>
-      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: The universe exists because of a one-in-a-billion rounding error that nobody can fully explain yet. Matter won against antimatter by the tiniest margin imaginable — and everything you've ever seen, touched, or known is just the leftover from that almost-perfectly-balanced destruction. Physics is wild!</div>
-    `
-  },
-  {
-    id: 7,
-    slug: "how-does-the-internet-actually-work",
-    heading: "Post 7: The Internet",
-    date: "March 20, 2026",
-    title: "How does the Internet actually work?",
-    preview: "Internet, its a service which literally everyone has in todays day and age. But almost noone wonders how it ACTUALLY functions, because they're busy scrolling reels..But if you ARE wondering how it works, well, you're at the right place.",
-    content: `
-      <h3>Introduction of The Internet</h3>
-      <p>The Internet is a place where you can watch Youtube videos, Search Google, share photos or reels, etc. Basically, It's a place where the world connects in one place!</p>
-      <p>The Internet isn't some kind of radio waves that are floating above your house, It's literally just billions of computers connected together by cables. It runs on ACTUAL cables, running under oceans! Like, there are massive undersea cables stretching from continent to continent right now carrying your YouTube videos at the speed of light.</p>
-      <p>And that 'Cloud' in which you store your photos and files? well, it's just someone else's computer in a giant warehouse! Sorry to ruin the magic..</p>
-      <h3>How does a website actually reach you? 📦</h3>
-      <p>When you type "Google.com", your computer doesn't magically locate the website. It first asks a DNS server, basically the Internet's phonebook: "Hey, whats the address for Google?". The DNS replies with an IP address, e.g 142.250.80.46. Now your computer knows where exactly to locate the website and...goes to that location!</p>
-      <p>Then your computer sends a request all the way to Google's servers, which could be thousands of miles away, Google sends the website back to you. All this happens in under a second, every single time!</p>
-      <h3>What's an IP Address?</h3>
-      <p>Every device on the internet has an IP Address. In simple terms, it's just your device's home address on the internet. Without this Address, nobody would know where to send the data back to.</p>
-      <p>It's like ordering pizza. If you literally don't give your address to them, By no surprise, the pizza just...won't arrive. You are just a hungry person staring at a phone at this point.</p>
-      <p>That's why IP address also acts in a same way! If there would be no Address for the device, no data would be received back!</p>
-      <h3>How does data actually travel? 🚀</h3>
-      <p>Here's the wild part: When you load a webpage, it doesn't load as one BIG chunk of data, Instead, The data gets chopped into thousands of tiny pieces called packets. Each packet finds its own route across the Internet, bouncing through routers around the world, and then reassembles perfectly on your screen!</p>
-      <p>Some packets might travel through Japan, some through Germany, even some through Antarctica (though i don't know if it's possible), all to load just one single page of data. And if any packet gets lost on the way, your device politely asks the Server for it again automatically, repeating the cycle in less than a second, without you even noticing!</p>
-      <h3>Then Why is Wi-Fi important to run the Internet? 📶</h3>
-      <p>Wifi isn't the Internet, it's the last step. Wifi is simply a wireless connection between your device and your router at home. The router is the thing ACTUALLY connected to the Internet via a physical cable from your ISP (Internet Service Provider).</p>
-      <p>So when your Wifi goes down, it's not the entire Internet dying, it's just your own router (from Temu) throwing a tantrum. The rest of the Internet is completely fine without you, unfortunately.. The perfect example of "The world doesn't revolve around you"!</p>
-      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: The Internet is just Billions of computers communicating with one another through physical cables, chopping data into tiny packets, bouncing them around the entire world, and reassembling them perfectly - All in less than a second! Pretty insane for something we use to read the Blue Kernel Labs Blog!</div>
-    `
-  },
-  {
-    id: 8,
-    slug: "what-actually-happens-when-you-press-a-key-on-your-keyboard",
-    heading: "Post 8: Programs",
-    date: "March 21, 2026",
-    title: "What Actually Happens When You Press a Key on Your Keyboard?",
-    preview: "In your entire life, you've pressed millions of keys without thinking twice. But in that fraction of a second, an absolutely ridiculous chain of events happen. So let's ruin the simplicity of typing altogether!",
-    content: `
-      <h3>What is a Keyboard? ⌨️</h3>
-      <p>If you're older than 6 years, you would already know what a keyboard is. It is a typing hardware used to..type! Each letter of the alphabet is assigned to a key on the keyboard, so if you press the 'A' key, the letter 'A' is displayed on the screen! I hope this doesn't need further clarification.</p>
-      <h3>It all starts with a physical switch 🔘</h3>
-      <p>The moment your finger presses a key, a physical switch closes underneath it. Most keyboards have a rubber dome or a mechanical switch sitting under every key. When you press down, the two electrical contacts inside that switch touch each other, completing a tiny electrical circuit.</p>
-      <p>That's it, the first step. You basically completed a circuit! Congrats, you're now an electrician!</p>
-      <h3>The keyboard's tiny brain takes over 🧠</h3>
-      <p>Every keyboard has its own small processor called a microcontroller. The moment the circuit closes, the microcontroller notices it immediately! It's scanning every key on the keyboard dozens of times per second just waiting for something to happen.</p>
-      <p>When it detects the closed circuit, it checks a built-in map called a Keyboard Matrix to figure out exactly which key was pressed. It then converts that into a number called a Scancode, basically a unique ID of that specific key.</p>
-      <h3>The signal travels to your computer ⚡</h3>
-      <p>The scancode gets sent from your keyboard to your computer through the USB cable - or wirelessly via Bluetooth if you're fancy. This happens so fast, it's basically instant! The data packet carrying your scancode is tiny, we're talking only a few bytes!</p>
-      <p>Your computer's operating system receives it and a special program called a keyboard driver wakes up. The driver's whole job is to translate that raw scancode into something meaningful. It checks your language settings, whether Caps Lock is on, whether you're holding Shift - and produces the final character!</p>
-      <h3>The character hits the software 💻</h3>
-      <p>Now the OS sends the character to whichever app is currently in focus - Your browser, Notes, MS Word, etc. The app receives the character and decides what to do. Meaning if it's a text field, it adds the character to the string of text and tells the screen to update.</p>
-      <p>The screen then redraws that tiny section of pixels to show the new letter, your GPU (Graphics Processing Unit) renders it, Then, Finally, your monitor displays it!</p>
-      <h3>How fast does all this happen? 🚀</h3>
-      <p>The entire process — from your finger hitting the key to the letter appearing on screen — takes somewhere between 1 and 30 milliseconds depending on your hardware. Your brain's reaction time is around 200-250 milliseconds, So the computer finishes the entire process before your brain even processes what happened! But this does depend on your GPU, your Keyboard hardware, and your OS. So if you try this on a 100 year old computer, you'll be waiting there for centuries until one singular letter appears!</p>
-      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: One keypress. One closed circuit, one microcontroller, one scancode, one USB packet, one keyboard driver, one operating system call, one app update, one GPU render — all in under 30 milliseconds, and you thought you were just typing. Well, at least now you know by reading Blue Kernel Labs Blog!</div>
-    `
-  },
-
-    {
     id: 9,
     slug: "why-do-we-dream",
     heading: "Post 9: Neuroscience",
@@ -1472,6 +1285,226 @@ const posts = [
       <p>At that point, some people can actually control what happens. Fly, explore, start a war, burn down a city, or just mess around with the dream world! It's like having an Admin Panel for your dreams!</p>
       <p>Your brain basically becomes a Game Engine, and you're the Developer! But this type of skill requires ALOT of training, so yes, it may take months or even YEARS to master!</p>
       <div class="conclusion">🔬 Blue Kernel Labs Conclusion: Every night, your brain enters a hyper-active state, locks your body, replays and remixes your memories, amplifies your emotions, and generates an entire reality - All without you even asking for it! And the craziest part is that we STILL don't fully know or understand why it happens. Yeah, sleep is BEYOND just closing your eyes!</div>
+    `
+  },
+  {
+    id: 8,
+    slug: "what-actually-happens-when-you-press-a-key-on-your-keyboard",
+    heading: "Post 8: Programs",
+    date: "March 21, 2026",
+    title: "What Actually Happens When You Press a Key on Your Keyboard?",
+    preview: "In your entire life, you've pressed millions of keys without thinking twice. But in that fraction of a second, an absolutely ridiculous chain of events happen. So let's ruin the simplicity of typing altogether!",
+    content: `
+      <h3>What is a Keyboard? ⌨️</h3>
+      <p>If you're older than 6 years, you would already know what a keyboard is. It is a typing hardware used to..type! Each letter of the alphabet is assigned to a key on the keyboard, so if you press the 'A' key, the letter 'A' is displayed on the screen! I hope this doesn't need further clarification.</p>
+      <h3>It all starts with a physical switch 🔘</h3>
+      <p>The moment your finger presses a key, a physical switch closes underneath it. Most keyboards have a rubber dome or a mechanical switch sitting under every key. When you press down, the two electrical contacts inside that switch touch each other, completing a tiny electrical circuit.</p>
+      <p>That's it, the first step. You basically completed a circuit! Congrats, you're now an electrician!</p>
+      <h3>The keyboard's tiny brain takes over 🧠</h3>
+      <p>Every keyboard has its own small processor called a microcontroller. The moment the circuit closes, the microcontroller notices it immediately! It's scanning every key on the keyboard dozens of times per second just waiting for something to happen.</p>
+      <p>When it detects the closed circuit, it checks a built-in map called a Keyboard Matrix to figure out exactly which key was pressed. It then converts that into a number called a Scancode, basically a unique ID of that specific key.</p>
+      <h3>The signal travels to your computer ⚡</h3>
+      <p>The scancode gets sent from your keyboard to your computer through the USB cable - or wirelessly via Bluetooth if you're fancy. This happens so fast, it's basically instant! The data packet carrying your scancode is tiny, we're talking only a few bytes!</p>
+      <p>Your computer's operating system receives it and a special program called a keyboard driver wakes up. The driver's whole job is to translate that raw scancode into something meaningful. It checks your language settings, whether Caps Lock is on, whether you're holding Shift - and produces the final character!</p>
+      <h3>The character hits the software 💻</h3>
+      <p>Now the OS sends the character to whichever app is currently in focus - Your browser, Notes, MS Word, etc. The app receives the character and decides what to do. Meaning if it's a text field, it adds the character to the string of text and tells the screen to update.</p>
+      <p>The screen then redraws that tiny section of pixels to show the new letter, your GPU (Graphics Processing Unit) renders it, Then, Finally, your monitor displays it!</p>
+      <h3>How fast does all this happen? 🚀</h3>
+      <p>The entire process — from your finger hitting the key to the letter appearing on screen — takes somewhere between 1 and 30 milliseconds depending on your hardware. Your brain's reaction time is around 200-250 milliseconds, So the computer finishes the entire process before your brain even processes what happened! But this does depend on your GPU, your Keyboard hardware, and your OS. So if you try this on a 100 year old computer, you'll be waiting there for centuries until one singular letter appears!</p>
+      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: One keypress. One closed circuit, one microcontroller, one scancode, one USB packet, one keyboard driver, one operating system call, one app update, one GPU render — all in under 30 milliseconds, and you thought you were just typing. Well, at least now you know by reading Blue Kernel Labs Blog!</div>
+    `
+  },
+  {
+    id: 7,
+    slug: "how-does-the-internet-actually-work",
+    heading: "Post 7: The Internet",
+    date: "March 20, 2026",
+    title: "How does the Internet actually work?",
+    preview: "Internet, its a service which literally everyone has in todays day and age. But almost noone wonders how it ACTUALLY functions, because they're busy scrolling reels..But if you ARE wondering how it works, well, you're at the right place.",
+    content: `
+      <h3>Introduction of The Internet</h3>
+      <p>The Internet is a place where you can watch Youtube videos, Search Google, share photos or reels, etc. Basically, It's a place where the world connects in one place!</p>
+      <p>The Internet isn't some kind of radio waves that are floating above your house, It's literally just billions of computers connected together by cables. It runs on ACTUAL cables, running under oceans! Like, there are massive undersea cables stretching from continent to continent right now carrying your YouTube videos at the speed of light.</p>
+      <p>And that 'Cloud' in which you store your photos and files? well, it's just someone else's computer in a giant warehouse! Sorry to ruin the magic..</p>
+      <h3>How does a website actually reach you? 📦</h3>
+      <p>When you type "Google.com", your computer doesn't magically locate the website. It first asks a DNS server, basically the Internet's phonebook: "Hey, whats the address for Google?". The DNS replies with an IP address, e.g 142.250.80.46. Now your computer knows where exactly to locate the website and...goes to that location!</p>
+      <p>Then your computer sends a request all the way to Google's servers, which could be thousands of miles away, Google sends the website back to you. All this happens in under a second, every single time!</p>
+      <h3>What's an IP Address?</h3>
+      <p>Every device on the internet has an IP Address. In simple terms, it's just your device's home address on the internet. Without this Address, nobody would know where to send the data back to.</p>
+      <p>It's like ordering pizza. If you literally don't give your address to them, By no surprise, the pizza just...won't arrive. You are just a hungry person staring at a phone at this point.</p>
+      <p>That's why IP address also acts in a same way! If there would be no Address for the device, no data would be received back!</p>
+      <h3>How does data actually travel? 🚀</h3>
+      <p>Here's the wild part: When you load a webpage, it doesn't load as one BIG chunk of data, Instead, The data gets chopped into thousands of tiny pieces called packets. Each packet finds its own route across the Internet, bouncing through routers around the world, and then reassembles perfectly on your screen!</p>
+      <p>Some packets might travel through Japan, some through Germany, even some through Antarctica (though i don't know if it's possible), all to load just one single page of data. And if any packet gets lost on the way, your device politely asks the Server for it again automatically, repeating the cycle in less than a second, without you even noticing!</p>
+      <h3>Then Why is Wi-Fi important to run the Internet? 📶</h3>
+      <p>Wifi isn't the Internet, it's the last step. Wifi is simply a wireless connection between your device and your router at home. The router is the thing ACTUALLY connected to the Internet via a physical cable from your ISP (Internet Service Provider).</p>
+      <p>So when your Wifi goes down, it's not the entire Internet dying, it's just your own router (from Temu) throwing a tantrum. The rest of the Internet is completely fine without you, unfortunately.. The perfect example of "The world doesn't revolve around you"!</p>
+      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: The Internet is just Billions of computers communicating with one another through physical cables, chopping data into tiny packets, bouncing them around the entire world, and reassembling them perfectly - All in less than a second! Pretty insane for something we use to read the Blue Kernel Labs Blog!</div>
+    `
+  },
+  {
+    id: 6,
+    slug: "the-universe-shouldn-t-exist-but-here-we-are",
+    heading: "Post 6: The Universe",
+    date: "March 18, 2026",
+    title: "The Universe Shouldn't Exist — But Here We Are",
+    preview: "The universe shouldn't exist. Not in some deep philosophical way — but literally. Every single atom in your body should have been wiped out moments after the Big Bang, leaving behind absolutely nothing. So why are you still here?",
+    content: `
+      <h3>What is Matter and Antimatter? ⚛️</h3>
+      <p>Every particle in the universe has a twin called an antiparticle — identical in almost every way, except opposite in charge. The antimatter version of an electron is called a positron, While the antimatter version of a proton is called an antiproton.</p>
+      <p>And when a particle meets its antiparticle, they both explode into pure energy and vanish, with nothing left but nothingness.</p>
+      <p>Now here's the problem: the Big Bang should have created equal amounts of matter and antimatter. Equal amounts meeting each other means total annihilation. Which means no universe, no stars, no you..</p>
+      <h3>The Insane Number That Explains Everything 🔢</h3>
+      <p>For every 1,630,000,000 antimatter particles created at the Big Bang, there was apparently ONE extra matter particle.</p>
+      <p>And thats totally it! The one-in-a-billion imbalance which create every Galaxy, every living thing, every everything! All of this are just scraps of matter that survived the 'cancellation' of matter and antimatter.</p>
+      <p>Physicists call this the Baryon Asymmetry, and they still don't fully know why it happened!</p>
+      <h3>Sakharov's Three Rules 🧑‍🔬</h3>
+      <p>Back in 1967, a Soviet Physicist named Andrei Sakharov asked: What had to be true about the early universe for matter to win?</p>
+      <p>He came up with 3 conditions:</p>
+      <p>1. There must be a way to convert antimatter into matter</p>
+      <p>2. The universe must have been out of equilibrium (basically, cooling too fast to "correct" itself)</p>
+      <p>3. The laws of physics must treat matter and antimatter slightly differently — a tiny built-in bias toward matter</p>
+      <p>That third one is wild. It means the universe wasn't perfectly fair. Physics itself had a preference. And we've actually confirmed this experimentally — it's called CP violation, and it was first observed in the 1960s in the decay of tiny particles called neutral kaons.</p>
+      <h3>So Do We Have an Answer? 🤔</h3>
+      <p>Sort of. Not really.</p>
+      <p>We know the three conditions that had to be met. We have proof that CP violation exists. But the amount of CP violation we've measured isn't nearly big enough to explain the full imbalance, Something is missing...</p>
+      <p>Neither the Standard Model of particle physics nor general relativity can fully explain it. Scientists have theories — some involve phase transitions in the early universe, others involve weird particles called neutrinos — but none have been confirmed yet.</p>
+      <p>The honest answer is: we don't know. And this is considered one of the biggest unsolved problems in all of physics.</p>
+      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: The universe exists because of a one-in-a-billion rounding error that nobody can fully explain yet. Matter won against antimatter by the tiniest margin imaginable — and everything you've ever seen, touched, or known is just the leftover from that almost-perfectly-balanced destruction. Physics is wild!</div>
+    `
+  },
+  {
+    id: 5,
+    slug: "black-holes",
+    heading: "Post 5: Black Holes",
+    date: "March 11, 2026",
+    title: "What if you fell into a <em>Black Hole?</em>",
+    preview: "There is something in space that is very mysterious and confusing: <em>Black Holes.</em> It has a gravity of 153 Trillion G's (gravity varies) and not even light can escape it. But..what if you fell in it?",
+    content: `
+      <h3>So, what IS a Black Hole? ⚫️</h3>
+      <p>In simple terms, A Black Hole is what happens when a super massive star runs out of fuel, collapses in its own gravity, and throws a tantrum so hard that it tears a hole in spacetime itself.</p>
+      <p>Its gravity is so strong that not even light can escape it. And this is the FASTEST thing in the universe we're talking about!</p>
+      <h3>The <em>Event Horizon</em></h3>
+      <p>The Event Horizon is basically the point of no return, meaning once you cross it, there is no turning back.</p>
+      <h3>But what ACTUALLY happens if you fall in? 🕳️</h3>
+      <p>First things first, from your perspective, crossing the <em>Event Horizon</em> actually feels completely normal at first. It would just feel like...you're floating, nothing else.</p>
+      <h3>Spaghettification 🍝</h3>
+      <p>Now, as you fall deeper into the black hole past the Event Horizon, the gravity pulling your feet is WAY stronger than the gravity pulling your head.</p>
+      <p>This difference stretches you vertically like a piece of spaghetti. NASA, in their infinite wisdom, looked at this process and said <em>"hmm..yea we're calling that Spaghettification"</em></p>
+      <h3>What's actually inside the Black Hole? ☠️</h3>
+      <p>Both generally and scientifically, we don't know what's truly inside the black hole. Our physics breaks down at the Singularity.</p>
+      <h3>Wait..can ANYTHING escape a Black Hole?</h3>
+      <p>Actually..kind of yes. Stephen Hawking discovered that black holes very slowly leak energy — this is called <em>Hawking Radiation</em>. Eventually, a black hole evaporates completely.</p>
+      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: Black holes are the universe's most dramatic overreaction to a star dying. 10/10 would not recommend falling into one!</div>
+    `
+  },
+  {
+    id: 4,
+    slug: "death",
+    heading: "Post 4: Unknown Science",
+    date: "March 8, 2026",
+    title: "What happens after Death",
+    preview: "Death, a topic everyone gets uncomfortable about. Because of its unknown effect, we don't actually know what happens after it, not even scientists! (excluding religion).",
+    content: `
+      <h3>What is Death, basically? ⚰️</h3>
+      <p>Death is a stage of life where you just...vanish from Earth. But not exactly, your soul just leaves your body. While your body just stays on Earth and decays over time.</p>
+      <p>What makes this stage more scary is that...we don't know what happens after.</p>
+      <h3>Your Brain survives for 10 minutes! 🧠</h3>
+      <p>After your heart stops, your brain continues functioning for up to 10 minutes! Scientists believe this is when people get vivid dreams about their memorable moments during the stage of Death.</p>
+      <h3>You can still hear after death?!</h3>
+      <p>Hearing is the LAST sense to go when you die. Meaning you can still hear people talking around you AFTER you've technically died!</p>
+      <h3>Near Death Experiences are real! ☠️</h3>
+      <p>A huge scientific study, called the AWARE study, tracked 2,060 patients who had cardiac arrests. Some accurately described what doctors were doing in the room while they were DEAD!</p>
+      <h3>Near Death witnesses reported by people 😵</h3>
+      <p>Thousands of people worldwide have reported the exact same experience during Near Death Experiences:</p>
+      <ul style="text-align: left; margin: 10px 0; padding-left: 20px; line-height: 2;">
+        <li>🌟 A bright warm tunnel of light pulling them forward</li>
+        <li>😌 Feeling of complete peace and zero pain</li>
+        <li>👁️ Floating above their own body watching doctors work on them</li>
+        <li>👴 Meeting deceased relatives who said <em>"it's not your time yet"</em></li>
+        <li>🚫 A strong feeling of not wanting to come back</li>
+      </ul>
+      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: Death is scary, but at that stage..you are basically in peace and quiet! So, enjoy your life like it's the last day!❤️</div>
+    `
+  },
+  {
+    id: 3,
+    slug: "ai",
+    heading: "Post 3: AI",
+    date: "March 5, 2026",
+    title: "AIs and how they Function",
+    preview: "AIs. yes, i am talking about those soul-less machines that generate you essays like its a printer with a brain. But have you ever wondered how they work?",
+    content: `
+      <h3>What are AIs? 🦾</h3>
+      <p>AIs, like ChatGPT, are basically programs trained to learn random information by scouring through the entire internet and reading whatever article they find.</p>
+      <p>It can answer your questions and chat with you, just like a real person-but with no soul, no emotions, and no bedtime..</p>
+      <p>But the most interesting part about it is that it is just autocomplete on steroids!</p>
+      <h3>It's just Autocomplete! 🧐</h3>
+      <p>The AIs don't actually think or understand anything, it just predicts what word comes next based on patterns it learnt!</p>
+      <p>Its like your phone keyboard autocomplete, but simply trained on the whole Internet.</p>
+      <h3>It costs an INSANE amount to train it 🧠</h3>
+      <p>If you wanted to train an AI, it would require a very large amount to do so, since you have to teach it the entire internet's knowledge!</p>
+      <p>Training the latest GPT-5 would approximately cost you <em>$100 Million</em>, just to learn the entire Internet!</p>
+      <h3>Why do they sometimes go wrong? 🤪</h3>
+      <p>Sometimes, ChatGPT can make up completely fake facts and say them with full confidence!</p>
+      <p>AIs just want to give you an answer, Whether its correct or completely made up. It will never admit that it can't find an answer!</p>
+      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: AI doesn't have feelings, emotions, thinking, and humour, because its all forced into the program! But it does have the ability to come up with any sort of answer, right or wrong.</div>
+    `
+  },
+  {
+    id: 2,
+    slug: "time",
+    heading: "Post 2: Time",
+    date: "March 3, 2026",
+    title: "Time and how it works differently in Space",
+    preview: "Time. The thing which moves very slowly in exams and takes a breather, and just..leaves the chat in weekends; like its running an Olympic Marathon!",
+    content: `
+      <h3>What exactly IS time 🕰️?</h3>
+      <p>Time is simply a measureable number, or a <em>Physical Quantity</em> in Fancy words, that tells us how much the Earth has rotated.</p>
+      <p>Simple enough, right? but NO! Because time just joins some other group chat when its in outer space!</p>
+      <h3>Time in Space, and how it abandons Physics to Earth 🌎</h3>
+      <p>Let me give y'all an example to talk on.</p>
+      <p>For example, an astronaut lives in The ISS, and lives there for 2 years. if he returns back on Earth, he would be a fraction of a bit younger than if he just lived on Earth!</p>
+      <h3>The Person Who Figured This Monstrosity Out ✨</h3>
+      <p>Albert Einstein called this <em>"Time Dilation"</em></p>
+      <p><em>"The Heavier the object near you, The slower time moves." -Einstein, i guess</em></p>
+      <p>This explains how our example actually works in real life. Earth is Insanely heavy, and its the reason time moves slower outside Earth!</p>
+      <h3>How our GPS uses Time Dilation 📍</h3>
+      <p>Your phone's GPS satellites actually have to correct for time dilation constantly</p>
+      <p>The satellites are far from Earth's gravity, so their clocks run a little faster than ours on the ground.</p>
+      <p>If it doesn't correct its time dilation, your GPS would give completely wrong directions by minimum 10km every single day!</p>
+      <h3>Speed also affects time! 🏎️</h3>
+      <p>Its not only gravity thats affecting how time works, Speed also enters the chat!</p>
+      <p>The faster you move, the slower time passes for you! Just like gravity, speed warps time too.</p>
+      <p>That means if you travelled at 99% the speed of light for what felt like a year to you, Decades would have passed on Earth!</p>
+      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: Time is absurd, Space is a complete rage-bait technique for your brain, and Einstein was..a giga chad.</div>
+    `
+  },
+  {
+    id: 1,
+    slug: "infinity",
+    heading: "Post 1: Infinity",
+    date: "March 1, 2026",
+    title: "What Is Infinity in Mathematics? (And Why There Are Different Sizes of It)",
+    preview: "Infinity isn't just huge. Some infinities are actually bigger than others… mind blown. ....",
+    content: `
+      <h3>Wait, Infinity Isn't Just One Thing? 🤯</h3>
+      <p>Okay, so infinity. Most people think it's just a really, really big number that never ends.</p>
+      <p>Like, bigger than the number of times you've hit snooze this week.</p>
+      <p>But nope. Math is weird. Infinity isn't just one thing — <strong>some infinities are actually bigger than others.</strong></p>
+      <h3>The Two Infinities That Break Your Brain 🔢</h3>
+      <p>Counting numbers — 1, 2, 3… — that's one type of infinity. It goes on forever, sure.</p>
+      <p>But the numbers between 0 and 1? Like 0.1, 0.01, 0.001… that's a <strong>bigger</strong> infinity.</p>
+      <p>Yeah. Math is literally trolling us. 😂</p>
+      <h3>The Guy Who Figured This Out 🧠</h3>
+      <p>Georg Cantor basically said: <em>"No matter how you try to list these numbers, I'll always find one you forgot."</em></p>
+      <p>He proved it with something called Cantor's Diagonal Argument. Absolute savage move.</p>
+      <p>Mathematicians at the time were furious. Some called it nonsense. Turns out he was just… right.</p>
+      <h3>So What Does This Mean? 🌀</h3>
+      <p>Infinity isn't total chaos. It's like organized chaos.</p>
+      <p>Like your messy desk — somehow you still know where your pencil is.</p>
+      <p>There are actually infinite levels of infinity. Mathematicians call them <strong>cardinalities</strong>. The rabbit hole goes deep.</p>
+      <div class="conclusion">🔬 Blue Kernel Labs Conclusion: Infinity is weird, wild, and secretly hilarious. And there's more than one of it. You're welcome.</div>
     `
   },
 ];
@@ -1752,9 +1785,13 @@ function renderPosts() {
   posts.forEach(post => {
     const section = document.createElement("section");
     section.id = `post-${post.slug}`;
-    section.innerHTML = `
-      <header>${post.heading}</header>
-      <h1>${post.title}</h1>
+    const badgeHTML = isNewPost(post.date)
+  ? `<span class="new-badge">🔖 New</span>`
+  : '';
+
+section.innerHTML = `
+  <header>${post.heading} ${badgeHTML}</header>
+  <h1>${post.title}</h1>
       <p class="post-date">📅 ${post.date}</p>
       <p>${post.preview}</p>
       <div id="full-${post.id}" class="fullContent">
@@ -1975,6 +2012,13 @@ window.onload = function() {
     makeStars();
     draw();
 })();
+
+function isNewPost(dateString) {
+  const postDate = new Date(dateString);
+  const now = new Date();
+  const diffDays = (now - postDate) / (1000 * 60 * 60 * 24);
+  return diffDays <= 3;
+}
 </script>
 </body>
 </html>
