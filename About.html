@@ -5,117 +5,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Blue Kernel Labs</title>
   <style>
-    body { margin: 0; font-family: 'Times New Roman', Times, serif; text-align: center; background: linear-gradient(to bottom, #8fcfff, #3f7af0); color: black; transition: background 1.5s ease, color 1s ease; }
-    body.dark { background: linear-gradient(to bottom, #000000, #1a1a1a); color: white; }
-    * { font-family: 'Courier New', Courier, monospace; font-weight: bold;}
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
 
-    nav {
-        position: fixed; top: 0; left: 0; right: 0; z-index: 2000;
-        display: flex; align-items: center; justify-content: space-between;
-        padding: 0 20px; height: 60px;
-        background: linear-gradient(90deg, #8fcfff, #ffffff);
-        border-bottom: 3px solid black; box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-        transition: background 1.5s ease, border-color 1s ease;
-    }
-    body.dark nav { background: linear-gradient(90deg, #111111, #2a2a2a); border-bottom: 3px solid white; box-shadow: 0 4px 15px rgba(255,255,255,0.05); }
+/* ===== BASE ===== */
+body {
+    margin: 0;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    text-align: center;
+    background: linear-gradient(to bottom, #8fcfff, #3f7af0);
+    color: #0d0d0d;
+    transition: background 1.5s ease, color 1s ease;
+}
+body.dark {
+    background: linear-gradient(to bottom, #000000, #1a1a1a);
+    color: #e8f0fe;
+}
 
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; flex-shrink: 0; }
-    .nav-logo img { width: 42px; height: 42px; }
+* {
+    box-sizing: border-box;
+}
 
-    .nav-links { display: flex; align-items: center; gap: 8px; }
+/* ===== FONT ASSIGNMENTS ===== */
+h1, h2, h3, h4, h5, h6,
+nav, .nav-link, .nav-toggle,
+button, footer, header {
+    font-family: 'Space Grotesk', sans-serif;
+}
 
-    .nav-link {
-        text-decoration: none; padding: 7px 18px; border-radius: 12px; font-size: 0.95em;
-        font-weight: bold; color: black; background: transparent; border: 2px solid transparent;
-        transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;
-    }
-    .nav-link::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: #1d33d9; transition: all 0.3s ease; transform: translateX(-50%); }
-    .nav-link:hover::after { width: 80%; }
-    .nav-link:hover { background: rgba(29, 51, 217, 0.1); border-color: rgba(29, 51, 217, 0.3); transform: translateY(-2px); }
-    .nav-link.active { background: linear-gradient(45deg, #1d33d9, #8fcfff); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(29, 51, 217, 0.35); }
-    .nav-link.active::after { display: none; }
-    body.dark .nav-link { color: white; }
-    body.dark .nav-link:hover { background: rgba(143, 207, 255, 0.15); border-color: rgba(143, 207, 255, 0.3); }
-    body.dark .nav-link.active { background: linear-gradient(45deg, #222, #444); box-shadow: 0 4px 12px rgba(255,255,255,0.1); }
+/* ===== NAVBAR ===== */
+nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 2000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 20px; height: 60px;
+    background: linear-gradient(90deg, #8fcfff, #ffffff);
+    border-bottom: 3px solid black; box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    transition: background 1.5s ease, border-color 1s ease;
+}
+body.dark nav { background: linear-gradient(90deg, #111111, #2a2a2a); border-bottom: 3px solid white; box-shadow: 0 4px 15px rgba(255,255,255,0.05); }
 
-    .nav-toggle {
-        background: linear-gradient(45deg, #1d33d9, #8fcfff); color: white; border: none;
-        padding: 7px 14px; border-radius: 12px; cursor: pointer; font-size: 0.9em;
-        font-weight: bold; transition: all 0.3s ease; white-space: nowrap;
-    }
-    .nav-toggle:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); background: linear-gradient(45deg, #8fcfff, #1d33d9); }
-    body.dark .nav-toggle { background: linear-gradient(45deg, #222, #444); box-shadow: 0 0 8px rgba(255,255,255,0.1); }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; flex-shrink: 0; }
+.nav-logo img { width: 42px; height: 42px; }
 
-    .hamburger {
-        display: none; flex-direction: column; justify-content: center; align-items: center;
-        gap: 5px; width: 40px; height: 40px; background: linear-gradient(45deg, #1d33d9, #8fcfff);
-        border: none; border-radius: 10px; cursor: pointer; padding: 0; animation: none; flex-shrink: 0;
-    }
-    .hamburger span { display: block; width: 22px; height: 2.5px; background: white; border-radius: 2px; transition: all 0.3s ease; }
-    body.dark .hamburger { background: linear-gradient(45deg, #222, #444); }
-    .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+.nav-links { display: flex; align-items: center; gap: 8px; }
 
-    .mobile-menu {
-        display: none; position: fixed; top: 60px; left: 0; right: 0; z-index: 1999;
-        background: linear-gradient(180deg, #d4eeff, #ffffff); border-bottom: 3px solid black;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15); flex-direction: column; align-items: stretch;
-        padding: 10px 16px 16px 16px; gap: 8px;
-    }
-    .mobile-menu.open { display: flex; }
-    body.dark .mobile-menu { background: linear-gradient(180deg, #1a1a1a, #2a2a2a); border-bottom: 3px solid white; }
-    .mobile-menu .nav-link { text-align: center; padding: 10px 16px; font-size: 1em; }
-    .mobile-menu .nav-toggle { width: 100%; padding: 10px; font-size: 1em; text-align: center; }
+.nav-link {
+    text-decoration: none; padding: 7px 18px; border-radius: 12px; font-size: 0.95em;
+    font-weight: bold; color: black; background: transparent; border: 2px solid transparent;
+    transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;
+}
+.nav-link::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: #1d33d9; transition: all 0.3s ease; transform: translateX(-50%); }
+.nav-link:hover::after { width: 80%; }
+.nav-link:hover { background: rgba(29, 51, 217, 0.1); border-color: rgba(29, 51, 217, 0.3); transform: translateY(-2px); }
+.nav-link.active { background: linear-gradient(45deg, #1d33d9, #8fcfff); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(29, 51, 217, 0.35); }
+.nav-link.active::after { display: none; }
+body.dark .nav-link { color: white; }
+body.dark .nav-link:hover { background: rgba(143, 207, 255, 0.15); border-color: rgba(143, 207, 255, 0.3); }
+body.dark .nav-link.active { background: linear-gradient(45deg, #222, #444); box-shadow: 0 4px 12px rgba(255,255,255,0.1); }
 
-    #pageTransition {
-        position: fixed; inset: 0; z-index: 9999; pointer-events: none;
-        background: linear-gradient(135deg, #1d33d9, #8fcfff); opacity: 0;
-        transform: scaleY(0); transform-origin: bottom;
-        transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.4s ease;
-    }
-    #pageTransition.active { opacity: 1; transform: scaleY(1); pointer-events: all; }
+.nav-toggle {
+    background: linear-gradient(45deg, #1d33d9, #8fcfff); color: white; border: none;
+    padding: 7px 14px; border-radius: 12px; cursor: pointer; font-size: 0.9em;
+    font-weight: bold; transition: all 0.3s ease; white-space: nowrap;
+}
+.nav-toggle:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); background: linear-gradient(45deg, #8fcfff, #1d33d9); }
+body.dark .nav-toggle { background: linear-gradient(45deg, #222, #444); box-shadow: 0 0 8px rgba(255,255,255,0.1); }
 
-    header {
-        background: linear-gradient(90deg, #8fcfff, #ffffff); border: 3px solid black;
-        border-radius: 15px; margin: 80px 15px 15px 15px; color: black; padding: 15px;
-        font-size: xxx-large; -webkit-text-stroke: 1px rgb(0,0,0); font-weight: bold;
-        transition: background 1.5s ease, color 1s ease;
-    }
-    header:hover { box-shadow: 0 0 15px rgba(143, 207, 255, 0.7); }
-    body.dark header { background: linear-gradient(90deg, #111111, #2a2a2a); color: white; border: 3px solid white; -webkit-text-stroke: 1px white; }
+.hamburger {
+    display: none; flex-direction: column; justify-content: center; align-items: center;
+    gap: 5px; width: 40px; height: 40px; background: linear-gradient(45deg, #1d33d9, #8fcfff);
+    border: none; border-radius: 10px; cursor: pointer; padding: 0; animation: none; flex-shrink: 0;
+}
+.hamburger span { display: block; width: 22px; height: 2.5px; background: white; border-radius: 2px; transition: all 0.3s ease; }
+body.dark .hamburger { background: linear-gradient(45deg, #222, #444); }
+.hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-    button {
-        background: linear-gradient(45deg, #1d33d9, #8fcfff); color: white; border: none;
-        padding: 12px 25px; font-size: 16px; border-radius: 15px; cursor: pointer;
-        transition: transform 0.3s ease, box-shadow 0.3s ease; animation: float 2s ease-in-out infinite;
-    }
-    button:hover { background: linear-gradient(45deg, #8fcfff, #1d33d9); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-    body.dark button { background: linear-gradient(45deg, #222222, #444444); color: white; box-shadow: 0 0 8px rgba(255,255,255,0.2); }
-    body.dark button:hover { background: linear-gradient(45deg, #444444, #666666); box-shadow: 0 0 15px rgba(255,255,255,0.4); transform: translateY(-5px); }
+.mobile-menu {
+    display: none; position: fixed; top: 60px; left: 0; right: 0; z-index: 1999;
+    background: linear-gradient(180deg, #d4eeff, #ffffff); border-bottom: 3px solid black;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15); flex-direction: column; align-items: stretch;
+    padding: 10px 16px 16px 16px; gap: 8px;
+}
+.mobile-menu.open { display: flex; }
+body.dark .mobile-menu { background: linear-gradient(180deg, #1a1a1a, #2a2a2a); border-bottom: 3px solid white; }
+.mobile-menu .nav-link { text-align: center; padding: 10px 16px; font-size: 1em; }
+.mobile-menu .nav-toggle { width: 100%; padding: 10px; font-size: 1em; text-align: center; }
 
-    footer { margin-top: 50px; padding: 20px; background: linear-gradient(to right, #006eff, #8fcfff); font-size: 14px; font-weight: bold; }
-    body.dark footer { background: linear-gradient(to right, #000000, #1a1a1a); color: white; }
+/* ===== PAGE TRANSITION ===== */
+#pageTransition {
+    position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+    background: linear-gradient(135deg, #1d33d9, #8fcfff); opacity: 0;
+    transform: scaleY(0); transform-origin: bottom;
+    transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.4s ease;
+}
+#pageTransition.active { opacity: 1; transform: scaleY(1); pointer-events: all; }
 
-    section {
-        padding: 60px 20px; margin: 40px auto; max-width: 900px;
-        background: linear-gradient(90deg, #8fcfff, #ffffff); backdrop-filter: blur(10px);
-        border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.2); border: 3px solid black;
-        transition: transform 0.3s ease, box-shadow 0.3s ease; animation: fadein 1.5s ease-out;
-    }
-    section:hover { transform: translateY(-5px); box-shadow: 0 12px 35px rgba(0,0,0,0.3); }
-    body.dark section { background: linear-gradient(90deg, #1a1a1a, #2b2b2b); border: 3px solid white; }
+/* ===== HEADER ===== */
+header {
+    background: linear-gradient(90deg, #8fcfff, #ffffff);
+    border: 3px solid black; border-radius: 15px;
+    margin: 80px 15px 15px 15px; color: black; padding: 15px;
+    font-size: xxx-large; -webkit-text-stroke: 1px rgb(0,0,0); font-weight: bold;
+    transition: background 1.5s ease, color 1s ease;
+}
+header:hover { box-shadow: 0 0 15px rgba(143, 207, 255, 0.7); }
+body.dark header { background: linear-gradient(90deg, #111111, #2a2a2a); color: white; border: 3px solid white; -webkit-text-stroke: 1px white; }
 
-    h1 { -webkit-text-stroke: 1px #000000; }
-    body.dark h1 { -webkit-text-stroke: 1px #ffffff; }
+/* ===== BUTTONS ===== */
+button {
+    background: linear-gradient(45deg, #1d33d9, #8fcfff); color: white; border: none;
+    padding: 12px 25px; font-size: 16px; border-radius: 15px; cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; animation: float 2s ease-in-out infinite;
+}
+button:hover { background: linear-gradient(45deg, #8fcfff, #1d33d9); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+body.dark button { background: linear-gradient(45deg, #222222, #444444); color: white; box-shadow: 0 0 8px rgba(255,255,255,0.2); }
+body.dark button:hover { background: linear-gradient(45deg, #444444, #666666); box-shadow: 0 0 15px rgba(255,255,255,0.4); transform: translateY(-5px); }
 
-    @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0); } }
+/* ===== FOOTER ===== */
+footer {
+    margin-top: 50px; padding: 20px;
+    background: linear-gradient(to right, #006eff, #8fcfff);
+    font-size: 14px; font-weight: bold;
+}
+body.dark footer { background: linear-gradient(to right, #000000, #1a1a1a); color: white; }
 
-    @media (max-width: 580px) {
-        .nav-links { display: none; }
-        .hamburger { display: flex; }
-    }
+/* ===== SECTIONS ===== */
+section {
+    padding: 60px 20px; margin: 40px auto; max-width: 900px;
+    background: linear-gradient(90deg, #8fcfff, #ffffff); backdrop-filter: blur(10px);
+    border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.2); border: 3px solid black;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; animation: fadein 1.5s ease-out;
+}
+section:hover { transform: translateY(-5px); box-shadow: 0 12px 35px rgba(0,0,0,0.3); }
+body.dark section { background: linear-gradient(90deg, #1a1a1a, #2b2b2b); border: 3px solid white; }
+
+/* paragraph text inside sections */
+section p {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1em;
+    line-height: 1.8;
+    font-weight: normal;
+}
+
+h1 { -webkit-text-stroke: 1px #000000; }
+body.dark h1 { -webkit-text-stroke: 1px #ffffff; }
+
+/* ===== KEYFRAMES ===== */
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+@keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0); } }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 580px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+}
   </style>
 </head>
 <body>
@@ -146,7 +192,7 @@
   <header>About Blue Kernel Labs</header>
 
   <section>
-    <h1>Blue Kernel Labs</h1>
+    <h1>🪐 Blue Kernel Labs 🧪</h1>
     <p>Blue Kernel Labs is an independent experimental studio focused on science, software development, and creative innovation. It was founded by a teen with a strong passion for technology and a commitment to building meaningful digital projects.</p>
     <p>The lab exists as a space for exploration — where ideas are tested, refined, and transformed into real applications. From web development to scientific topics, Blue Kernel Labs combines curiosity with execution.</p>
     <p>Its core philosophy is simple: think critically, build consistently, and never underestimate the power of starting early.</p>
